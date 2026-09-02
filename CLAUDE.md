@@ -5,16 +5,21 @@ Este fichero es la fuente de verdad viva del proyecto — se actualiza cuando ca
 cuando se añade código.
 
 ## Estado actual
-Fase 0: los 8 ADRs (`docs/adr/`) y el roadmap están **aprobados** (2026-09-02). Cuentas reales creadas:
-GitHub (`digitalwingsacademy/docentia-plataforma` y `digitalwingsacademy/docentia-contenidos`, públicos,
-rama `main`) y Supabase dev/prod (`eu-west-1` confirmado en ambos). Netlify: pendiente de conectar el
-site — es el único bloqueante que queda para verificar el spike en producción real.
+Fase 0 completa. Los 8 ADRs y el roadmap están **aprobados** (2026-09-02). Cuentas reales: GitHub
+(`digitalwingsacademy/docentia-plataforma` y `digitalwingsacademy/docentia-contenidos`, públicos, rama
+`main`), Supabase dev/prod (`eu-west-1` confirmado en ambos), y Netlify (`docentia-platform.netlify.app`,
+enlazado al repo vía `@netlify/plugin-nextjs`).
 
-Primer código del proyecto en marcha: el **spike de ADR-001** (app Next.js mínima y desechable en la raíz
-de este repo — `app/`, `lib/spike-content.ts` — que no es el scaffolding de la sección 9, solo prueba
-`unstable_cache`/`revalidateTag` + webhook contra `docentia-contenidos`). Hasta que ese spike se verifique
-desplegado en Netlify de verdad, ADR-001 sigue "confirmado como arquitectura" pero no "validado en
-producción", y no se empieza la sección 9 (dominio, Supabase, Tailwind/shadcn, etc.).
+**El spike de ADR-001 pasó en producción real** (2026-09-02): webhook de GitHub → `revalidateTag` →
+contenido actualizado en la plataforma sin redeploy, verificado con entregas reales
+(`status_code: 200`) y contenido cambiado en vivo. Un hallazgo del spike, no un fallo: la fuente de
+fetch para el contenido real debe ser `api.github.com` (o el blob por SHA del payload del webhook), no
+`raw.githubusercontent.com` — su caché de CDN de 5 min confunde las pruebas de invalidación. Detalle
+completo en ADR-001.
+
+El código del spike (`app/`, `lib/spike-content.ts`) es desechable y **se sustituye**, no se reutiliza
+tal cual, al empezar el scaffolding real de la sección 9 (dominio, Supabase, Tailwind/shadcn, MDX). Con
+el spike validado, ya no hay bloqueante para arrancar esa sección.
 
 ## Decisiones vigentes (ver ADRs para el razonamiento completo)
 - **Contenido**: repo separado `docentia-contenidos` (MDX + YAML), leído en runtime, cacheado con

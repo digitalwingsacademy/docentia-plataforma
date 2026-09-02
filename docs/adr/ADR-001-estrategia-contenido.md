@@ -1,8 +1,10 @@
 # ADR-001 — Estrategia de contenido: dónde vive y cómo se publica sin redesplegar
 
 ## Estado
-Confirmado (2026-09-02) como decisión de arquitectura. El spike de Netlify (ver "Spike" más abajo) sigue
-pendiente de ejecución real — bloqueado hasta que existan las cuentas reales de GitHub/Netlify/Supabase.
+**Confirmado y validado en producción (2026-09-02).** El spike se ejecutó de verdad contra
+`docentia-platform.netlify.app` y `docentia-contenidos` — ver resultado en "Spike" más abajo. La
+arquitectura de la Opción B queda cerrada; el único ajuste que introduce el spike es la fuente de fetch
+(ver "Consecuencias").
 
 ## Contexto
 El contenido es el corazón del negocio y debe poder publicarse (nueva lección, corrección, curso nuevo)
@@ -29,34 +31,47 @@ directamente vía PR — así lo ha confirmado. Por eso **la opción D no entra 
 documentada como ruta de mejora: TinaCMS puede montarse *sobre el mismo repo y formato* (no obliga a
 cambiar de B) el día que el socio necesite escribir directamente, sin tener que revisar esta decisión.
 
-## Spike obligatorio (según instrucción del usuario)
-El plan del spike es: una app mínima en Netlify que lea un fichero del repo de contenidos, lo cachee con
-`revalidateTag`, y un route handler que reciba un webhook y lo invalide — desplegado y comprobado en
-producción de verdad antes de construir nada más.
+## Spike ejecutado (2026-09-02) — resultado: PASA
 
-**Este spike está pendiente de ejecución real.** El usuario ha elegido el modelo "tú creas las cuentas
-(GitHub/Netlify/Supabase), yo accedo" — hasta que comparta esos accesos no hay una cuenta de Netlify
-real contra la que desplegar y verificar. Lo que sí puedo afirmar a partir de la documentación oficial:
+Código: app Next.js 16 mínima en la raíz de `docentia-plataforma` (`app/`, `lib/spike-content.ts`,
+desechable, no es el scaffolding de la sección 9). Desplegada en `docentia-platform.netlify.app` vía
+`@netlify/plugin-nextjs`. Contenido de prueba en `docentia-contenidos/spike/mensaje.txt`.
 
-- Next.js sobre Netlify soporta App Router, RSC, Server Actions e ISR, y `revalidateTag`/`revalidatePath`
-  usan las cabeceras de caché de grano fino de Netlify — es una ruta soportada, no un hack.
-- Existen reportes en el foro de soporte de Netlify de comportamiento inesperado con revalidación
-  on-demand por tags combinada con rutas dinámicas (`dynamicParams`), incluyendo 404s tras invalidar.
-  Esto es exactamente el riesgo que el usuario pedía descartar con un spike antes de comprometerse.
+**Prueba real**: edición del fichero fuente + push a `main` → webhook de GitHub (evento `push`, firma
+HMAC-SHA256 verificada) → `POST /api/webhooks/content-publish` → `revalidateTag`. Verificado con
+`gh api .../hooks/.../deliveries`: entrega real con `status_code: 200`. La página estática `/` y la ruta
+dinámica `/api/spike-content` reflejaron el contenido nuevo sin ningún redeploy de la plataforma.
+
+**Confirmado**:
+- `revalidateTag` + webhook funciona de forma fiable en Netlify con Next.js 16 (`@netlify/plugin-nextjs`
+  5.15.13, cache "Netlify Durable" activa). No se reprodujo el riesgo citado en los foros de Netlify
+  (404s / comportamiento inesperado con `dynamicParams`).
+- El patrón es *stale-while-revalidate*, no invalidación síncrona: tras el webhook, la petición
+  inmediatamente siguiente puede servir aún el valor anterior mientras se refresca en segundo plano; la
+  petición de después ya trae el valor nuevo. Es el comportamiento esperado de ISR on-demand, no un bug
+  — pero importa para las expectativas de "instantaneidad" que se comuniquen comercialmente.
+- Next 16 cambió la firma de `revalidateTag` (ahora exige un segundo argumento, un perfil `cacheLife`
+  como `"max"` o `{ expire }`) — ver chuleta en `CLAUDE.md`.
+
+**Hallazgo no anticipado — fuente de fetch importa**: usar `raw.githubusercontent.com` como origen (una
+de las opciones que planteaba la sección 4 del encargo) introduce una caché de CDN propia de GitHub
+(`Cache-Control: max-age=300`, Fastly) **independiente** de la de Next/Netlify. Esto puede hacer parecer
+que la invalidación falla cuando en realidad el mecanismo de Next/Netlify ya refrescó, pero GitHub sigue
+sirviendo bytes de hace hasta 5 minutos desde el edge que atienda la petición saliente de la función. La
+API de contenidos (`api.github.com/repos/.../contents/...`) cachea solo 60s — mejor, pero no cero. Se
+recoge como consecuencia (ver abajo), no cambia la decisión de arquitectura.
 
 Fuentes: [Next.js — revalidateTag](https://nextjs.org/docs/app/api-reference/functions/revalidateTag),
-[Netlify Support — NextJS unexpected revalidation behaviour](https://answers.netlify.com/t/nextjs-unexpected-revalidation-behaviour-v5-runtime/119854),
-[Netlify Support — ISR on-demand revalidation with tags causes 404s](https://answers.netlify.com/t/nextjs-isr-on-demand-revalidation-with-tags-and-dynamicparams-in-app-router-causes-all-routes-to-404/145498).
+[Netlify — Next.js 16 is ready to deploy on Netlify](https://www.netlify.com/changelog/next-js-16-deploy-on-netlify/),
+[Netlify Support — NextJS unexpected revalidation behaviour](https://answers.netlify.com/t/nextjs-unexpected-revalidation-behaviour-v5-runtime/119854)
+(riesgo planteado, no reproducido).
 
-**Acción**: en cuanto existan las cuentas reales, el primer trabajo de código de este proyecto es el
-spike descrito (medio día, aislado, desechable), no el scaffolding completo. Este ADR se marca como
-"confirmado" solo cuando el spike pase en producción.
-
-### Plan B si el spike falla
+### Plan B (no necesario — el spike pasó, se deja documentado por si una regresión futura lo requiere)
 1. `revalidatePath` explícito por ruta conocida (curso/unidad/lección) en vez de tags amplios, invocado
    desde el mismo webhook — más verboso (hay que enumerar rutas afectadas) pero más predecible.
-2. Si tampoco es fiable: revalidación por tiempo (`revalidate: 60` en vez de on-demand), aceptando hasta
-   ~1 minuto de latencia de publicación. Sigue sin requerir redeploy, que es el requisito no negociable.
+2. Si tampoco fuera fiable: revalidación por tiempo (`revalidate: 60` en vez de on-demand), aceptando
+   hasta ~1 minuto de latencia de publicación. Sigue sin requerir redeploy, que es el requisito no
+   negociable.
 
 ## Consecuencias
 - Se necesita un GitHub App (mejor que un PAT personal, permisos más granulares) con lectura sobre
@@ -66,3 +81,12 @@ spike descrito (medio día, aislado, desechable), no el scaffolding completo. Es
   consciente, no una limitación técnica.
 - El origen del contenido en local es siempre disco (`CONTENT_SOURCE=local`), nunca la API de GitHub —
   ver ADR-002 y la sección de experiencia de desarrollo local.
+- **Nuevo, a raíz del spike**: el scaffolding real (sección 9) debe leer contenido vía
+  `api.github.com/repos/.../contents/...` (o, mejor aún, resolviendo por el SHA de commit/blob que trae
+  el propio payload del webhook, que es inmutable y evita cualquier caché intermedia) — no vía
+  `raw.githubusercontent.com`, cuya caché de CDN de 5 minutos no depende de nuestra invalidación y puede
+  confundirse con un fallo del mecanismo.
+- No comunicar "publicación instantánea" cara al cliente: el patrón real es *stale-while-revalidate* (la
+  petición inmediatamente posterior al webhook puede servir aún el contenido anterior); en la práctica
+  observada, la actualización visible tarda segundos, no hasta el próximo build — pero no es
+  estrictamente síncrona con el merge.
