@@ -1,7 +1,7 @@
 # ADR-008 — Versionado de cursos y qué pasa con el progreso al editar contenido publicado
 
 ## Estado
-Propuesto.
+Confirmado (2026-09-02).
 
 ## Contexto
 Pregunta concreta del usuario: si se edita una lección de un curso que ya están cursando 200 docentes,

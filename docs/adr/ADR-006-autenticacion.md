@@ -1,7 +1,7 @@
 # ADR-006 — Autenticación e identidad con Supabase Auth
 
 ## Estado
-Propuesto. SSO (Google/Microsoft) queda documentado pero no activo en el MVP — ver "Estado real de
+Confirmado (2026-09-02). SSO (Google/Microsoft) queda documentado pero no activo en el MVP — ver "Estado real de
 acceso" más abajo.
 
 ## Contexto

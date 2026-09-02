@@ -1,7 +1,7 @@
 # ADR-004 — Presentaciones y material visual
 
 ## Estado
-Propuesto.
+Confirmado (2026-09-02).
 
 ## Contexto
 Parte del contenido son presentaciones (diapositivas). Hay que decidir cómo se insertan y renderizan,

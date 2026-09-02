@@ -1,7 +1,7 @@
 # Roadmap hasta un producto vendible a colegios
 
 ## Fase 0 — Fundacional (actual)
-- ADRs (`docs/adr/`) revisados y aprobados por el usuario.
+- ADRs (`docs/adr/`) revisados y aprobados por el usuario (2026-09-02).
 - Cuentas reales creadas por el usuario: GitHub (org + dos repos), Netlify, Supabase (proyectos dev/prod
   en región UE) — modelo elegido: "tú creas, yo accedo".
 - Spike de revalidación en Netlify (ADR-001) ejecutado y verificado en producción de verdad.

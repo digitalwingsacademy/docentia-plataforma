@@ -1,7 +1,7 @@
 # ADR-003 — Proveedor de vídeo
 
 ## Estado
-Propuesto.
+Confirmado (2026-09-02).
 
 ## Contexto
 Escenario de dimensionamiento dado por el usuario: ~20h de vídeo alojado, ~500 docentes activos,

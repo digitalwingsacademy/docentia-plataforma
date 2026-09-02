@@ -1,7 +1,7 @@
 # ADR-007 — Acceso a datos: supabase-js frente a ORM tipado, migraciones y RLS
 
 ## Estado
-Propuesto.
+Confirmado (2026-09-02).
 
 ## Contexto
 El usuario pide decidir explícitamente si las consultas de dominio van con `supabase-js` o con un ORM

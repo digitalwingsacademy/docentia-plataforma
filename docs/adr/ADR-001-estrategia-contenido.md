@@ -1,7 +1,8 @@
 # ADR-001 — Estrategia de contenido: dónde vive y cómo se publica sin redesplegar
 
 ## Estado
-Propuesto — pendiente de validar el spike en una cuenta real de Netlify (ver "Spike" más abajo).
+Confirmado (2026-09-02) como decisión de arquitectura. El spike de Netlify (ver "Spike" más abajo) sigue
+pendiente de ejecución real — bloqueado hasta que existan las cuentas reales de GitHub/Netlify/Supabase.
 
 ## Contexto
 El contenido es el corazón del negocio y debe poder publicarse (nueva lección, corrección, curso nuevo)

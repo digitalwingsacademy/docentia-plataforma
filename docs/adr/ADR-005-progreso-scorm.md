@@ -1,7 +1,7 @@
 # ADR-005 — Modelo de progreso y postura sobre SCORM / xAPI / cmi5
 
 ## Estado
-Propuesto.
+Confirmado (2026-09-02).
 
 ## Contexto
 Hay que trackear el progreso por docente y sección, con criterios de completado distintos según el tipo

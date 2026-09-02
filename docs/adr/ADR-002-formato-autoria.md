@@ -1,7 +1,7 @@
 # ADR-002 — Formato de autoría: MDX + YAML, esquema, componentes, validación
 
 ## Estado
-Propuesto.
+Confirmado (2026-09-02).
 
 ## Contexto
 El contenido debe ser autorable por una persona técnica (el usuario, en el MVP), validable en CI, y

@@ -5,8 +5,12 @@ Este fichero es la fuente de verdad viva del proyecto — se actualiza cuando ca
 cuando se añade código.
 
 ## Estado actual
-Fase 0: ADRs escritos (`docs/adr/`), pendientes de aprobación del usuario antes de generar scaffolding y
-el vertical slice del MVP (ver `docs/roadmap.md`). Todavía no hay código de aplicación.
+Fase 0: los 8 ADRs (`docs/adr/`) y el roadmap están **aprobados** (2026-09-02). Bloqueados en seguir
+adelante hasta que existan cuentas reales (GitHub org, Netlify, Supabase dev/prod en UE) — sin ellas no
+se puede ejecutar de verdad el spike de revalidación de Netlify que exige ADR-001, y el propio encargo
+pide no construir nada más hasta que ese spike pase en producción. Decisión explícita del usuario:
+esperar a tener las cuentas antes de empezar el scaffolding de la sección 9, en vez de avanzar con mocks.
+Todavía no hay código de aplicación.
 
 ## Decisiones vigentes (ver ADRs para el razonamiento completo)
 - **Contenido**: repo separado `docentia-contenidos` (MDX + YAML), leído en runtime, cacheado con
@@ -23,15 +27,16 @@ el vertical slice del MVP (ver `docs/roadmap.md`). Todavía no hay código de ap
 - **Versionado de cursos**: `(slug, version)`, `Enrollment` ancla su versión al matricularse — ver ADR-008.
 
 ## Pendiente de confirmar con el usuario (asumido por defecto, corregible)
-- **Naming**: se ha usado el placeholder **"Docentia"** como marca y `docentia-plataforma` /
-  `docentia-contenidos` como nombres de repo. Pendiente de confirmación o renombrado.
+- **Naming**: **"Docentia"** confirmado como nombre de trabajo (2026-09-02) — se mantiene como marca y
+  como nombre de repos (`docentia-plataforma` / `docentia-contenidos`) hasta nueva indicación; no es
+  necesariamente el nombre comercial final.
 - **Dominio**: sin dominio propio todavía; se asume Netlify subdomain hasta que se indique uno.
 - **Escala año 1**: sin cifra confirmada más allá del escenario de vídeo dado (~500 docentes,
   ~3.000h/mes) usado en ADR-003; se asume una escala pequeña-media (orden de 5-15 colegios) para
   dimensionar planes de Supabase/Netlify hasta indicación contraria.
-- **Cuentas reales** (GitHub org, Netlify, Supabase dev/prod en UE): a crear por el usuario, que
-  compartirá acceso — sin esto, el spike de ADR-001 y el despliegue real de la sección 9 no pueden
-  ejecutarse de verdad.
+- **Cuentas reales** (GitHub org, Netlify, Supabase dev/prod en UE): confirmado (2026-09-02) que aún no
+  existen. El usuario las creará y compartirá acceso ("tú creas, yo accedo"); hasta entonces el proyecto
+  queda parado en Fase 0 — no se genera scaffolding con mocks como vía alternativa.
 
 ## Modelo de dominio (resumen — el detalle vive en el esquema SQL cuando exista)
 - `Organization` — el colegio: plazas, licencia, facturación.
