@@ -1,0 +1,31 @@
+{
+  "name": "docentia-plataforma",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Plataforma de formacion digital para docentes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalwingsacademy/docentia-plataforma.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^16.3.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.13",
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "typescript": "^7.0.2"
+  }
+}

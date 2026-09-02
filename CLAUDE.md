@@ -5,12 +5,16 @@ Este fichero es la fuente de verdad viva del proyecto — se actualiza cuando ca
 cuando se añade código.
 
 ## Estado actual
-Fase 0: los 8 ADRs (`docs/adr/`) y el roadmap están **aprobados** (2026-09-02). Bloqueados en seguir
-adelante hasta que existan cuentas reales (GitHub org, Netlify, Supabase dev/prod en UE) — sin ellas no
-se puede ejecutar de verdad el spike de revalidación de Netlify que exige ADR-001, y el propio encargo
-pide no construir nada más hasta que ese spike pase en producción. Decisión explícita del usuario:
-esperar a tener las cuentas antes de empezar el scaffolding de la sección 9, en vez de avanzar con mocks.
-Todavía no hay código de aplicación.
+Fase 0: los 8 ADRs (`docs/adr/`) y el roadmap están **aprobados** (2026-09-02). Cuentas reales creadas:
+GitHub (`digitalwingsacademy/docentia-plataforma` y `digitalwingsacademy/docentia-contenidos`, públicos,
+rama `main`) y Supabase dev/prod (`eu-west-1` confirmado en ambos). Netlify: pendiente de conectar el
+site — es el único bloqueante que queda para verificar el spike en producción real.
+
+Primer código del proyecto en marcha: el **spike de ADR-001** (app Next.js mínima y desechable en la raíz
+de este repo — `app/`, `lib/spike-content.ts` — que no es el scaffolding de la sección 9, solo prueba
+`unstable_cache`/`revalidateTag` + webhook contra `docentia-contenidos`). Hasta que ese spike se verifique
+desplegado en Netlify de verdad, ADR-001 sigue "confirmado como arquitectura" pero no "validado en
+producción", y no se empieza la sección 9 (dominio, Supabase, Tailwind/shadcn, etc.).
 
 ## Decisiones vigentes (ver ADRs para el razonamiento completo)
 - **Contenido**: repo separado `docentia-contenidos` (MDX + YAML), leído en runtime, cacheado con
@@ -34,9 +38,9 @@ Todavía no hay código de aplicación.
 - **Escala año 1**: sin cifra confirmada más allá del escenario de vídeo dado (~500 docentes,
   ~3.000h/mes) usado en ADR-003; se asume una escala pequeña-media (orden de 5-15 colegios) para
   dimensionar planes de Supabase/Netlify hasta indicación contraria.
-- **Cuentas reales** (GitHub org, Netlify, Supabase dev/prod en UE): confirmado (2026-09-02) que aún no
-  existen. El usuario las creará y compartirá acceso ("tú creas, yo accedo"); hasta entonces el proyecto
-  queda parado en Fase 0 — no se genera scaffolding con mocks como vía alternativa.
+- **Cuentas reales**: GitHub y Supabase (dev/prod, `eu-west-1`) creadas y accesibles (2026-09-02). Netlify
+  aún sin site conectado — pendiente de un Personal Access Token del usuario o de que cree el site
+  manualmente ("Import from Git") y comparta el nombre.
 
 ## Modelo de dominio (resumen — el detalle vive en el esquema SQL cuando exista)
 - `Organization` — el colegio: plazas, licencia, facturación.
@@ -62,3 +66,24 @@ en Postgres. En la BD solo entra estado del usuario y los metadatos mínimos par
 ## Chuleta Next.js App Router (para quien viene de un SSR artesanal con Vite+React)
 Se rellena a medida que aparezcan patrones sin equivalente directo, con el porqué — no antes de que
 exista código real al que referirse.
+
+- **Route Handlers (`app/api/.../route.ts`)**: no son "Express endpoints". Cada método HTTP es una
+  función exportada (`GET`, `POST`...) en vez de un router con middlewares encadenados; no hay `req/res`
+  mutables, se recibe un `Request` (Web API estándar) y se devuelve un `Response`/`NextResponse`. Si en tu
+  SSR artesanal montabas rutas de API a mano con Express, esto es el equivalente, pero sin la capa de
+  routing/middleware — el enrutado ya lo hace la carpeta.
+- **`unstable_cache` + `revalidateTag`**: sustituye a "invalidar caché a mano" (un `Map` en memoria, un
+  Redis con TTL que borrabas tú mismo). Envuelves la función que hace el trabajo caro con `unstable_cache`
+  y le pones una o varias `tags`; en cualquier otro sitio del servidor (típicamente un route handler de
+  webhook) llamas a `revalidateTag(tag)` y Next invalida solo esa entrada, sin que tengas que saber la
+  clave de caché exacta ni tocar la función original. Ojo: es una caché *de datos* de Next (persistente
+  entre requests en el servidor), distinta de la caché nativa de `fetch` — mezclar las dos es confuso, por
+  eso el `fetch` interno de `getSpikeContent` usa `cache: "no-store"` y delega todo el control a la tag.
+  Sigue con el prefijo `unstable_` en Next 16 (API estable pendiente, `use cache` es la futura sustituta).
+  Ojo si se actualiza Next: en la v16, `revalidateTag` pasó a exigir un segundo argumento (un perfil
+  `cacheLife` como `"max"`, o `{ expire }`) — antes de la v16 se llamaba solo con el tag.
+- **Por qué no `runtime = "edge"` en Netlify**: en un SSR artesanal, "edge" suena a "más rápido, más
+  cerca". En Netlify da igual: las funciones ya se ejecutan en la región configurada, así que el edge
+  runtime de Next no aporta latencia extra ganada y sí quita APIs de Node disponibles (por ejemplo,
+  `node:crypto` tal y como se usa en el webhook del spike). Por eso ningún route handler de este proyecto
+  fija `runtime = "edge"`.
