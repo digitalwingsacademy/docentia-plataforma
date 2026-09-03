@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+// Server-only. Un componente/fichero "use client" nunca debe importar esto
+// — usa lib/env.client.ts, que vive aparte por eso mismo (ver el comentario
+// de ese fichero).
 const envSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z
     .string()
@@ -26,7 +29,6 @@ const envSchema = z.object({
   MUX_SIGNING_KEY_PRIVATE: z
     .string()
     .min(1, "Falta MUX_SIGNING_KEY_PRIVATE. Se muestra una sola vez al crear la signing key en Mux."),
-  // Opcional: habilita Mux Data (analítica de visionado) en el reproductor.
   NEXT_PUBLIC_MUX_DATA_ENV_KEY: z.string().optional(),
 
   // Opcionales: si no existen, los botones de SSO correspondientes no se muestran (ADR-006).
