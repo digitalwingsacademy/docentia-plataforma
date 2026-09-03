@@ -2,8 +2,22 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { completeLoginSetup } from "@/lib/actions/auth";
 
+// En Netlify (y en general detras de un proxy), request.url puede reflejar
+// el host INTERNO del deploy concreto (p. ej. "<deploy-id>--sitio.netlify.app")
+// en vez del dominio publico que el navegador realmente pidio. Redirigir con
+// ese origen hace que las cookies de sesion se fijen en el host equivocado -
+// visibles en ese deploy, invisibles en el dominio real. x-forwarded-host es
+// el header estandar para el host tal como lo vio el cliente.
+function publicOrigin(request: NextRequest): string {
+  const forwardedHost = request.headers.get("x-forwarded-host");
+  if (!forwardedHost) return new URL(request.url).origin;
+  const forwardedProto = request.headers.get("x-forwarded-proto") ?? "https";
+  return `${forwardedProto}://${forwardedHost}`;
+}
+
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url);
+  const origin = publicOrigin(request);
+  const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
 

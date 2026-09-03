@@ -32,7 +32,14 @@ export async function proxy(request: NextRequest) {
   const isPublicPath = PUBLIC_PATHS.some((path) => request.nextUrl.pathname.startsWith(path));
 
   if (!user && !isPublicPath) {
-    const loginUrl = new URL("/login", request.url);
+    // request.url puede reflejar el host interno del deploy en Netlify, no
+    // el dominio publico (ver el mismo comentario en auth/callback/route.ts)
+    // - x-forwarded-host es el que vio de verdad el navegador.
+    const forwardedHost = request.headers.get("x-forwarded-host");
+    const base = forwardedHost
+      ? `${request.headers.get("x-forwarded-proto") ?? "https"}://${forwardedHost}`
+      : request.url;
+    const loginUrl = new URL("/login", base);
     loginUrl.searchParams.set("next", request.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
