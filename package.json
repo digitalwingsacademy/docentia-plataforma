@@ -23,7 +23,7 @@
     "setup": "tsx scripts/setup.ts",
     "db:types": "supabase gen types typescript --linked > lib/database.types.ts",
     "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
-    "content:validate": "tsx scripts/validate-content.ts"
+    "content:sync": "tsx --env-file=.env.local scripts/sync-course.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

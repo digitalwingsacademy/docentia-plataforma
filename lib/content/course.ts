@@ -12,7 +12,10 @@ export interface CourseStructure {
   unidades: Array<{ dir: string; unidad: UnidadYml }>;
 }
 
-async function loadCourseStructure(slug: string, ref: string): Promise<CourseStructure> {
+// Version sin cachear: la usan el webhook y los scripts (sync-course,
+// seed), que corren fuera de una request de Next y no tienen el
+// incrementalCache que unstable_cache necesita para funcionar.
+export async function loadCourseStructureUncached(slug: string, ref: string): Promise<CourseStructure> {
   const cursoRaw = await readContentFile(`cursos/${slug}/curso.yml`, ref);
   const curso = cursoYmlSchema.parse(parseYaml(cursoRaw));
 
@@ -28,7 +31,7 @@ async function loadCourseStructure(slug: string, ref: string): Promise<CourseStr
 }
 
 export function getCourseStructure(slug: string, ref: string) {
-  return unstable_cache(() => loadCourseStructure(slug, ref), ["course-structure", slug, ref], {
+  return unstable_cache(() => loadCourseStructureUncached(slug, ref), ["course-structure", slug, ref], {
     tags: [contentTag(slug)],
   })();
 }

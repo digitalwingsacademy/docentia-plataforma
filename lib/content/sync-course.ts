@@ -1,5 +1,5 @@
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getCourseStructure, summarizeCourse } from "./course";
+import { loadCourseStructureUncached, summarizeCourse } from "./course";
 
 /**
  * Sincroniza los metadatos de un curso (courses.total_sections/
@@ -8,7 +8,7 @@ import { getCourseStructure, summarizeCourse } from "./course";
  * unica via para que la fila de `courses` no se desincronice del contenido.
  */
 export async function syncCourse(slug: string, contentRef: string) {
-  const structure = await getCourseStructure(slug, contentRef);
+  const structure = await loadCourseStructureUncached(slug, contentRef);
   const { totalSections, totalMinutes } = summarizeCourse(structure);
 
   const supabase = createAdminClient();

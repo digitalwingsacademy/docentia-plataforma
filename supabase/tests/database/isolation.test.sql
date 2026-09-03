@@ -15,7 +15,7 @@ create temporary table _tap_output (line text);
 -- antes del cambio de rol, o los INSERT posteriores fallarian.
 grant insert, select on _tap_output to authenticated;
 
-insert into _tap_output select plan(4);
+insert into _tap_output select plan(5);
 
 insert into auth.users (id, email) values
   ('11111111-1111-1111-1111-111111111111', 'coord-a@example.com'),
@@ -62,6 +62,11 @@ insert into _tap_output select is(
 insert into _tap_output select is(
   (select count(*) from public.memberships)::int, 1,
   'coordinador B solo ve las membresias de su propia organizacion'
+);
+
+insert into _tap_output select is(
+  (select count(*) from public.profiles where id = '33333333-3333-3333-3333-333333333333')::int, 0,
+  'coordinador B no ve el perfil de un docente del colegio A'
 );
 
 -- Control positivo: el coordinador del colegio A si ve su propia matricula.

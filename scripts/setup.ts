@@ -90,6 +90,9 @@ async function main() {
   console.log("Sembrando datos de desarrollo...");
   execSync("npm run db:seed", { stdio: "inherit" });
 
+  console.log("Sincronizando metadatos del curso de ejemplo...");
+  execSync("npm run content:sync -- competencia-digital-docente-nivel-1 main", { stdio: "inherit" });
+
   console.log("\nListo. Arranca la app con: npm run dev");
 }
 
