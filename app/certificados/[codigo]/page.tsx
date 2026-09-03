@@ -14,7 +14,7 @@ export default async function CertificatePage({ params }: { params: Promise<{ co
   return (
     <main className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center gap-4 px-4 text-center">
       <h1 className="text-2xl font-semibold">Certificado verificado ✓</h1>
-      <p className="text-lg">{data.teacher_name}</p>
+      <p className="text-lg">{data.teacher_name ?? "Docente"}</p>
       <p className="text-muted-foreground">{data.course_title}</p>
       <p className="text-sm">
         {data.total_hours} horas — emitido el {new Date(data.issued_at).toLocaleDateString("es-ES")}

@@ -21,10 +21,13 @@ export async function GET(_request: Request, { params }: { params: Promise<{ cod
     page.drawText(text, { x: (595 - width) / 2, y, size, font, color: rgb(0.1, 0.1, 0.1) });
   };
 
+  // full_name puede no existir todavia (login solo con magic link, sin
+  // ningun paso que pida nombre) - sin fallback, pdf-lib revienta al pedirle
+  // que dibuje null en vez de un string.
   center("Certificado de Aprovechamiento", 340, bold, 22);
-  center(data.teacher_name, 280, bold, 18);
+  center(data.teacher_name ?? "Docente", 280, bold, 18);
   center("ha completado el curso", 250, regular, 12);
-  center(data.course_title, 220, bold, 16);
+  center(data.course_title ?? "", 220, bold, 16);
   center(
     `${data.total_hours} horas de formación — ${new Date(data.issued_at).toLocaleDateString("es-ES")}`,
     180,
