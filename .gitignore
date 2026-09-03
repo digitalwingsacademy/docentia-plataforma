@@ -21,3 +21,10 @@ supabase/.temp
 .DS_Store
 *.log
 npm-debug.log*
+*.tsbuildinfo
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
