@@ -34,6 +34,19 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
   const statusBySection = new Map(progressRows?.map((p) => [p.section_id, p.status]));
   const firstIncomplete = sections.find((s) => statusBySection.get(s.sectionId) !== "COMPLETED") ?? sections[0];
 
+  // Agrupa preservando el orden ya establecido por flattenSections (por
+  // unidad.orden, luego seccion.orden) - las unidades son la unidad visual
+  // de navegacion del curso, no una lista plana de lecciones.
+  const unidades: { unidadDir: string; unidadTitulo: string; sections: typeof sections }[] = [];
+  for (const section of sections) {
+    const last = unidades.at(-1);
+    if (last && last.unidadDir === section.unidadDir) {
+      last.sections.push(section);
+    } else {
+      unidades.push({ unidadDir: section.unidadDir, unidadTitulo: section.unidadTitulo, sections: [section] });
+    }
+  }
+
   const { data: certificate } = await supabase
     .from("certificates")
     .select("verification_code")
@@ -66,24 +79,43 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
         )
       )}
 
-      <ul className="mt-8 flex flex-col gap-1">
-        {sections.map((section) => {
-          const status = statusBySection.get(section.sectionId) ?? "NOT_STARTED";
+      <div className="mt-8 flex flex-col gap-6">
+        {unidades.map((unidad, unidadIndex) => {
+          const completedCount = unidad.sections.filter(
+            (s) => statusBySection.get(s.sectionId) === "COMPLETED"
+          ).length;
           return (
-            <li key={section.sectionId}>
-              <Link
-                href={`/cursos/${slug}/${section.unidadDir}/${section.sectionId}`}
-                className="flex items-center justify-between rounded-md px-3 py-2 text-sm hover:bg-secondary"
-              >
-                <span>{section.titulo}</span>
+            <section key={unidad.unidadDir}>
+              <div className="flex items-baseline justify-between border-b pb-1.5">
+                <h2 className="text-sm font-semibold text-muted-foreground">
+                  Unidad {unidadIndex + 1} — {unidad.unidadTitulo}
+                </h2>
                 <span className="text-xs text-muted-foreground">
-                  {status === "COMPLETED" ? "✓" : `${section.duracionMinutos} min`}
+                  {completedCount}/{unidad.sections.length}
                 </span>
-              </Link>
-            </li>
+              </div>
+              <ul className="mt-2 flex flex-col gap-1">
+                {unidad.sections.map((section) => {
+                  const status = statusBySection.get(section.sectionId) ?? "NOT_STARTED";
+                  return (
+                    <li key={section.sectionId}>
+                      <Link
+                        href={`/cursos/${slug}/${section.unidadDir}/${section.sectionId}`}
+                        className="flex items-center justify-between rounded-md px-3 py-2 text-sm hover:bg-secondary"
+                      >
+                        <span>{section.titulo}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {status === "COMPLETED" ? "✓" : `${section.duracionMinutos} min`}
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
           );
         })}
-      </ul>
+      </div>
     </main>
   );
 }
