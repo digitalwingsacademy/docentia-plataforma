@@ -1,17 +1,21 @@
 # Roadmap hasta un producto vendible a colegios
 
-## Fase 0 — Fundacional (actual)
+## Fase 0 — Fundacional (completa)
 - ADRs (`docs/adr/`) revisados y aprobados por el usuario (2026-09-02).
 - Cuentas reales creadas por el usuario: GitHub (org + dos repos), Netlify, Supabase (proyectos dev/prod
   en región UE) — modelo elegido: "tú creas, yo accedo".
 - Spike de revalidación en Netlify (ADR-001) ejecutado y verificado en producción de verdad.
-- Scaffolding + vertical slice (sección 9 del encargo).
 
-## Fase 1 — MVP vertical (demo de principio a fin)
-Alcance definido en la sección 9 del encargo: alta de colegio con plazas, invitación y login, un curso
-completo con vídeo/texto/quiz, progreso persistente entre dispositivos, certificado PDF, panel de
-coordinador, y publicación de contenido sin redeploy demostrada de verdad. Incluye el curso de ejemplo
-completo y el test de aislamiento multi-colegio.
+## Fase 1 — MVP vertical (completa, 2026-09-03)
+Alcance de la sección 9 del encargo, verificado de principio a fin con un navegador real contra
+`docentia-platform.netlify.app`: alta de colegio con plazas, invitación y login (magic link, incluyendo
+el caso de abrir el enlace en otro dispositivo), un curso completo con vídeo/texto/quiz, progreso
+persistente entre dispositivos, certificado PDF con verificación pública, panel de coordinador, y
+publicación de contenido sin redeploy demostrada de verdad. Incluye el curso de ejemplo completo
+("Competencia Digital Docente — Nivel 1") y el test de aislamiento multi-colegio (pgTAP).
+
+Deliberadamente fuera de esta fase, para la siguiente: entorno de producción real y separado (hoy el
+site de Netlify usa el proyecto de Supabase de dev), y activación de SSO.
 
 ## Fase 2 — Piloto comercial reducido (2-3 colegios reales)
 - Invitación también por código (no solo email).

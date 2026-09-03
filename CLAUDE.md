@@ -5,26 +5,36 @@ Este fichero es la fuente de verdad viva del proyecto — se actualiza cuando ca
 cuando se añade código.
 
 ## Estado actual
-Fase 0 completa. Los 8 ADRs y el roadmap están **aprobados** (2026-09-02). Cuentas reales: GitHub
-(`digitalwingsacademy/docentia-plataforma` y `digitalwingsacademy/docentia-contenidos`, públicos, rama
-`main`), Supabase dev/prod (`eu-west-1` confirmado en ambos), y Netlify (`docentia-platform.netlify.app`,
-enlazado al repo vía `@netlify/plugin-nextjs`).
+**Vertical slice de la sección 9 completo y verificado en producción real** (2026-09-03). Los 8 ADRs y
+el roadmap están aprobados; el spike de ADR-001 pasó en producción antes de empezar esta sección (ver
+ADR-001 para el detalle histórico del spike, ya desechado — sustituido por el código real).
 
-**El spike de ADR-001 pasó en producción real** (2026-09-02): webhook de GitHub → `revalidateTag` →
-contenido actualizado en la plataforma sin redeploy, verificado con entregas reales
-(`status_code: 200`) y contenido cambiado en vivo. Un hallazgo del spike, no un fallo: la fuente de
-fetch para el contenido real debe ser `api.github.com` (o el blob por SHA del payload del webhook), no
-`raw.githubusercontent.com` — su caché de CDN de 5 min confunde las pruebas de invalidación. Detalle
-completo en ADR-001.
+Verificado de principio a fin contra `docentia-platform.netlify.app` (Supabase dev, Mux real) con
+Playwright y un navegador real (no cookies simuladas a mano): alta de colegio con plazas, invitación de
+un docente, login por magic link (PKCE y el flujo implícito de "enlace abierto en otro dispositivo"),
+lección leída con progreso persistido, y el coordinador viendo ese progreso en su panel. `npm run
+test:e2e` con `E2E_BASE_URL` reproduce esta verificación.
 
-El código del spike (`app/`, `lib/spike-content.ts`) es desechable y **se sustituye**, no se reutiliza
-tal cual, al empezar el scaffolding real de la sección 9 (dominio, Supabase, Tailwind/shadcn, MDX). Con
-el spike validado, ya no hay bloqueante para arrancar esa sección.
+Esa verificación real encontró y corrigió tres bugs que ningún build ni test unitario habían detectado
+(detalle en los commits `fix: real end-to-end verification...` y `fix: auth redirects used Netlify's
+internal deploy host...`):
+- Un módulo de entorno que mezclaba secretos de servidor con variables de cliente reventaba cualquier
+  bundle de navegador que lo importara — separado en `lib/env.ts` (servidor) y `lib/env.client.ts`
+  (cliente), en ficheros distintos a propósito (importar cualquiera de los dos evalúa el módulo entero).
+- Los redirects de auth construían URLs absolutas desde `request.url`, que en Netlify puede reflejar el
+  host interno del deploy en vez del dominio público — la cookie de sesión se fijaba en el host
+  equivocado. Ahora se usa `x-forwarded-host`. Ver la chuleta más abajo.
+- El catálogo solo listaba matrículas ya existentes, así que un docente recién invitado (sin ninguna
+  matrícula todavía) no tenía forma de descubrir el curso al que tenía acceso.
+
+Pendiente, no bloqueante para la demo: activar SSO (Google/Microsoft, ADR-006) en cuanto haya acceso a
+esos tenants; el proyecto de Supabase de **prod** (`lrngrnszldipgkqifypl`) existe pero el sitio de
+Netlify apunta hoy solo a **dev** — no hay todavía una distinción real de entornos de despliegue.
 
 ## Decisiones vigentes (ver ADRs para el razonamiento completo)
-- **Contenido**: repo separado `docentia-contenidos` (MDX + YAML), leído en runtime, cacheado con
-  `revalidateTag`, invalidado por webhook al mergear en `main`. Spike de Netlify pendiente de ejecutar en
-  cuenta real antes de darlo por definitivo — ver ADR-001.
+- **Contenido**: repo separado `docentia-contenidos` (MDX + YAML), leído en runtime vía la API de
+  contenidos de GitHub, cacheado con `revalidateTag`, invalidado por webhook al mergear en `main` —
+  validado en producción real, ver ADR-001.
 - **Vídeo**: Mux, detrás de una interfaz `VideoProvider` — ver ADR-003.
 - **Presentaciones**: exportadas a PDF por el autor, renderizadas con pdf.js — ver ADR-004.
 - **Progreso**: modelo propio, vocabulario inspirado en xAPI sin implementarlo; SCORM (import y export)
@@ -43,9 +53,10 @@ el spike validado, ya no hay bloqueante para arrancar esa sección.
 - **Escala año 1**: sin cifra confirmada más allá del escenario de vídeo dado (~500 docentes,
   ~3.000h/mes) usado en ADR-003; se asume una escala pequeña-media (orden de 5-15 colegios) para
   dimensionar planes de Supabase/Netlify hasta indicación contraria.
-- **Cuentas reales**: GitHub y Supabase (dev/prod, `eu-west-1`) creadas y accesibles (2026-09-02). Netlify
-  aún sin site conectado — pendiente de un Personal Access Token del usuario o de que cree el site
-  manualmente ("Import from Git") y comparta el nombre.
+- **Cuentas reales**: GitHub, Supabase (dev/prod, `eu-west-1`) y Netlify (`docentia-platform.netlify.app`,
+  `@netlify/plugin-nextjs`) creadas, conectadas y con la app desplegada de verdad (2026-09-03). El sitio
+  de Netlify usa hoy el proyecto de Supabase de **dev** para todo — no hay todavía un entorno de
+  producción real separado.
 
 ## Modelo de dominio (resumen — el detalle vive en el esquema SQL cuando exista)
 - `Organization` — el colegio: plazas, licencia, facturación.
@@ -92,6 +103,17 @@ exista código real al que referirse.
   runtime de Next no aporta latencia extra ganada y sí quita APIs de Node disponibles (por ejemplo,
   `node:crypto` tal y como se usa en el webhook del spike). Por eso ningún route handler de este proyecto
   fija `runtime = "edge"`.
+- **`request.url` en Netlify no es de fiar para construir redirects absolutos**: dentro de un route
+  handler o del proxy, `request.url` puede reflejar el host *interno* del deploy concreto
+  (`<deploy-id>--sitio.netlify.app`), no el dominio público que pidió el navegador. Un
+  `NextResponse.redirect(`${new URL(request.url).origin}/algo`)` manda al usuario a ese host interno —
+  inofensivo para una redirección cualquiera, pero si de camino se fija una cookie (p. ej. una sesión de
+  Supabase tras `setSession`), la cookie queda fijada en el host equivocado y toda navegación posterior al
+  dominio real parece "no autenticada". Se soluciona leyendo `x-forwarded-host` (y `x-forwarded-proto`)
+  primero, cayendo a `request.url` solo si no están presentes — ver `app/auth/callback/route.ts` y
+  `proxy.ts`. Esto no lo detecta ningún build ni test unitario: solo aparece probando contra el dominio
+  público real desplegado, nunca contra `next dev`/`next start` en local (un único host, sin nada que
+  discrepar).
 
 <!-- BEGIN:nextjs-agent-rules -->
 
