@@ -13,6 +13,7 @@ import { Presentacion } from "@/components/mdx/presentacion";
 import { VideoSection } from "@/components/mdx/video";
 import { ReadingProgress } from "@/components/reading-progress";
 import { QuizPlayer } from "@/components/quiz-player";
+import { NoOrganizationMessage } from "@/components/no-organization";
 
 interface PageParams {
   slug: string;
@@ -24,7 +25,10 @@ export default async function SectionPage({ params }: { params: Promise<PagePara
   const { slug, unidad: unidadDir, seccion: sectionId } = await params;
   const supabase = await createClient();
 
-  const enrollment = await getOrCreateEnrollment(slug);
+  const result = await getOrCreateEnrollment(slug);
+  if (result.status === "no_organization") return <NoOrganizationMessage />;
+  if (result.status === "course_not_found") notFound();
+  const enrollment = result.enrollment;
 
   const { data: course } = await supabase
     .from("courses")

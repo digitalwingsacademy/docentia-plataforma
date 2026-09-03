@@ -4,12 +4,16 @@ import { createClient } from "@/lib/supabase/server";
 import { getOrCreateEnrollment } from "@/lib/actions/enrollment";
 import { getCourseStructure } from "@/lib/content/course";
 import { flattenSections } from "@/lib/content/flatten";
+import { NoOrganizationMessage } from "@/components/no-organization";
 
 export default async function CoursePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const supabase = await createClient();
 
-  const enrollment = await getOrCreateEnrollment(slug);
+  const result = await getOrCreateEnrollment(slug);
+  if (result.status === "no_organization") return <NoOrganizationMessage />;
+  if (result.status === "course_not_found") notFound();
+  const enrollment = result.enrollment;
 
   const { data: course } = await supabase
     .from("courses")
