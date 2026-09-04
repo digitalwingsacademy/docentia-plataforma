@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { createClient } from "@/lib/supabase/server";
 import { getOrCreateEnrollment } from "@/lib/actions/enrollment";
 import { getCourseStructure, getQuiz, getSectionMdx } from "@/lib/content/course";
@@ -138,7 +139,7 @@ async function LessonContent({
           <VideoSection {...props} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
         ),
       }}
-      options={{ parseFrontmatter: true }}
+      options={{ parseFrontmatter: true, mdxOptions: { remarkPlugins: [remarkGfm] } }}
     />
   );
 }
