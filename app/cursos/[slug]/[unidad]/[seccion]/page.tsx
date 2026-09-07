@@ -4,7 +4,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { createClient } from "@/lib/supabase/server";
 import { getOrCreateEnrollment } from "@/lib/actions/enrollment";
-import { getCourseStructure, getQuiz, getSectionMdx } from "@/lib/content/course";
+import { getActividad, getCourseStructure, getQuiz, getSectionMdx } from "@/lib/content/course";
+import { RellenarHuecos } from "@/components/actividades/rellenar-huecos";
 import { flattenSections } from "@/lib/content/flatten";
 import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
@@ -70,6 +71,16 @@ export default async function SectionPage({ params }: { params: Promise<PagePara
             sectionId={sectionId}
             contentRef={course.content_ref}
             enrollmentId={enrollment.id}
+            durationMinutes={section.duracionMinutos}
+          />
+        ) : section.tipo === "actividad" ? (
+          <ActividadSection
+            slug={slug}
+            unidadDir={unidadDir}
+            archivo={section.archivo}
+            contentRef={course.content_ref}
+            enrollmentId={enrollment.id}
+            sectionId={sectionId}
             durationMinutes={section.duracionMinutos}
           />
         ) : (
@@ -168,6 +179,34 @@ async function QuizPlayerSection({
       unidadDir={unidadDir}
       sectionId={sectionId}
       contentRef={contentRef}
+      durationMinutes={durationMinutes}
+    />
+  );
+}
+
+async function ActividadSection({
+  slug,
+  unidadDir,
+  archivo,
+  contentRef,
+  enrollmentId,
+  sectionId,
+  durationMinutes,
+}: {
+  slug: string;
+  unidadDir: string;
+  archivo: string;
+  contentRef: string;
+  enrollmentId: string;
+  sectionId: string;
+  durationMinutes: number;
+}) {
+  const actividad = await getActividad(slug, unidadDir, archivo, contentRef);
+  return (
+    <RellenarHuecos
+      actividad={actividad}
+      enrollmentId={enrollmentId}
+      sectionId={sectionId}
       durationMinutes={durationMinutes}
     />
   );

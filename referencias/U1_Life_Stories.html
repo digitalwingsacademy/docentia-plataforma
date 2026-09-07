@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U1 Life Stories | English B1 â Actividades Reales</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0f6cbf;--bdk:#0a4f8e;--blt:#e8f4fc;--grn:#1a7a4a;--glt:#e6f4ed;--red:#ca3120;--rlt:#fdf0ee;--org:#f98012;--ylw:#f0ad00;--ylt:#fff8e6;--pur:#6a4db3;--plt:#f0edf9;--gry:#6a737b;--glt2:#f4f4f4;--bdr:#dee2e6;--txt:#212529;--mut:#6c757d;--r:6px;--sh:0 2px 8px rgba(0,0,0,.1);--tr:.2s ease;--fn:'Nunito Sans',sans-serif;--fu:'Nunito',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fn);font-size:14px;color:var(--txt);background:#f5f6f7;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--blue);text-decoration:none}button{cursor:pointer;font-family:var(--fn)}
+/* NAV */
+.tnav{background:var(--bdk);height:56px;display:flex;align-items:center;padding:0 20px;gap:14px;position:sticky;top:0;z-index:200;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo svg{width:30px;height:30px}
+.logo span{font-family:var(--fu);font-weight:800;font-size:20px;color:#fff;letter-spacing:-.5px}
+.nsep{flex:1}
+.nbtn{background:rgba(255,255,255,.12);border:none;color:#fff;padding:5px 13px;border-radius:var(--r);font-size:13px;cursor:pointer}
+.nbtn:hover{background:rgba(255,255,255,.22)}
+.avt{width:34px;height:34px;border-radius:50%;background:var(--org);display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-weight:700;color:#fff;font-size:13px;border:2px solid rgba(255,255,255,.3)}
+/* LAYOUT */
+.lay{display:flex;flex:1;min-height:calc(100vh - 56px)}
+.sb{width:250px;background:#fff;border-right:1px solid var(--bdr);flex-shrink:0;overflow-y:auto;position:sticky;top:56px;height:calc(100vh - 56px)}
+.sbsec{border-bottom:1px solid var(--bdr)}
+.sbh{padding:11px 14px;font-family:var(--fu);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.sbn{list-style:none;padding:3px 0 7px}
+.sbn li a{display:flex;align-items:center;gap:9px;padding:6px 14px;color:var(--txt);font-size:13px;transition:background var(--tr),color var(--tr)}
+.sbn li a:hover{background:var(--glt2);color:var(--blue);text-decoration:none}
+.sbn li.act a{background:var(--blt);color:var(--blue);font-weight:600;border-left:3px solid var(--blue)}
+.nbt{margin-left:auto;background:var(--org);color:#fff;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px}
+.prb{padding:10px 14px 14px}
+.prl{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mut);margin-bottom:5px}
+.prw{background:var(--glt2);border-radius:99px;height:7px;overflow:hidden}
+.prb2{background:linear-gradient(90deg,var(--blue),#4da6e8);height:100%;border-radius:99px;transition:width .8s ease}
+/* MAIN */
+.main{flex:1;overflow-x:hidden;padding-bottom:40px}
+.bc{background:#fff;border-bottom:1px solid var(--bdr);padding:9px 24px;display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--mut)}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0a4f8e,#0f6cbf,#1a87d4);color:#fff;padding:26px 24px 22px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.06)}
+.htag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border-radius:4px;padding:3px 9px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin-bottom:9px}
+.hero h1{font-family:var(--fu);font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.hero .sub{font-size:14px;opacity:.85;margin-bottom:14px}
+.hm{display:flex;flex-wrap:wrap;gap:14px}
+.hm span{font-size:12px;opacity:.88;display:flex;align-items:center;gap:5px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--org);flex-shrink:0}
+/* CONTENT */
+.ct{padding:20px 24px;max-width:920px}
+.stit{font-family:var(--fu);font-size:15px;font-weight:800;color:var(--bdk);margin:24px 0 12px;display:flex;align-items:center;gap:9px;padding-bottom:7px;border-bottom:2px solid var(--bdr)}
+.inf{background:var(--blt);border-left:4px solid var(--blue);border-radius:var(--r);padding:12px 15px;margin-bottom:18px;font-size:13px;line-height:1.6}
+/* SESSIONS */
+.sess{display:flex;flex-direction:column;gap:9px}
+.sc{background:#fff;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.sh{display:flex;align-items:center;padding:11px 15px;cursor:pointer;gap:11px;transition:background var(--tr)}
+.sh:hover{background:var(--glt2)}
+.sbg{min-width:40px;height:40px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-family:var(--fu);font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+.c1{background:var(--blue)}.c2{background:var(--grn)}.c3{background:var(--pur)}.c4{background:var(--red)}.c5{background:var(--org)}
+.si{flex:1}.si h3{font-family:var(--fu);font-weight:700;font-size:13.5px;margin-bottom:2px}.si p{font-size:11.5px;color:var(--mut)}
+.stags{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px}
+.tg{font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px}
+.tg-t{background:#e8f4fc;color:var(--blue)}.tg-g{background:var(--plt);color:var(--pur)}.tg-s{background:var(--rlt);color:var(--red)}.tg-w{background:#fff3e0;color:#e65100}.tg-r{background:#e8f5e9;color:#2e7d32}.tg-l{background:#e3f2fd;color:#1565c0}.tg-a{background:#e6f4ed;color:var(--grn)}.tg-y{background:var(--ylt);color:#a07400}
+.chev{font-size:11px;color:var(--mut);transition:transform var(--tr)}
+.sc.op .chev{transform:rotate(180deg)}
+.sbd{display:none;border-top:1px solid var(--bdr)}
+.sc.op .sbd{display:block}
+/* ACTS */
+.al{list-style:none}
+.ai{display:flex;align-items:flex-start;gap:11px;padding:10px 15px;border-bottom:1px solid #f0f0f0;transition:background var(--tr)}
+.ai:last-child{border-bottom:none}
+.ai:hover{background:var(--glt2)}
+.aic{width:34px;height:34px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:1px}
+.ab{flex:1}.ab h4{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:2px}.ab p{font-size:12px;color:var(--mut);line-height:1.5}
+.am{display:flex;gap:7px;margin-top:5px;align-items:center;flex-wrap:wrap}
+.bo{font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--red);color:#fff}
+.ba{font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--pur);color:#fff}
+.be{font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--org);color:#fff}
+.bt2{font-size:10.5px;color:var(--mut);display:flex;align-items:center;gap:3px}
+.ob{background:var(--blue);color:#fff;border:none;padding:5px 13px;border-radius:var(--r);font-size:11.5px;font-weight:600;transition:background var(--tr);white-space:nowrap;flex-shrink:0;margin-top:2px;cursor:pointer}
+.ob:hover{background:var(--bdk)}
+.cc{width:22px;height:22px;border-radius:50%;border:2px solid var(--bdr);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;cursor:pointer;transition:all var(--tr);margin-top:5px}
+.cc:hover{border-color:var(--grn);background:var(--glt);color:var(--grn)}
+.ai.dn .cc{background:var(--grn);border-color:var(--grn);color:#fff}
+/* MODAL */
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.mov.op{display:flex}
+.mb{background:#fff;border-radius:10px;width:100%;max-width:820px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;animation:mIn .25s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.mh{background:var(--bdk);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.mhi{font-size:22px}.mhf{flex:1}
+.mhf h2{font-family:var(--fu);font-weight:800;font-size:16px}
+.mhf p{font-size:12px;opacity:.8}
+.mc{background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.mc:hover{background:rgba(255,255,255,.3)}
+.mbd{padding:20px 22px;overflow-y:auto;flex:1;line-height:1.6}
+.mft{padding:12px 22px;border-top:1px solid var(--bdr);display:flex;align-items:center;gap:10px;justify-content:flex-end;flex-shrink:0;background:#fafafa}
+/* EXERCISE */
+.xi{background:var(--blt);border-radius:var(--r);padding:11px 14px;margin-bottom:16px;font-size:13px;line-height:1.6;border-left:3px solid var(--blue)}
+.xt{font-size:14px;line-height:2.2;margin-bottom:16px;background:#fafafa;border-radius:var(--r);padding:16px 18px;border:1px solid var(--bdr)}
+.gi{display:inline-block;border:none;border-bottom:2px solid var(--blue);padding:2px 6px;min-width:130px;font-family:var(--fn);font-size:13.5px;text-align:center;background:transparent;outline:none;color:var(--bdk)}
+.gi:focus{border-bottom-color:var(--org)}
+.gi.ok{border-bottom-color:var(--grn);color:var(--grn);background:var(--glt)}
+.gi.ng{border-bottom-color:var(--red);color:var(--red);background:var(--rlt)}
+.wb{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.wbc{background:var(--blt);color:var(--bdk);border:1px solid #b3d4f5;border-radius:var(--r);padding:5px 11px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all var(--tr)}
+.wbc:hover{background:var(--blue);color:#fff}
+.wbc.used{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.qq{margin-bottom:18px}.qq p{font-size:13.5px;font-weight:600;margin-bottom:9px}
+.qos{display:flex;flex-direction:column;gap:6px}
+.qo{display:flex;align-items:center;gap:9px;padding:8px 12px;border:1.5px solid var(--bdr);border-radius:var(--r);cursor:pointer;font-size:13px;transition:all var(--tr)}
+.qo:hover{background:var(--blt);border-color:var(--blue)}
+.qo.sel{background:var(--blt);border-color:var(--blue);font-weight:600}
+.qo.ok{background:var(--glt);border-color:var(--grn);color:var(--grn)}
+.qo.ng{background:var(--rlt);border-color:var(--red);color:var(--red)}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mch{font-family:var(--fu);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:9px;color:var(--mut)}
+.mis{display:flex;flex-direction:column;gap:7px}
+.mi{padding:9px 12px;border:1.5px solid var(--bdr);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all var(--tr);line-height:1.4}
+.mi:hover{border-color:var(--blue);background:var(--blt)}
+.mi.sel{border-color:var(--blue);background:var(--blue);color:#fff;font-weight:600}
+.mi.mok{border-color:var(--grn);background:var(--glt);color:var(--grn);cursor:default}
+.mi.merr{border-color:var(--red);background:var(--rlt);color:var(--red);cursor:default}
+.dvb{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;padding:10px;background:#fafafa;border:1px solid var(--bdr);border-radius:var(--r);min-height:48px}
+.vc{padding:6px 12px;background:var(--blt);border:1.5px solid #b3d4f5;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;color:var(--bdk);transition:all var(--tr)}
+.vc:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.vc.vs{background:var(--org);color:#fff;border-color:var(--org)}
+.vc.vp{opacity:.3;pointer-events:none;text-decoration:line-through}
+.pc2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.pcat{border:2px solid var(--bdr);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color var(--tr)}
+.pcat:hover{border-color:var(--blue)}
+.pch{padding:9px 12px;font-family:var(--fu);font-weight:800;font-size:13.5px;text-align:center;color:#fff}
+.pt{background:#0f6cbf}.pd{background:var(--grn)}.pid{background:var(--pur)}
+.pcb{padding:8px;min-height:80px;display:flex;flex-direction:column;gap:5px}
+.pv{padding:5px 9px;border-radius:var(--r);font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.pv .rv{font-size:10px;cursor:pointer;opacity:.6;background:none;border:none;color:inherit;padding:0}
+.pv .rv:hover{opacity:1}
+.mwt{font-size:14px;line-height:2.5;padding:16px 18px;background:#fafafa;border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:14px}
+.mw{cursor:pointer;border-radius:3px;padding:1px 3px;transition:background var(--tr)}
+.mw:hover{background:#fff3cd}
+.mw.mk{background:#fff3cd;border-bottom:2px solid var(--ylw)}
+.mw.mok2{background:var(--glt);border-bottom:2px solid var(--grn);color:var(--grn)}
+.mw.merr2{background:var(--rlt);border-bottom:2px solid var(--red);color:var(--red)}
+.mw.mms{background:#ffebee;border-bottom:2px dashed var(--red)}
+.ei{margin-bottom:16px;padding:14px;background:#fafafa;border:1px solid var(--bdr);border-radius:var(--r)}
+.es{font-size:14px;line-height:1.9;margin-bottom:9px;font-style:italic}
+.ew{color:var(--red);text-decoration:underline wavy var(--red);font-style:normal}
+.er{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.er label{font-size:12px;color:var(--mut)}
+.einp{border:1.5px solid var(--bdr);border-radius:var(--r);padding:6px 10px;font-size:13.5px;font-family:var(--fn);min-width:150px;outline:none;transition:border-color var(--tr)}
+.einp:focus{border-color:var(--blue)}
+.einp.ok{border-color:var(--grn);background:var(--glt);color:var(--grn)}
+.einp.ng{border-color:var(--red);background:var(--rlt);color:var(--red)}
+.efb{font-size:11.5px;display:none}
+.efb.sh{display:inline}
+.wa{width:100%;padding:12px 14px;font-family:var(--fn);font-size:14px;border:1.5px solid var(--bdr);border-radius:var(--r);resize:vertical;outline:none;line-height:1.7;transition:border-color var(--tr)}
+.wa:focus{border-color:var(--blue)}
+.wcr{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:6px}
+.wn{font-weight:700;color:var(--blue)}.wn.ok{color:var(--grn)}.wn.ov{color:var(--red)}
+.ap{background:var(--bdk);border-radius:var(--r);padding:14px 18px;color:#fff;display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.pb3{width:44px;height:44px;border-radius:50%;background:var(--org);border:none;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+.pi{flex:1}.pt2{font-family:var(--fu);font-weight:700;font-size:14px}.ps{font-size:11.5px;opacity:.8;margin-top:2px}
+.pbw{background:rgba(255,255,255,.2);border-radius:99px;height:4px;margin-top:9px}
+.pb4{background:var(--org);height:100%;border-radius:99px;transition:width .1s}
+.tr2{display:none;background:#f9f9f9;border:1px solid var(--bdr);border-radius:var(--r);padding:14px 16px;font-size:13.5px;line-height:1.9;margin-bottom:16px;max-height:200px;overflow-y:auto}
+.tr2.v{display:block}
+.sk{background:var(--rlt);border:1px solid #f5c6c0;border-radius:var(--r);padding:16px 18px;margin-bottom:14px}
+.sk h4{font-family:var(--fu);font-weight:700;font-size:15px;color:var(--red);margin-bottom:6px}
+.sk p{font-size:13px;line-height:1.7;color:#6b2020}
+.tc{width:80px;height:80px;border-radius:50%;border:5px solid var(--blue);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px;font-family:var(--fu)}
+.tn2{font-size:22px;font-weight:800;color:var(--bdk)}.tl2{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut)}
+.rb{width:100%;padding:12px;background:var(--red);color:#fff;border:none;border-radius:var(--r);font-family:var(--fu);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:9px;transition:background var(--tr);cursor:pointer}
+.rb:hover{background:#a01c10}
+.rb.rec{background:#6b2020;animation:pu 1.5s infinite}
+@keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(202,49,32,.4)}50%{box-shadow:0 0 0 12px rgba(202,49,32,0)}}
+.rb.dn2{background:var(--grn)}
+.ls{margin-bottom:14px;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.lsh{padding:10px 14px;font-family:var(--fu);font-weight:700;font-size:13px;color:#fff}
+.lsh1{background:var(--blue)}.lsh2{background:var(--red)}.lsh3{background:var(--grn)}.lsh4{background:var(--pur)}
+.lsb{padding:12px 14px}
+.lsb p{font-size:12px;color:var(--mut);margin-bottom:8px;font-style:italic}
+.lsb textarea{width:100%;padding:9px 11px;font-family:var(--fn);font-size:13.5px;border:1.5px solid var(--bdr);border-radius:var(--r);resize:vertical;outline:none;line-height:1.7;min-height:80px}
+.lsb textarea:focus{border-color:var(--blue)}
+.ci{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0f0;cursor:pointer}
+.ci:last-child{border-bottom:none}
+.ci input{width:18px;height:18px;accent-color:var(--grn);flex-shrink:0;cursor:pointer;margin-top:1px}
+.ci label{font-size:13.5px;cursor:pointer;line-height:1.5}
+.ci.ck label{color:var(--grn);text-decoration:line-through;opacity:.7}
+.cdr{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f0;gap:12px}
+.cdr:last-child{border-bottom:none}
+.cdt{font-size:13px;flex:1;line-height:1.5}
+.cds{display:flex;gap:6px;flex-shrink:0}
+.cdb{width:28px;height:28px;border-radius:50%;border:2px solid var(--bdr);background:#fff;font-size:11.5px;font-weight:700;color:var(--mut);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--tr)}
+.cdb:hover{border-color:var(--blue);color:var(--blue);background:var(--blt)}
+.cdb.sl{border-color:var(--blue);background:var(--blue);color:#fff}
+.sb2{text-align:center;padding:20px;background:var(--glt);border:1px solid #a5d6a7;border-radius:var(--r);margin-top:16px}
+.sb2 .sn{font-family:var(--fu);font-size:40px;font-weight:800;color:var(--grn)}
+.sb2 .sm{font-size:14px;color:var(--grn);margin-top:4px}
+.sb2.low{background:var(--rlt);border-color:#f5c6c0}.sb2.low .sn,.sb2.low .sm{color:var(--red)}
+.sb2.mid{background:var(--ylt);border-color:#ffe082}.sb2.mid .sn{color:var(--ylw)}.sb2.mid .sm{color:#a07400}
+.bp{background:var(--blue);color:#fff;border:none;padding:9px 20px;border-radius:var(--r);font-family:var(--fu);font-weight:700;font-size:13.5px;cursor:pointer}
+.bp:hover{background:var(--bdk)}
+.bs{background:#fff;color:var(--blue);border:1.5px solid var(--blue);padding:9px 20px;border-radius:var(--r);font-family:var(--fu);font-weight:700;font-size:13.5px;cursor:pointer}
+.bs:hover{background:var(--blt)}
+.bg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.bk{border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.bkh{padding:9px 12px;font-family:var(--fu);font-weight:700;font-size:12px;color:#fff}
+.buk{background:#012169}.bes{background:#AA151B}
+.bkb{padding:12px;font-size:13px;line-height:1.75;background:#fafafa}
+.pc{background:linear-gradient(135deg,var(--org),#e55a00);border-radius:var(--r);padding:18px 20px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden}
+.pc::before{content:'ðï¸';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:50px;opacity:.15}
+.pc h3{font-family:var(--fu);font-weight:800;font-size:16px;margin-bottom:6px}
+.pc p{font-size:13px;opacity:.9;line-height:1.7;margin-bottom:8px}
+.prl2{list-style:none}.prl2 li{font-size:12.5px;padding:2px 0;display:flex;gap:7px}
+.prl2 li::before{content:'â';font-weight:700;flex-shrink:0}
+.pic{background:rgba(0,0,0,.15);border-radius:var(--r);padding:9px 12px;margin-top:10px;font-size:12px}
+.dt{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:14px}
+.dt th{background:var(--bdk);color:#fff;padding:8px 11px;text-align:left;font-size:11.5px}
+.dt td{padding:8px 11px;border-bottom:1px solid var(--bdr);vertical-align:top;line-height:1.5}
+.dt tr:nth-child(even) td{background:#f9f9f9}
+.rt{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:14px}
+.rt th{padding:9px 10px;text-align:left;font-size:11.5px}
+.rt th:first-child{background:#2c3e50;color:#fff;width:140px}
+.rt th.r1{background:#c0392b;color:#fff}.rt th.r2{background:#e67e22;color:#fff}.rt th.r3{background:#27ae60;color:#fff}.rt th.r4{background:var(--blue);color:#fff}
+.rt td{padding:8px 10px;border:1px solid var(--bdr);vertical-align:top;line-height:1.5}
+.rt td:first-child{background:#f0f2f5;font-weight:700;color:#2c3e50;font-size:11.5px}
+.lg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.lc{background:#fff;border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.lc h4{font-family:var(--fu);font-weight:700;font-size:12.5px;margin-bottom:7px;color:var(--bdk)}
+.lc ul{list-style:none}.lc ul li{padding:3px 0;font-size:12px;border-bottom:1px dashed #eee;line-height:1.5;padding-left:12px;position:relative}
+.lc ul li::before{content:'â¢';position:absolute;left:0;color:var(--org);font-weight:700}
+.lc ul li:last-child{border-bottom:none}
+.ib{background:var(--glt);border:1px solid #a5d6a7;border-left:4px solid var(--grn);border-radius:var(--r);padding:12px 15px;margin:10px 0;font-size:13px;line-height:1.6}
+.nlvl{display:inline-block;background:var(--blue);color:#fff;border-radius:99px;padding:2px 8px;font-size:10.5px;font-weight:700}
+.sp2{display:inline-flex;align-items:center;gap:3px;border-radius:4px;padding:2px 6px;font-size:10.5px;font-weight:700}
+.stb{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;border:none;font-size:17px;box-shadow:var(--sh);display:flex;align-items:center;justify-content:center;z-index:150;opacity:0;transition:opacity var(--tr);cursor:pointer}
+.stb.sh{opacity:1}
+html{scroll-behavior:smooth}
+@media(max-width:700px){.sb{display:none}.lg,.bg,.mg,.pc2{grid-template-columns:1fr}}
+</style>
+</head>
+<body><nav class="tnav"><a class="logo" href="#"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#f98012"/><path d="M8 28V16l12-8 12 8v12H26V22h-4v6H14V22h-4v6H8Z" fill="#fff"/></svg><span>Moodle</span></a><span class="nsep"></span><button class="nbtn">ð  Dashboard</button><button class="nbtn">ð Calendario</button><div class="avt">MG</div></nav>
+<div class="lay">
+<aside class="sb">
+  <div class="sbsec"><div class="sbh">ð English B1</div><ul class="sbn"><li><a href="#">ð  Inicio</a></li><li class="act"><a href="#">ð U1 â Life Stories <span class="nbt">Activa</span></a></li><li><a href="#">ð U2 â City Life</a></li><li><a href="#">ð U4 â Reported Speech</a></li></ul></div>
+  <div class="sbsec"><div class="sbh">ð Progreso U1</div><div class="prb"><div class="prl"><span>Completadas</span><span id="pl">0 / 22</span></div><div class="prw"><div class="prb2" id="pb" style="width:0%"></div></div></div><ul class="sbn"><li><a href="#s1">S1 Pre-Task</a></li><li><a href="#s2">S2 Task Cycle 1</a></li><li><a href="#s3">S3 Task Cycle 2</a></li><li><a href="#s4">S4 Task Cycle 3</a></li><li><a href="#s5">S5 Project Task</a></li></ul></div>
+</aside>
+<main class="main">
+<div class="bc"><a href="#">Inicio</a><span>âº</span><a href="#">English B1</a><span>âº</span><strong>U1 â Life Stories</strong></div>
+<div class="hero">
+  <div class="htag">ð Nivel B1 Â· MCER</div><h1>U1 â Life Stories</h1><p class="sub">Personal Narratives and Past Experiences â Actividades Reales Interactivas</p>
+  <div class="hm"><span><span class="dot"></span>5 sesiones Â· 60â75 min</span><span><span class="dot"></span>22 actividades reales</span><span><span class="dot"></span>TBLT â Willis &amp; Willis</span><span><span class="dot"></span>Project Task: Mini-podcast</span></div>
+</div>
+<div class="ct">
+<div class="inf">ð¯ <strong>Tema comunicativo:</strong> Narrar experiencias pasadas, describir sentimientos y contar historias personales. Haz clic en <strong>"Iniciar â¶"</strong> en cualquier tarjeta para abrir la actividad interactiva completa con contenido real.</div>
+<h2 class="stit">ð Secuencia de sesiones â U1.1</h2>
+<div class="sess">
+<!-- S1 -->
+<div class="sc op" id="s1"><div class="sh" onclick="tS(this)"><div class="sbg c1">S1</div><div class="si"><h3>SesiÃ³n 1 â PRE-TASK (conciencia comunicativa)</h3><p>ActivaciÃ³n Â· Warm-up PoodLL Â· Forum de introducciÃ³n</p><div class="stags"><span class="tg tg-t">Pre-Task</span><span class="tg tg-s">Speaking</span><span class="tg tg-a">AsÃ­ncrono</span></div></div><span class="chev">â¼</span></div>
+<div class="sbd"><ul class="al">
+<li class="ai"><div class="aic" style="background:var(--rlt)">ðï¸</div><div class="ab"><h4>Warm-up: Tell us about a memorable moment (PoodLL, 60 segundos)</h4><p>Narrar una experiencia con recursos actuales. Activa necesidad de tiempos narrativos antes de la instrucciÃ³n.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('wu')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--plt)">ð¬</div><div class="ab"><h4>Forum: The five most important events in my life</h4><p>Publicar 5 eventos clave de tu vida + responder a un compaÃ±ero con una pregunta de seguimiento.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 25 min</span></div></div><button class="ob" onclick="oA('fo')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+</ul></div></div>
+<!-- S2 -->
+<div class="sc" id="s2"><div class="sh" onclick="tS(this)"><div class="sbg c2">S2</div><div class="si"><h3>SesiÃ³n 2 â TASK CYCLE 1 (input + anÃ¡lisis)</h3><p>GramÃ¡tica inductiva Â· Listening Â· Vocabulario Â· FonÃ©tica</p><div class="stags"><span class="tg tg-t">Task Cycle 1</span><span class="tg tg-g">GramÃ¡tica</span><span class="tg tg-l">Listening</span></div></div><span class="chev">â¼</span></div>
+<div class="sbd"><ul class="al">
+<li class="ai"><div class="aic" style="background:#e3f2fd">ð</div><div class="ab"><h4>Grammar Reference: Past Tenses in Context (Book Moodle)</h4><p>PresentaciÃ³n inductiva de past simple, past continuous y used to con ejemplos narrativos autÃ©nticos.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('gr')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð¯</div><div class="ab"><h4>H5P Gap-fill: Past Simple vs Past Continuous â "A Chance Meeting" (10 Ã­tems)</h4><p>Completar texto narrativo con la forma correcta. Banco de palabras clicable + feedback automÃ¡tico.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('gf')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð§</div><div class="ab"><h4>Listening: "Luis's Story" (~3 min) â 6 MCQ de comprensiÃ³n</h4><p>Escuchar monÃ³logo narrativo B1 (transcripciÃ³n progresiva) y responder 6 preguntas de comprensiÃ³n.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 25 min</span></div></div><button class="ob" onclick="oA('ls')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð</div><div class="ab"><h4>H5P Matching: Life Events &amp; Phrasal Verbs (10 pares)</h4><p>Emparejar tÃ©rminos clave (life events, phrasal verbs, emociones) con sus definiciones.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('mt')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð</div><div class="ab"><h4>H5P Drag &amp; Drop: PronunciaciÃ³n -ed â /t/ /d/ /Éªd/ (15 verbos)</h4><p>Clasificar 15 verbos segÃºn la pronunciaciÃ³n de su terminaciÃ³n -ed. Click-to-assign por columnas.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 15 min</span></div></div><button class="ob" onclick="oA('ph')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:#e8eaf6">ð</div><div class="ab"><h4>AMPLIACIÃN: Timeline â Ordenar los 8 eventos de la vida de Ana</h4><p>Ordenar cronolÃ³gicamente eventos narrativos y asignar la forma verbal correcta.</p><div class="am"><span class="ba">AMPLIACIÃN</span><span class="bt2">â± 25 min</span></div></div><button class="ob" onclick="oA('tl')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+</ul></div></div>
+<!-- S3 -->
+<div class="sc" id="s3"><div class="sh" onclick="tS(this)"><div class="sbg c3">S3</div><div class="si"><h3>SesiÃ³n 3 â TASK CYCLE 2 (prÃ¡ctica + mediaciÃ³n)</h3><p>Reading Â· Discourse Â· Writing guiado Â· Peer Review Â· Actividad integradora</p><div class="stags"><span class="tg tg-t">Task Cycle 2</span><span class="tg tg-r">Reading</span><span class="tg tg-w">Writing</span></div></div><span class="chev">â¼</span></div>
+<div class="sbd">
+<div style="padding:10px 14px 0"><div class="ib">â­ <strong>ACTIVIDAD INTEGRADORA OBLIGATORIA:</strong> Listen (Carmen 90s) â Mediate (PoodLL 60s) â Write (Forum 80 words). Integra CO + EO mediaciÃ³n + EE.</div></div>
+<ul class="al">
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð</div><div class="ab"><h4>Reading + MCQ: "The Unexpected Gift" â 350 palabras, 6 preguntas</h4><p>Skimming + scanning: anÃ©cdota de Laura Chen en Bristol. Phrasal verbs en negrita.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 25 min</span></div></div><button class="ob" onclick="oA('rd')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð</div><div class="ab"><h4>H5P Mark the Words: Conectores discursivos (10 Ã­tems en texto)</h4><p>Identificar y marcar los 10 conectores narrativos: secuencia, contraste y causa-resultado.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('mw')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð</div><div class="ab"><h4>H5P Gap-fill: Conectores y adverbios de secuencia â "Maria's Big Decision" (10 Ã­tems)</h4><p>Banco de palabras: adverbios de secuencia (first, then, eventuallyâ¦) + conectores causa-resultado.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('gv')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:#fce4ec">ð</div><div class="ab"><h4>Guided Writing: Plantilla narrativa â Estructura de Labov (4 secciones)</h4><p>OrientaciÃ³n â ComplicaciÃ³n â ResoluciÃ³n â EvaluaciÃ³n con preguntas guÃ­a para cada fase.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 35 min</span></div></div><button class="ob" onclick="oA('lb')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:#fce4ec">âï¸</div><div class="ab"><h4>Writing: Carta a un amigo extranjero (120 palabras, registro informal)</h4><p>Guided writing con plantilla. Registro informal. Contador de palabras en tiempo real (100â140 target).</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 35 min</span></div></div><button class="ob" onclick="oA('lt')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--plt)">ð</div><div class="ab"><h4>Workshop Moodle: Peer Review â Checklist 8 criterios</h4><p>Revisar carta del compaÃ±ero: tiempos verbales, conectores, cohesiÃ³n, registro, vocabulario, formato.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 25 min</span></div></div><button class="ob" onclick="oA('pr')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--rlt)">â­</div><div class="ab"><h4>â­ INTEGRADORA: Listen â Mediate â Write (Carmen + Forum PoodLL + 80 palabras)</h4><p>Escuchar narrativa â reformular en audio 60s â escribir resumen 80 palabras en Forum.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 30 min</span></div></div><button class="ob" onclick="oA('in')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+</ul></div></div>
+<!-- S4 -->
+<div class="sc" id="s4"><div class="sh" onclick="tS(this)"><div class="sbg c4">S4</div><div class="si"><h3>SesiÃ³n 4 â TASK CYCLE 3 (producciÃ³n semilibre)</h3><p>Speaking extendido Â· Error Correction Â· Free Writing</p><div class="stags"><span class="tg tg-t">Task Cycle 3</span><span class="tg tg-s">Speaking</span><span class="tg tg-w">Writing</span></div></div><span class="chev">â¼</span></div>
+<div class="sbd"><ul class="al">
+<li class="ai"><div class="aic" style="background:var(--rlt)">ðï¸</div><div class="ab"><h4>PoodLL Speaking: "A time when you felt proud or surprised" â monÃ³logo 2 min</h4><p>Extended monologue con rÃºbrica PET Part 3. PreparaciÃ³n 30s + grabaciÃ³n 2 minutos.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 30 min</span></div></div><button class="ob" onclick="oA('sp')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--ylt)">ð§</div><div class="ab"><h4>H5P Error Correction: 8 frases con errores de tiempos narrativos</h4><p>Identificar y corregir errores de past simple, past continuous, used to. Hint automÃ¡tico por Ã­tem.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('ec')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:#fce4ec">âï¸</div><div class="ab"><h4>Free Writing: "It was the best/worst day of my life" (150â200 palabras)</h4><p>NarraciÃ³n libre integrando todos los recursos de la unidad. Contador de palabras en tiempo real.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 40 min</span></div></div><button class="ob" onclick="oA('fw')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+</ul></div></div>
+<!-- S5 -->
+<div class="sc" id="s5"><div class="sh" onclick="tS(this)"><div class="sbg c5">S5</div><div class="si"><h3>SesiÃ³n 5 â PROJECT TASK (tarea culminante TBLT)</h3><p>Mini-podcast Â· Componente intercultural Â· Can-Do Tracker</p><div class="stags"><span class="tg tg-t">Project Task</span><span class="tg tg-y">SÃ­nc. BBB</span></div></div><span class="chev">â¼</span></div>
+<div class="sbd">
+<div style="padding:12px 14px 0"><div class="pc"><h3>ðï¸ Mini-podcast: "My Life Story So Far" (3 min)</h3><p>Tarea sumativa integradora. EvaluaciÃ³n con rÃºbrica analÃ­tica de 5 criterios.</p><ul class="prl2"><li>3 eventos clave con past simple, continuous y used to</li><li>Adverbios de secuencia + vocabulario de emociones</li><li>Estructura de Labov con evaluaciÃ³n personal</li></ul><div class="pic">ð COMPONENTE INTERCULTURAL (10% rÃºbrica): ComparaciÃ³n 60 palabras entre tu estilo y el estilo britÃ¡nico/estadounidense.</div></div></div>
+<ul class="al">
+<li class="ai"><div class="aic" style="background:#e8f5e9">ð</div><div class="ab"><h4>Cultural Moment: UK vs Hispanic Storytelling â AnÃ¡lisis de 2 blogs autÃ©nticos</h4><p>Leer fragmentos de un blog britÃ¡nico y uno hispanohablante. Identificar 2 diferencias en understatement y narrativa.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 20 min</span></div></div><button class="ob" onclick="oA('cu')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:var(--rlt)">ðï¸</div><div class="ab"><h4>PROJECT TASK: Mini-podcast "My Life Story So Far" (PoodLL, 3 minutos)</h4><p>Entrega sumativa. PlanificaciÃ³n guiada + checklist + grabaciÃ³n 3 min + rÃºbrica analÃ­tica 5 criterios.</p><div class="am"><span class="be">EVALUACIÃN SUMATIVA</span><span class="bt2">â± 60 min</span></div></div><button class="ob" onclick="oA('pt')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+<li class="ai"><div class="aic" style="background:#e0f2f1">â</div><div class="ab"><h4>Can-Do Tracker â AutoevaluaciÃ³n final U1 (10 descriptores MCER)</h4><p>Seleccionar nivel 1â4 en cada descriptor. Datos usados para orientaciÃ³n y planificaciÃ³n de U2.</p><div class="am"><span class="bo">OBLIGATORIA</span><span class="bt2">â± 10 min</span></div></div><button class="ob" onclick="oA('cd')">Iniciar â¶</button><div class="cc" onclick="mD(this)">â</div></li>
+</ul></div></div>
+</div>
+<h2 class="stit">ð¯ U1.2 Descriptores MCER</h2>
+<div style="overflow-x:auto;margin-bottom:8px"><table class="dt"><thead><tr><th>Descriptor MCER B1</th><th>Destreza</th><th>Fase</th><th>Nivel</th></tr></thead><tbody>
+<tr><td>Comprende informaciÃ³n principal sobre narraciones breves en lengua estÃ¡ndar clara.</td><td><span class="sp2" style="background:#e3f2fd;color:#1565c0">ð§ Listening</span></td><td>S2</td><td><span class="nlvl">3</span></td></tr>
+<tr><td>Comprende descripciones de lugares, sentimientos y acontecimientos.</td><td><span class="sp2" style="background:#e8f5e9;color:#2e7d32">ð Reading</span></td><td>S3</td><td><span class="nlvl">3</span></td></tr>
+<tr><td>Relata experiencias con sentimientos; narra historias; describe hechos reales o imaginados.</td><td><span class="sp2" style="background:var(--rlt);color:var(--red)">ð£ï¸ Speaking</span></td><td>S4</td><td><span class="nlvl">3â4</span></td></tr>
+<tr><td>Relata experiencias describiendo sentimientos y reacciones en textos cohesionados.</td><td><span class="sp2" style="background:#fff3e0;color:#e65100">âï¸ Writing</span></td><td>S3/S4</td><td><span class="nlvl">3â4</span></td></tr>
+<tr><td>Elabora cartas personales describiendo experiencias con cierto detalle.</td><td><span class="sp2" style="background:#fff3e0;color:#e65100">âï¸ Writing</span></td><td>S3</td><td><span class="nlvl">3â4</span></td></tr>
+<tr><td>Sigue secuencia de acontecimientos usando conectores lÃ³gicos y temporales.</td><td><span class="sp2" style="background:#e0f2f1;color:#00695c">ð Transversal</span></td><td>S5</td><td><span class="nlvl">4</span></td></tr>
+</tbody></table></div>
+<h2 class="stit">ð U1.3 Contenidos lingÃ¼Ã­sticos</h2>
+<div class="lg">
+<div class="lc"><h4>ð GramÃ¡tica</h4><ul><li>Past simple (regulares e irregulares)</li><li>Past continuous â acciÃ³n interrumpida</li><li>Contraste when/while + past simple/continuous</li><li><em>Used to</em> â hÃ¡bitos y estados pasados</li><li><em>Would</em> en narrativa formal</li></ul></div>
+<div class="lc"><h4>ð Vocabulario</h4><ul><li>Life events: <em>graduate, retire, be promotedâ¦</em></li><li>Phrasal verbs: <em>grow up, give up, end upâ¦</em></li><li>Emociones: <em>shocked, relieved, overwhelmedâ¦</em></li><li>Conectores causa-resultado y secuencia</li></ul></div>
+<div class="lc"><h4>ð FonÃ©tica</h4><ul><li>TerminaciÃ³n -ed: /t/, /d/, /Éªd/</li><li>Formas dÃ©biles: <em>was /wÉz/, were /wÉ/</em></li><li>Irregulares: <em>thought, caught, bought</em></li><li>EntonaciÃ³n descendente al concluir episodio</li></ul></div>
+<div class="lc"><h4>ð Discurso</h4><ul><li>Modelo de Labov: 4 fases narrativas</li><li>Marcadores de secuencia temporal</li><li>CohesiÃ³n por referencia pronominal</li><li>Registro informal vs semiformal</li></ul></div>
+</div>
+<h2 class="stit">ð U1.8 RÃºbrica analÃ­tica diferenciada</h2>
+<div style="overflow-x:auto;margin-bottom:20px"><table class="rt"><thead><tr><th>Criterio</th><th class="r1">1 â Insuficiente</th><th class="r2">2 â BÃ¡sico</th><th class="r3">3 â Competente</th><th class="r4">4 â Excelente</th></tr></thead><tbody>
+<tr><td>CorrecciÃ³n gramatical</td><td>Errores de tiempos impiden comprensiÃ³n.</td><td>Past simple dominado; continuous con errores.</td><td>Buen control; contraste correcto en mayorÃ­a.</td><td>IntegraciÃ³n fluida de past simple, continuous y used to.</td></tr>
+<tr><td>Riqueza lÃ©xica</td><td>Vocabulario muy limitado; repite 'then' y 'and'.</td><td>Adverbios bÃ¡sicos; life events limitados.</td><td>Adverbios variados + phrasal verbs; emociones diferenciadas.</td><td>Phrasal verbs y emociones diferenciadas (overwhelmed, relieved).</td></tr>
+<tr><td>Estructura Labov</td><td>Sin orientaciÃ³n ni resoluciÃ³n.</td><td>OrientaciÃ³n y complicaciÃ³n; evaluaciÃ³n dÃ©bil.</td><td>4 fases de Labov presentes y diferenciadas.</td><td>Labov dominado con evaluaciÃ³n reflexiva potente.</td></tr>
+<tr><td>AdecuaciÃ³n al gÃ©nero</td><td>Registro inadecuado; formato inexistente.</td><td>Registro generalmente coherente.</td><td>Registro narrativo correcto; inicio y cierre.</td><td>Registro, tono y voz narrativa mantenidos.</td></tr>
+<tr><td>FonologÃ­a / ortografÃ­a</td><td>-ed siempre mal pronunciado/escrito.</td><td>-ed con errores sistemÃ¡ticos.</td><td>-ed discriminado en mayorÃ­a; ortografÃ­a aceptable.</td><td>-ed, weak forms y entonaciÃ³n dominadas.</td></tr>
+</tbody></table></div>
+</div></main></div>
+<div class="mov" id="modal" onclick="cBg(event)"><div class="mb"><div class="mh"><div class="mhi" id="mi">ð¯</div><div class="mhf"><h2 id="mt">Actividad</h2><p id="ms">SesiÃ³n Â· Tipo</p></div><button class="mc" onclick="cM()">â</button></div><div class="mbd" id="mbd"></div><div class="mft" id="mft"></div></div></div>
+<button class="stb" id="stb" onclick="scrollTo({top:0,behavior:'smooth'})">â²</button>
+<script>
+// ââ GLOBALS ââââââââââââââââââââââââââââââââââââââ
+let dC=0,TOT=22
+function tS(h){h.closest('.sc').classList.toggle('op')}
+function mD(el){const it=el.closest('.ai'),w=it.classList.contains('dn');it.classList.toggle('dn');dC+=w?-1:1;document.getElementById('pl').textContent=dC+'/'+TOT;document.getElementById('pb').style.width=Math.min(100,dC/TOT*100)+'%'}
+window.addEventListener('scroll',()=>document.getElementById('stb').classList.toggle('sh',scrollY>300))
+function oM(ico,ti,su,bd,ft){document.getElementById('mi').textContent=ico;document.getElementById('mt').textContent=ti;document.getElementById('ms').textContent=su;document.getElementById('mbd').innerHTML=bd;document.getElementById('mft').innerHTML=ft||'';document.getElementById('modal').classList.add('op');document.body.style.overflow='hidden'}
+function cM(){document.getElementById('modal').classList.remove('op');document.body.style.overflow=''}
+function cBg(e){if(e.target===document.getElementById('modal'))cM()}
+function oA(id){({wu:aWu,fo:aFo,gr:aGr,gf:aGf,ls:aLs,mt:aMt,ph:aPh,tl:aTl,rd:aRd,mw:aMw,gv:aGv,lb:aLb,lt:aLt,pr:aPr,in:aIn,sp:aSp,ec:aEc,fw:aFw,cu:aCu,pt:aPt,cd:aCd}[id]||(()=>oM('ð§','En construcciÃ³n','','<p style="padding:20px;text-align:center">PrÃ³ximamente.</p>','')))()}
+function wc(ta,id,mn,mx){const n=ta.value.trim().split(/\s+/).filter(w=>w).length,el=document.getElementById(id);if(!el)return;el.textContent=n+' words';el.className='wn'+(n>=mn&&n<=mx?' ok':n>mx?' ov':'')}
+function wn(t){return t.trim().split(/\s+/).filter(w=>w).length}
+function sBox(ok,tot,msg){const p=Math.round(ok/tot*100),c=p>=80?'':p>=50?'mid':'low';return`<div class="sb2 ${c}"><div class="sn">${ok}/${tot}</div><div class="sm">${p}% â ${msg}</div></div>`}
+function stR(nId,bId,s,lbl,dn){const b=document.getElementById(bId),n=document.getElementById(nId);if(!b||b.classList.contains('rec')||b.classList.contains('dn2'))return;b.classList.add('rec');b.textContent=lbl;let t=s;const iv=setInterval(()=>{t--;n.textContent=t;if(t<=0){clearInterval(iv);b.classList.remove('rec');b.classList.add('dn2');b.textContent=dn}},1000)}
+
+// âââ S1 âââââââââââââââââââââââââââââââââââââââââââ
+function aWu(){oM('ðï¸','Warm-up: Tell Us About a Memorable Moment','S1 Pre-Task Â· Speaking Â· 60 sec',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Activar recursos narrativos previos. Â¡No te preocupes por errores!</div>
+<div class="sk"><h4>ðï¸ Your task:</h4><p>Record <strong>60 seconds</strong>: a memorable moment from your life.<br><em>When? What happened? How did you feel?</em></p></div>
+<div style="background:#fff3e0;border:1px solid #ffcc80;border-radius:6px;padding:14px;margin-bottom:14px"><p style="font-size:12.5px;font-weight:700;color:#e65100;margin-bottom:7px">ð¡ Preparation â 30 seconds, quick notes:</p>
+<textarea class="wa" placeholder="When? Where? Who? What happened? How did you feel?" style="min-height:65px"></textarea></div>
+<div style="text-align:center;margin-bottom:12px"><div class="tc"><span class="tn2" id="wu-n">60</span><span class="tl2">seconds</span></div></div>
+<button class="rb" id="wu-b" onclick="stR('wu-n','wu-b',60,'ð´ Recording... tell your story!','â Recording saved!')">â¶ Start Recording</button>`,
+'<button class="bs" onclick="cM()">Cerrar</button>')}
+
+function aFo(){oM('ð¬','Forum: The Five Most Important Events in My Life','S1 Pre-Task Â· Writing & Interaction',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Reflexionar sobre los momentos clave de tu vida e interactuar en inglÃ©s.</div>
+<div style="background:#f0f8ff;border:1px solid #b3d4f5;border-radius:6px;padding:14px;margin-bottom:14px;font-size:13.5px;line-height:1.8"><strong>ð Task:</strong><br>1. Write a post listing <strong>5 key events in your life</strong>. For each: what happened + how you felt.<br>2. Reply to a classmate with <strong>at least one follow-up question</strong>.</div>
+<p style="font-size:12.5px;color:var(--mut);margin-bottom:10px;font-style:italic">E.g. "1. When I was 12, my family moved to another city. I felt sad at first, but eventually I loved my new school."</p>
+<p style="font-size:13px;font-weight:600;margin-bottom:6px">âï¸ Your post:</p>
+<textarea class="wa" id="fo-t" oninput="wc(this,'fo-w',0,999)" placeholder="Write your 5 life events here..." style="min-height:150px"></textarea>
+<div class="wcr"><span>Min 50 words</span><span class="wn" id="fo-w">0 words</span></div>
+<p style="font-size:13px;font-weight:600;margin:12px 0 6px">ð¬ Reply to a classmate:</p>
+<textarea class="wa" placeholder="Write your follow-up question here..." style="min-height:65px"></textarea>`,
+`<button class="bp" onclick="if(wn(document.getElementById('fo-t').value)<20){alert('Write at least 20 words!')}else{alert('â Post published!');cM()}">ð¤ Post</button><button class="bs" onclick="cM()" style="margin-left:9px">Cancelar</button>`)}
+
+// âââ S2 âââââââââââââââââââââââââââââââââââââââââââ
+function aGr(){oM('ð','Grammar Reference: Past Tenses in Narrative','S2 Task Cycle 1 Â· Grammar Input',`
+<div class="xi">Read carefully. Notice how each tense works in real narrative contexts.</div>
+<div style="background:#fff;border:1px solid var(--bdr);border-radius:6px;padding:16px;margin-bottom:12px">
+<h3 style="font-size:15px;color:var(--bdk);margin-bottom:9px;font-family:var(--fu);font-weight:700">1. Past Simple â completed actions</h3>
+<p style="font-size:13.5px;margin-bottom:8px">Finished actions at a specific time in the past.</p>
+<div style="background:var(--blt);border-radius:6px;padding:10px 14px;font-size:13.5px;font-style:italic">"I <strong>grew up</strong> in a small town." Â· "She <strong>moved</strong> to London in 2018."</div>
+<p style="font-size:12px;color:var(--mut);margin-top:8px">â Regular: walkâwalked | â ï¸ Irregular: goâwent, seeâsaw</p></div>
+<div style="background:#fff;border:1px solid var(--bdr);border-radius:6px;padding:16px;margin-bottom:12px">
+<h3 style="font-size:15px;color:var(--pur);margin-bottom:9px;font-family:var(--fu);font-weight:700">2. Past Continuous â action in progress</h3>
+<p style="font-size:13.5px;margin-bottom:8px"><em>Was/were + -ing</em> for an action in progress interrupted by another.</p>
+<div style="background:var(--plt);border-radius:6px;padding:10px 14px;font-size:13.5px;font-style:italic">"I <strong>was walking</strong> to work when I <strong>saw</strong> him." Â· "While she <strong>was reading</strong>, the phone <strong>rang</strong>."</div>
+<p style="font-size:12px;color:var(--mut);margin-top:8px">â when â interrupting action (past simple) | â while â parallel actions</p></div>
+<div style="background:#fff;border:1px solid var(--bdr);border-radius:6px;padding:16px;margin-bottom:12px">
+<h3 style="font-size:15px;color:var(--grn);margin-bottom:9px;font-family:var(--fu);font-weight:700">3. Used to â past habits &amp; states</h3>
+<p style="font-size:13.5px;margin-bottom:8px"><em>Used to + infinitive</em> for habits/states that no longer exist.</p>
+<div style="background:var(--glt);border-radius:6px;padding:10px 14px;font-size:13.5px;font-style:italic">"I <strong>used to live</strong> in Madrid." Â· "Did you <strong>use to</strong> cycle to school?"</div>
+<p style="font-size:12px;color:var(--mut);margin-top:8px">â ï¸ Negative: <em>didn't use to</em> (NO -d in negative/question)</p></div>
+<div style="background:var(--ylt);border:1px solid #ffe082;border-radius:6px;padding:12px 14px;font-size:13px">ð§  <strong>Notice:</strong> "While I <em>was having</em> dinner, the doorbell <em>rang</em>." â why continuous + simple?</div>`,
+'<button class="bp" onclick="cM()">Entendido â</button>')}
+
+const GFA=['was visiting','bumped','was standing','was looking','were talking','started','used to','told','had moved','had passed']
+let gfx=null
+function aGf(){gfx=null;const bk=GFA.map((w,i)=>`<span class="wbc" id="gfb${i}" onclick="gfFl(this,'${w}')">${w}</span>`).join('')
+oM('ð¯','Gap-fill: Past Simple vs Past Continuous â "A Chance Meeting"','S2 Task Cycle 1 Â· Grammar Â· 10 Ã­tems',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Practicar el contraste entre past simple, past continuous y used to.<br>Clica un chip â clica un hueco, o escribe directamente.</div>
+<p style="font-size:12.5px;font-weight:700;color:var(--mut);margin-bottom:8px">ð¦ BANCO DE PALABRAS:</p>
+<div class="wb" id="gf-bk">${bk}</div>
+<div class="xt"><strong>A Chance Meeting</strong><br><br>
+Last summer, I <input class="gi" id="gf0" data-a="was visiting" onclick="gfSl(this)" placeholder="(1)"> my hometown when I suddenly <input class="gi" id="gf1" data-a="bumped" onclick="gfSl(this)" placeholder="(2)"> into an old school friend. She <input class="gi" id="gf2" data-a="was standing" onclick="gfSl(this)" placeholder="(3)"> outside the old library and <input class="gi" id="gf3" data-a="was looking" onclick="gfSl(this)" placeholder="(4)"> at her phone. While we <input class="gi" id="gf4" data-a="were talking" onclick="gfSl(this)" placeholder="(5)">, it <input class="gi" id="gf5" data-a="started" onclick="gfSl(this)" placeholder="(6)"> to rain heavily. When I was young, I <input class="gi" id="gf6" data-a="used to" onclick="gfSl(this)" placeholder="(7)"> cycle to school with her. She <input class="gi" id="gf7" data-a="told" onclick="gfSl(this)" placeholder="(8)"> me that she <input class="gi" id="gf8" data-a="had moved" onclick="gfSl(this)" placeholder="(9)"> to London two years earlier. I couldn't believe how much time <input class="gi" id="gf9" data-a="had passed" onclick="gfSl(this)" placeholder="(10)">.</div>
+<div id="gf-sc"></div>`,
+`<button class="bp" onclick="gfCk()">â Comprobar</button><button class="bs" onclick="gfRs()" style="margin-left:9px">âº Reset</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function gfSl(el){document.querySelectorAll('.gi').forEach(g=>g.style.borderBottomColor='var(--blue)');el.style.borderBottomColor='var(--org)';gfx=el}
+function gfFl(ch,w){if(ch.classList.contains('used'))return;if(gfx){gfx.value=w;ch.classList.add('used');gfx.style.borderBottomColor='var(--blue)';gfx=null}else{for(let i=0;i<10;i++){const g=document.getElementById('gf'+i);if(!g.value){g.value=w;ch.classList.add('used');break}}}}
+function gfCk(){let ok=0;for(let i=0;i<10;i++){const g=document.getElementById('gf'+i);g.classList.remove('ok','ng');const v=g.value.trim().toLowerCase();if(v===g.dataset.a.toLowerCase()){g.classList.add('ok');ok++}else if(v)g.classList.add('ng')}document.getElementById('gf-sc').innerHTML=sBox(ok,10,ok>=8?'Excellent! ð':ok>=5?'Good. Review incorrect.':'Check grammar reference.')}
+function gfRs(){for(let i=0;i<10;i++){const g=document.getElementById('gf'+i);g.value='';g.classList.remove('ok','ng');g.style.borderBottomColor='var(--blue)'}document.querySelectorAll('#gf-bk .wbc').forEach(c=>c.classList.remove('used'));document.getElementById('gf-sc').innerHTML='';gfx=null}
+
+const LSQ=[{q:"1. Where did Luis grow up?",o:["In Granada","In a small southern village","In a large northern city","Near the coast"],a:1},{q:"2. Why did his family move to Granada?",o:["For Luis's education","For better weather","For better job opportunities","To be near relatives"],a:2},{q:"3. How did Luis feel in his first months there?",o:["Excited and motivated","Lonely and lost","Happy and confident","Busy"],a:1},{q:"4. How did Luis get involved with the theatre group?",o:["He watched a performance","He applied for acting","He volunteered for sound","A friend invited him"],a:2},{q:"5. What was the group doing when Luis arrived?",o:["Performing for an audience","Rehearsing a play","Holding auditions","Watching a film"],a:1},{q:"6. What did Luis decide to study at university?",o:["Music","Languages","Film","Drama"],a:3}]
+const LST=`"Hi, I'm Luis. I want to tell you about a time that changed my life completely.\n\nI used to live in a small village in the south of Spain. Then, when I was about seventeen, my parents decided to move to Granada for better job opportunities.\n\nAt first, I didn't want to go. The first few months in Granada were honestly quite hard. While my parents were busy setting up their new life, I was just sitting at home feeling lost. I stopped playing football, I stopped going out.\n\nHowever, one evening I came across a community theatre group near our flat. They were rehearsing a play and they needed someone to help with the sound system. So I volunteered. Then, gradually, I got more and more involved. Eventually I ended up on stage as an actor!\n\nAs a result of that experience, I applied to study drama at university â something I had never thought about before. Looking back, moving to the city was the best thing that happened to me, even though it was so hard at the time."`
+let lSl={},lPl=false
+function aLs(){lSl={};lPl=false
+const mh=LSQ.map((q,i)=>`<div class="qq" id="lq${i}"><p>${q.q}</p><div class="qos">${q.o.map((o,j)=>`<div class="qo" id="lo${i}_${j}" onclick="lSl2(${i},${j})">${o}</div>`).join('')}</div></div>`).join('')
+oM('ð§',"Listening: Luis's Story",'S2 Task Cycle 1 Â· Listening Â· 6 MCQ',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> ComprensiÃ³n oral de narrativa B1. Clica â¶ para activar la transcripciÃ³n progresiva. Luego responde las 6 preguntas.</div>
+<div class="ap"><button class="pb3" id="lp-b" onclick="lsPlay()">â¶</button><div class="pi"><div class="pt2">Luis's Story â A Life-Changing Move</div><div class="ps">MonÃ³logo narrativo B1 Â· ~3 min Â· Acento peninsular estÃ¡ndar</div><div class="pbw"><div class="pb4" id="lp-pb" style="width:0%"></div></div></div></div>
+<div class="tr2" id="lp-tr">${LST.replace(/\n/g,'<br><br>')}</div>
+<hr style="border:none;border-top:1px solid var(--bdr);margin:16px 0">
+<p style="font-size:13.5px;font-weight:700;margin-bottom:12px;color:var(--bdk)">ð Answer the questions:</p>
+${mh}<div id="ls-sc"></div>`,
+`<button class="bp" onclick="lsCk()">â Check Answers</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function lsPlay(){if(lPl)return;lPl=true;document.getElementById('lp-tr').classList.add('v');let p=0;const iv=setInterval(()=>{p+=100/180;document.getElementById('lp-pb').style.width=Math.min(100,p)+'%';if(p>=100){clearInterval(iv);document.getElementById('lp-b').textContent='âº'}},1000)}
+function lSl2(i,j){document.querySelectorAll(`#lq${i} .qo`).forEach(o=>o.classList.remove('sel'));document.getElementById(`lo${i}_${j}`).classList.add('sel');lSl[i]=j}
+function lsCk(){let ok=0;LSQ.forEach((q,i)=>{for(let j=0;j<q.o.length;j++){const el=document.getElementById(`lo${i}_${j}`);el.classList.remove('ok','ng','sel');if(j===q.a)el.classList.add('ok');else if(lSl[i]===j)el.classList.add('ng')};if(lSl[i]===q.a)ok++});document.getElementById('ls-sc').innerHTML=sBox(ok,6,ok>=5?'Well done! ð':ok>=3?'Good. Review the transcript.':'Listen again carefully.')}
+
+const MP=[['graduate','to successfully complete university studies'],['be promoted','to be given a more important or higher-paid job'],['retire','to stop working permanently, usually due to age'],['move house','to go and live in a different home'],['grow up','to develop from child into adult'],['end up','to finally be in a situation, often unexpectedly'],['come across','to find or meet someone/something by chance'],['give up','to stop doing something you were trying to do'],['overwhelmed','feeling something is too difficult or intense to deal with'],['relieved','feeling happy because a worry has ended']]
+let mSl=null,mMp={}
+function aMt(){mSl=null;mMp={}
+const sd=[...MP].sort(()=>Math.random()-.5)
+oM('ð','Matching: Life Events, Phrasal Verbs & Emotions','S2 Task Cycle 1 Â· Vocabulary Â· 10 pairs',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Dominar vocabulario clave de la unidad.<br>Clica un tÃ©rmino â clica su definiciÃ³n.</div>
+<div class="mg"><div><div class="mch">Terms</div><div class="mis" id="mc-t">${MP.map((p,i)=>`<div class="mi" id="mm${i}" data-i="${i}" onclick="mSlT(this)">${p[0]}</div>`).join('')}</div></div>
+<div><div class="mch">Definitions</div><div class="mis" id="mc-d">${sd.map((p,i)=>`<div class="mi" id="md${i}" data-def="${p[1]}" onclick="mSlD(this)">${p[1]}</div>`).join('')}</div></div></div>
+<div id="mt-sc"></div>`,
+`<button class="bp" onclick="mCk()">â Check</button><button class="bs" onclick="aMt()" style="margin-left:9px">âº Reset</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function mSlT(el){if(el.classList.contains('mok')||el.classList.contains('merr'))return;document.querySelectorAll('#mc-t .mi').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');mSl=el}
+function mSlD(el){if(!mSl||el.classList.contains('mok'))return;const i=parseInt(mSl.dataset.i);mMp[i]=el.dataset.def;mSl.classList.remove('sel');mSl.classList.add('mok');el.classList.add('mok');el.style.background='var(--blt)';mSl=null}
+function mCk(){let ok=0;MP.forEach((p,i)=>{const el=document.getElementById('mm'+i);el.classList.remove('mok','merr');if(mMp[i]){if(mMp[i]===p[1]){el.classList.add('mok');ok++}else el.classList.add('merr')}});document.getElementById('mt-sc').innerHTML=sBox(ok,10,ok>=8?'Excellent vocab! ð':ok>=6?'Good. Check incorrect.':'Review the vocabulary list.')}
+
+const PVL=[{w:'walked',c:'t'},{w:'watched',c:'t'},{w:'laughed',c:'t'},{w:'stopped',c:'t'},{w:'missed',c:'t'},{w:'called',c:'d'},{w:'lived',c:'d'},{w:'moved',c:'d'},{w:'planned',c:'d'},{w:'enjoyed',c:'d'},{w:'wanted',c:'id'},{w:'visited',c:'id'},{w:'decided',c:'id'},{w:'started',c:'id'},{w:'needed',c:'id'}]
+let phSl=null,phPl={t:[],d:[],id:[]}
+function aPh(){phSl=null;phPl={t:[],d:[],id:[]}
+const sh=[...PVL].sort(()=>Math.random()-.5)
+oM('ð','Pronunciation: -ed Endings â /t/ /d/ /Éªd/','S2 Task Cycle 1 Â· Phonetics Â· 15 verbs',`
+<div class="xi"><strong>Regla:</strong> /Éªd/ â tras /t/ o /d/ | /t/ â consonante sorda | /d/ â vocal o consonante sonora<br>Clica un verbo â clica la columna correcta.</div>
+<div class="dvb" id="ph-bk">${sh.map(v=>`<span class="vc" id="pv_${v.w}" data-w="${v.w}" data-c="${v.c}" onclick="phSlV(this)">${v.w}</span>`).join('')}</div>
+<div class="pc2">
+<div class="pcat" onclick="phPl2('t')"><div class="pch pt">/t/ e.g. walked</div><div class="pcb" id="pcc-t"></div></div>
+<div class="pcat" onclick="phPl2('d')"><div class="pch pd">/d/ e.g. called</div><div class="pcb" id="pcc-d"></div></div>
+<div class="pcat" onclick="phPl2('id')"><div class="pch pid">/Éªd/ e.g. wanted</div><div class="pcb" id="pcc-id"></div></div></div>
+<div id="ph-sc"></div>`,
+`<button class="bp" onclick="phCk()">â Check</button><button class="bs" onclick="aPh()" style="margin-left:9px">âº Reset</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function phSlV(el){if(el.classList.contains('vp'))return;document.querySelectorAll('.vc').forEach(c=>c.classList.remove('vs'));el.classList.add('vs');phSl=el}
+function phPl2(cat){if(!phSl)return;const w=phSl.dataset.w,cc=phSl.dataset.c;phPl[cat].push({w,cc});phSl.classList.add('vp');phSl.classList.remove('vs');phSl=null;const col=document.getElementById('pcc-'+cat),el=document.createElement('div');el.className='pv';const cols={t:['var(--blt)','var(--blue)'],d:['var(--glt)','var(--grn)'],id:['var(--plt)','var(--pur)']};el.style.cssText=`background:${cols[cat][0]};color:${cols[cat][1]};border-left:3px solid ${cols[cat][1]}`;el.innerHTML=`<span>${w}</span><button class="rv" onclick="phRm(this,'${cat}','${w}')">â</button>`;col.appendChild(el)}
+function phRm(b,cat,w){b.closest('.pv').remove();phPl[cat]=phPl[cat].filter(x=>x.w!==w);const c=document.getElementById('pv_'+w);if(c)c.classList.remove('vp')}
+function phCk(){let ok=0,tot=0;['t','d','id'].forEach(c=>phPl[c].forEach(x=>{tot++;if(x.cc===c)ok++}));document.getElementById('ph-sc').innerHTML=sBox(ok,tot||15,ok/15>=.8?'Great phonetic awareness! ð':'/Éªd/ only after /t/ or /d/ sounds.')}
+
+function aTl(){const evs=[{t:"She was born in a small town in Galicia.",n:1},{t:"She used to walk to school with her brother every day.",n:2},{t:"Her family moved to Madrid when she was twelve.",n:3},{t:"She went to secondary school in Madrid.",n:4},{t:"She graduated from university with a degree in architecture.",n:5},{t:"She got married and moved abroad.",n:6},{t:"She started her own design company.",n:8},{t:"She won her first national architecture award.",n:9}],sh=[...evs].sort(()=>Math.random()-.5)
+oM('ð',"Timeline: Order the Events in Ana's Life",'S2 Task Cycle 1 Â· Vocab & Grammar Â· AMPLIACIÃN',`
+<div class="xi"><strong>ð Instrucciones:</strong> Asigna el orden cronolÃ³gico correcto (1 = primero) a cada evento de la vida de Ana.</div>
+<table style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--bdk)"><th style="padding:9px 10px;text-align:left;color:#fff;font-size:12px">Event</th><th style="padding:9px 10px;color:#fff;font-size:12px;width:80px">Order</th></tr></thead><tbody>
+${sh.map((e,i)=>`<tr style="border-bottom:1px solid var(--bdr)"><td style="padding:8px 10px;font-size:13px">${e.t}</td><td style="padding:8px 10px;text-align:center"><select style="padding:5px;border:1.5px solid var(--bdr);border-radius:6px;font-size:13px" id="tl${i}" data-n="${e.n}"><option value="">â</option>${[1,2,3,4,5,6,7,8].map(k=>`<option value="${k}">${k}</option>`).join('')}</select></td></tr>`).join('')}
+</tbody></table><div id="tl-sc"></div>`,
+`<button class="bp" onclick="tlCk()">â Check</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function tlCk(){let ok=0;document.querySelectorAll('[id^="tl"]').forEach(s=>{if(!s.value)return;if(parseInt(s.value)===parseInt(s.dataset.n)){ok++;s.style.borderColor='var(--grn)'}else s.style.borderColor='var(--red)'});document.getElementById('tl-sc').innerHTML=sBox(ok,8,ok>=6?'Excellent! ð':ok>=4?'Good â look for time clues (ages).':'Try again â find age/sequence clues.')}
+
+// âââ S3 âââââââââââââââââââââââââââââââââââââââââââ
+const RDT=`It was a Tuesday morning in November when everything changed for Laura Chen. She was rushing through the crowded streets of Bristol, running late for work, when she <strong>came across</strong> a small brown envelope lying on the pavement. Inside were three things: a faded photograph, a handwritten letter, and a return address in Edinburgh.<br><br>The photograph showed an elderly couple standing outside a house. On the back, someone had written: <em>"Our first home, 1962."</em> The letter was addressed to someone called Robert, dated just three weeks earlier. In it, a woman called Margaret described how she had grown up in Bristol and was looking back on her life with both joy and sadness. She wrote about the friends she had gradually lost touch with over the years, and most touchingly, the younger brother she had never been able to find since the family separated in the 1970s.<br><br>Laura didn't hesitate. She <strong>carried on</strong> to work but spent the entire day thinking about the letter. That evening, she <strong>set up</strong> a social media post describing what she had found, including the return address but not the personal details. By the following morning, the post had been shared hundreds of times.<br><br>Three days later, Laura received a message from a man called Robert â Margaret's brother. He had been living in Bristol all along, less than two miles away. He explained that he had been <strong>going through</strong> some difficult times and had given up hope of ever finding his sister. Reading the post had been, in his words, "the most overwhelming moment of my life."<br><br>Laura later described the experience as "surprisingly life-changing." "I <strong>used to</strong> walk past things without noticing," she admitted, "but this taught me to pay attention." As a result, Robert and Margaret eventually met for the first time in over forty years â just before Christmas.`
+const RDQ=[{q:"1. Where was Laura when she found the envelope?",o:["At her workplace","On the streets of Bristol","In Edinburgh","Outside a house"],a:1},{q:"2. What three items were inside the envelope?",o:["A photo, a letter, and money","A photo, a letter, and an address","Two photos and a letter","A letter, a key, and an address"],a:1},{q:"3. Who wrote the handwritten letter?",o:["Robert","Laura","Margaret","The elderly couple"],a:2},{q:"4. What did Laura do immediately after finding the letter?",o:["She went straight home","She called the police","She carried on to work","She travelled to Edinburgh"],a:2},{q:"5. For how long had Robert and Margaret been separated?",o:["About 10 years","About 20 years","Over 40 years","Over 60 years"],a:2},{q:"6. What did the experience teach Laura?",o:["To use social media","To move to Edinburgh","To pay more attention","To find lost people"],a:2}]
+let rSl={}
+function aRd(){rSl={}
+const mh=RDQ.map((q,i)=>`<div class="qq" id="rq${i}"><p>${q.q}</p><div class="qos">${q.o.map((o,j)=>`<div class="qo" id="ro${i}_${j}" onclick="rSl2(${i},${j})">${o}</div>`).join('')}</div></div>`).join('')
+oM('ð','Reading: "The Unexpected Gift"','S3 Task Cycle 2 Â· Reading + 6 MCQ',`
+<div class="xi"><strong>ð Instrucciones:</strong> Skimming primero (idea general), luego scanning (detalles). FÃ­jate en los phrasal verbs en negrita.</div>
+<div class="xt"><strong style="font-size:15px">The Unexpected Gift</strong><br><br>${RDT}</div>
+<hr style="border:none;border-top:1px solid var(--bdr);margin:14px 0">
+<p style="font-size:13.5px;font-weight:700;margin-bottom:12px;color:var(--bdk)">ð Comprehension:</p>${mh}<div id="rd-sc"></div>`,
+`<button class="bp" onclick="rdCk()">â Check Answers</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function rSl2(i,j){document.querySelectorAll(`#rq${i} .qo`).forEach(o=>o.classList.remove('sel'));document.getElementById(`ro${i}_${j}`).classList.add('sel');rSl[i]=j}
+function rdCk(){let ok=0;RDQ.forEach((q,i)=>{for(let j=0;j<q.o.length;j++){const el=document.getElementById(`ro${i}_${j}`);el.classList.remove('ok','ng','sel');if(j===q.a)el.classList.add('ok');else if(rSl[i]===j)el.classList.add('ng')};if(rSl[i]===q.a)ok++});document.getElementById('rd-sc').innerHTML=sBox(ok,6,ok>=5?'Excellent! ð':ok>=3?'Good. Re-read for missed questions.':'Read again carefully.')}
+
+const MWT="First I had no idea what to expect. I arrived in the city on a cold January morning and while I was waiting for my luggage, I met an elderly man who had lived there all his life. Then I found my way to the student residence. It wasn't easy â however, I refused to give up. As a result of my determination, I settled in quickly. Shortly after, I made my first real friend. Eventually, the city began to feel like home. Meanwhile, my family back in Madrid was worried. At that point, I decided to call them every Sunday. In the end, moving there turned out to be the best decision of my life."
+const MWA=['First','while','Then','however','As a result','Shortly after','Eventually','Meanwhile','At that point','In the end']
+function aMw(){
+const ws=MWT.split(' ')
+let i=0,html=''
+while(i<ws.length){let f=false;for(const t of [...MWA].sort((a,b)=>b.split(' ').length-a.split(' ').length)){const tw=t.split(' '),sl=ws.slice(i,i+tw.length).join(' ').replace(/[,â\-]/g,'').trim();if(sl.toLowerCase()===t.toLowerCase()){html+=`<span class="mw" data-t="${t}" onclick="mwTg(this)">${ws.slice(i,i+tw.length).join(' ')}</span> `;i+=tw.length;f=true;break}}if(!f){html+=ws[i]+' ';i++}}
+oM('ð','Mark the Words: Discourse Connectors (10 Ã­tems)','S3 Task Cycle 2 Â· Discourse Â· 10 connectors',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Identificar marcadores discursivos de secuencia, contraste y causa-resultado.<br>Clica las 10 expresiones conectoras. Clica de nuevo para desmarcar.</div>
+<div class="mwt" id="mw-tx">${html}</div>
+<p style="font-size:12.5px;color:var(--mut)">Marcados: <strong id="mw-c">0</strong> / 10</p>
+<div id="mw-sc"></div>`,
+`<button class="bp" onclick="mwCk()">â Check</button><button class="bs" onclick="aMw()" style="margin-left:9px">âº Reset</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function mwTg(el){el.classList.toggle('mk');document.getElementById('mw-c').textContent=document.querySelectorAll('.mw.mk').length}
+function mwCk(){let ok=0;document.querySelectorAll('.mw').forEach(el=>{el.classList.remove('mok2','merr2','mms','mk');if(MWA.some(t=>t.toLowerCase()===el.dataset.t.toLowerCase())){el.classList.add('mok2');ok++}else el.classList.add('mms')});document.getElementById('mw-sc').innerHTML=sBox(ok,10,ok>=8?'Excellent! All connectors found ð':ok>=6?'Good. Red dashes = missed.':'Review discourse connectors.')}
+
+const GVA=['First','Then','Shortly before','However','At that point','As a result','Meanwhile','Suddenly','Eventually','In the end']
+let gvx=null
+function aGv(){gvx=null;const bk=GVA.map((w,i)=>`<span class="wbc" id="gvb${i}" onclick="gvFl(this,'${w}')">${w}</span>`).join('')
+oM('ð','Gap-fill: Sequence Adverbs & Connectors â "Maria\'s Big Decision"','S3 Task Cycle 2 Â· Vocabulary Â· 10 Ã­tems',`
+<div class="xi"><strong>ð Instrucciones:</strong> Completa el texto con las 10 expresiones del banco. Clica chip â clica hueco.</div>
+<div class="wb" id="gv-bk">${bk}</div>
+<div class="xt"><strong>Maria's Big Decision</strong><br><br>
+<input class="gi" id="gv0" data-a="First" onclick="gvSl(this)" placeholder="(1)"> she researched every decision carefully. <input class="gi" id="gv1" data-a="Then" onclick="gvSl(this)" placeholder="(2)">, one day, she decided to quit her job. <input class="gi" id="gv2" data-a="Shortly before" onclick="gvSl(this)" placeholder="(3)"> she handed in her resignation, she felt her hands shaking. <input class="gi" id="gv3" data-a="However" onclick="gvSl(this)" placeholder="(4)">, she took a deep breath and walked into her boss's office. <input class="gi" id="gv4" data-a="At that point" onclick="gvSl(this)" placeholder="(5)">, she realised there was no turning back. <input class="gi" id="gv5" data-a="As a result" onclick="gvSl(this)" placeholder="(6)"> of her decision, she started her own business. <input class="gi" id="gv6" data-a="Meanwhile" onclick="gvSl(this)" placeholder="(7)">, her colleagues couldn't believe the news. <input class="gi" id="gv7" data-a="Suddenly" onclick="gvSl(this)" placeholder="(8)">, the phone rang â it was her first client! <input class="gi" id="gv8" data-a="Eventually" onclick="gvSl(this)" placeholder="(9)">, the business grew and she hired a team. <input class="gi" id="gv9" data-a="In the end" onclick="gvSl(this)" placeholder="(10)">, it was the best decision she had ever made.</div>
+<div id="gv-sc"></div>`,
+`<button class="bp" onclick="gvCk()">â Check</button><button class="bs" onclick="aGv()" style="margin-left:9px">âº Reset</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function gvSl(el){document.querySelectorAll('[id^="gv"]').forEach(g=>g.tagName==='INPUT'&&(g.style.borderBottomColor='var(--blue)'));el.style.borderBottomColor='var(--org)';gvx=el}
+function gvFl(ch,w){if(ch.classList.contains('used'))return;if(gvx){gvx.value=w;ch.classList.add('used');gvx.style.borderBottomColor='var(--blue)';gvx=null}else{for(let i=0;i<10;i++){const g=document.getElementById('gv'+i);if(!g.value){g.value=w;ch.classList.add('used');break}}}}
+function gvCk(){let ok=0;for(let i=0;i<10;i++){const g=document.getElementById('gv'+i);g.classList.remove('ok','ng');const v=g.value.trim().toLowerCase();if(v===GVA[i].toLowerCase()){g.classList.add('ok');ok++}else if(v)g.classList.add('ng')}document.getElementById('gv-sc').innerHTML=sBox(ok,10,ok>=8?'Excellent! ð':ok>=5?'Good.':'Review sequence adverbs.')}
+
+function aLb(){const scs=[{lbl:'1. ORIENTATION',c:'lsh1',bg:'#e8f4fc',gd:'Who? Where? When? Set the scene.',ph:'e.g. "It was a warm July evening. I was travelling alone in Portugal for the first time..."'},{lbl:'2. COMPLICATION',c:'lsh2',bg:'var(--rlt)',gd:'What happened? Main problem or turning point.',ph:'e.g. "While I was waiting at the station, I suddenly realised I had lost my passport..."'},{lbl:'3. RESOLUTION',c:'lsh3',bg:'var(--glt)',gd:'How was it resolved? What happened in the end?',ph:'e.g. "Eventually, a kind stranger helped me contact the Embassy..."'},{lbl:'4. EVALUATION',c:'lsh4',bg:'var(--plt)',gd:'Why was this important? What did you learn?',ph:'e.g. "Looking back, I think this experience taught me that..."'}]
+oM('ð','Guided Writing: Labov Narrative Structure','S3 Task Cycle 2 Â· Writing Â· 4 sections',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Producir una narraciÃ³n personal cohesionada siguiendo el modelo de Labov.<br>Usa past tenses, conectores y vocabulario de emociones.</div>
+${scs.map(s=>`<div class="ls"><div class="lsh ${s.c}">${s.lbl}</div><div class="lsb" style="background:${s.bg}"><p>${s.gd}</p><textarea placeholder="${s.ph}"></textarea></div></div>`).join('')}`,
+`<button class="bp" onclick="alert('â Draft saved!');cM()">ð¾ Save Draft</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+
+function aLt(){oM('âï¸','Writing: Letter to a Friend (120 words)','S3 Task Cycle 2 Â· Writing Â· Informal register',`
+<div class="xi"><strong>ð Situation:</strong> Your English-speaking friend Alex has written asking what you've been up to. Write back (~120 words) describing a recent experience. Include what happened, how you felt, and what the result was.</div>
+<div style="background:#fafafa;border:1px solid var(--bdr);border-radius:6px;padding:16px;font-size:14px;line-height:2">
+<strong>Dear Alex,</strong><br><br>
+<textarea class="wa" id="lt-t" oninput="wc(this,'lt-w',100,140)" placeholder="Write your letter here... Start with how you are, then describe your experience." style="min-height:180px;border:none;padding:0;resize:none;font-size:14px;line-height:2;background:transparent"></textarea>
+<br><strong>Write back soon!<br>[Your name]</strong></div>
+<div class="wcr"><span>Target: 100â140 words Â· ð¡ Under Â· ð¢ OK Â· ð´ Over</span><span class="wn" id="lt-w">0 words</span></div>
+<div style="margin-top:12px;font-size:12.5px;color:var(--mut)"><strong>ð¡ Phrases:</strong> <em>I'm writing to tell you aboutâ¦ / Something amazing happenedâ¦ / While I wasâ¦ / In the end, â¦ / I felt really â¦ becauseâ¦</em></div>`,
+`<button class="bp" onclick="if(wn(document.getElementById('lt-t').value)<80){alert('Write at least 80 words!')}else{alert('â Letter submitted for peer review! ('+wn(document.getElementById('lt-t').value)+' words)');cM()}">ð¤ Submit</button><button class="bs" onclick="cM()" style="margin-left:9px">Cancelar</button>`)}
+
+function aPr(){const cr=['The letter uses past simple and past continuous correctly.','<em>Used to</em> is used appropriately (if relevant).','Sequence connectors are used correctly.','Cause-result connectors are present (as a result, becauseâ¦).','The register is consistently informal (contractions, friendly tone).','The letter has a clear structure: opening, news, details, closing.','Vocabulary includes â¥3 items from the unit (emotions, life events, phrasal verbs).','Spelling and punctuation are generally accurate.']
+oM('ð','Peer Review Workshop: Checklist 8 Criteria','S3 Task Cycle 2 Â· Peer Review',`
+<div class="xi">Read your classmate's letter carefully. Tick each criterion that is met. Add a constructive comment below.</div>
+<div style="background:#fafafa;border:1px solid var(--bdr);border-radius:6px;padding:14px;margin-bottom:14px;font-size:13px;color:var(--mut);font-style:italic">[Tu compaÃ±ero/a asignado/a por Moodle Workshop aparecerÃ¡ aquÃ­]</div>
+${cr.map((c,i)=>`<div class="ci" id="ci${i}" onclick="ciTg(this)"><input type="checkbox" id="cb${i}"><label for="cb${i}">${c}</label></div>`).join('')}
+<p style="font-size:13px;font-weight:600;margin:14px 0 7px">ð¬ Constructive comment (in English):</p>
+<textarea class="wa" id="pr-c" placeholder="2â3 sentences of positive feedback + 1â2 suggestions..." style="min-height:90px"></textarea>`,
+`<button class="bp" onclick="prSb()">ð¤ Submit Review</button><button class="bs" onclick="cM()" style="margin-left:9px">Cancelar</button>`)}
+function ciTg(it){it.classList.toggle('ck');it.querySelector('input').checked=it.classList.contains('ck')}
+function prSb(){const n=document.querySelectorAll('.ci.ck').length;if(n<3){alert('Please evaluate at least 3 criteria.');return}if(!document.getElementById('pr-c').value.trim()){alert('Please add a comment.');return}alert(`â Review submitted!\nCriteria: ${n}/8`);cM()}
+
+const INT=`"My name is Carmen and I want to tell you about something that really surprised me last year.\n\nI was working at a cafÃ© in the city centre when a woman came in who looked very upset. She was crying quietly at a corner table. While I was taking her order, she suddenly apologised and explained that it was her mother's birthday â her mother who had passed away six months earlier. She used to come to that same cafÃ© every year on her birthday, and now the daughter was continuing the tradition alone.\n\nI didn't know what to say. However, I brought her a small piece of cake and told her that her mother had wonderful taste. She laughed. As a result of that small gesture, she came back every week after that. Eventually she became one of our most regular customers. In the end, I learned that sometimes the kindest thing you can do is just pay attention."`
+function aIn(){oM('â­','Actividad Integradora: Listen â Mediate â Write','S3 Task Cycle 2 Â· CO + EO + EE Â· OBLIGATORIA',`
+<div class="xi"><strong>â­ ACTIVIDAD INTEGRADORA.</strong> Completa los 3 pasos en orden.</div>
+<p style="font-family:var(--fu);font-weight:800;font-size:13px;color:var(--bdk);margin-bottom:8px">PASO 1 â LISTENING ð§</p>
+<div class="ap"><button class="pb3" id="in-pb3" onclick="inPl()">â¶</button><div class="pi"><div class="pt2">Carmen's Story â A Moment of Kindness</div><div class="ps">Narrative B1 Â· ~90 seconds</div><div class="pbw"><div class="pb4" id="in-pb4" style="width:0%"></div></div></div></div>
+<div class="tr2" id="in-tr">${INT.replace(/\n/g,'<br><br>')}</div>
+<p style="font-family:var(--fu);font-weight:800;font-size:13px;color:var(--red);margin:14px 0 8px">PASO 2 â MEDIATION SPEAKING ðï¸ (60 segundos)</p>
+<div class="sk"><h4>ðï¸ Mediation task:</h4><p>Reformulate Carmen's story for a classmate. Summarise + add your reaction. Don't just repeat!</p></div>
+<div style="text-align:center;margin-bottom:12px"><div class="tc"><span class="tn2" id="in-tn">60</span><span class="tl2">seconds</span></div></div>
+<button class="rb" id="in-rb" onclick="stR('in-tn','in-rb',60,'ð´ Recording mediation...','â Mediation saved!')">ðï¸ Record Mediation (60s)</button>
+<p style="font-family:var(--fu);font-weight:800;font-size:13px;color:var(--grn);margin:14px 0 8px">PASO 3 â WRITTEN SUMMARY âï¸ (80 palabras)</p>
+<textarea class="wa" id="in-t" oninput="wc(this,'in-w',70,100)" placeholder="Summarise Carmen's story and add your personal reaction (~80 words)..." style="min-height:120px"></textarea>
+<div class="wcr"><span>Target: 70â100 words</span><span class="wn" id="in-w">0 words</span></div>`,
+`<button class="bp" onclick="if(wn(document.getElementById('in-t').value)<50){alert('Please write at least 50 words.')}else{alert('â Integrative activity submitted!');cM()}">ð¤ Submit</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function inPl(){let p=0;document.getElementById('in-tr').classList.add('v');const iv=setInterval(()=>{p+=100/90;document.getElementById('in-pb4').style.width=Math.min(100,p)+'%';if(p>=100){clearInterval(iv);document.getElementById('in-pb3').textContent='âº'}},1000)}
+
+// âââ S4 âââââââââââââââââââââââââââââââââââââââââââ
+function aSp(){oM('ðï¸','Extended Speaking: A Time When You Felt Proud or Surprised','S4 Task Cycle 3 Â· Speaking Â· 2 min',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Producir un monÃ³logo extendido de 2 minutos con coherencia narrativa.</div>
+<div class="sk"><h4>ð£ï¸ Your task (2 minutes):</h4><p>Tell a personal story about <strong>"A time when you felt proud or surprised."</strong><br>Include: when/where Â· past continuous Â· used to Â· how you felt Â· the result</p></div>
+<div style="background:#fff3e0;border:1px solid #ffcc80;border-radius:6px;padding:14px;margin-bottom:14px">
+<p style="font-size:12.5px;font-weight:700;color:#e65100;margin-bottom:8px">ð Preparation notes (30 seconds):</p>
+<textarea class="wa" placeholder="Quick notes..." style="min-height:60px"></textarea></div>
+<div style="background:#fff;border:1px solid var(--bdr);border-radius:6px;padding:12px;margin-bottom:14px;font-size:12.5px">
+<strong style="color:var(--bdk)">ð¡ Language to include:</strong>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">${['Past simple + time expression','Past continuous (while/when)','Used to + infinitive','Sequence connectors','Emotion vocabulary','Cause-result'].map(t=>`<span style="background:var(--blt);color:var(--bdk);padding:3px 8px;border-radius:99px;font-size:11.5px;font-weight:600">${t}</span>`).join('')}</div></div>
+<div style="text-align:center;margin-bottom:12px"><div class="tc"><span class="tn2" id="sp-tn">120</span><span class="tl2">seconds</span></div></div>
+<button class="rb" id="sp-rb" onclick="stR('sp-tn','sp-rb',120,'ð´ Recording... 2 minutes!','â Recording saved!')">ðï¸ Start Recording (2 min)</button>`,
+'<button class="bs" onclick="cM()">Cerrar</button>')}
+
+const ECL=[{s:'While I was <span class="ew">walk</span> to the station, it started to rain.',a:'walking',h:'Past continuous: was/were + -ing'},{s:'She used to <span class="ew">went</span> to the beach every summer.',a:'go',h:'used to + infinitive (base form, not past)'},{s:'When the alarm rang, I was <span class="ew">sleep</span> deeply.',a:'sleeping',h:'Past continuous: was/were + -ing'},{s:'He <span class="ew">didn\'t used to</span> like spicy food.',a:"didn't use to",h:"Negative: didn't + use to (no -d)"},{s:'They <span class="ew">was living</span> in London when they fell in love.',a:'were living',h:'Plural: were (not was) + -ing'},{s:'<span class="ew">What you were doing</span> when I called?',a:'What were you doing',h:'Question order: Wh- + aux + subject + -ing'},{s:'Suddenly, the lights went off while we <span class="ew">eat</span> dinner.',a:'were eating',h:'Past continuous with while: were/was + -ing'},{s:'I used to <span class="ew">living</span> in a small village.',a:'live',h:'used to + infinitive (not -ing)'}]
+function aEc(){oM('ð§','Error Correction: Narrative Tenses (8 sentences)','S4 Task Cycle 3 Â· Grammar Â· OBLIGATORIA',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Identificar y corregir errores de past simple, past continuous y used to.<br>Cada frase tiene un error subrayado en rojo. Escribe la forma correcta.</div>
+${ECL.map((e,i)=>`<div class="ei"><p class="es">${i+1}. ${e.s}</p><div class="er"><label>âï¸ CorrecciÃ³n:</label><input class="einp" id="ec${i}" data-a="${e.a}" data-h="${e.h}" placeholder="Escribe la forma correcta"><span class="efb" id="ef${i}"></span></div></div>`).join('')}
+<div id="ec-sc"></div>`,
+`<button class="bp" onclick="ecCk()">â Check All</button><button class="bs" onclick="aEc()" style="margin-left:9px">âº Reset</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function ecCk(){let ok=0;ECL.forEach((e,i)=>{const inp=document.getElementById('ec'+i),fb=document.getElementById('ef'+i);inp.classList.remove('ok','ng');const v=inp.value.trim().toLowerCase();if(v===e.a.toLowerCase()){inp.classList.add('ok');fb.textContent=' â Correct!';fb.style.color='var(--grn)';fb.classList.add('sh');ok++}else if(v){inp.classList.add('ng');fb.textContent=` â â ${e.a} (${e.h})`;fb.style.color='var(--red)';fb.classList.add('sh')}});document.getElementById('ec-sc').innerHTML=sBox(ok,8,ok>=6?'Excellent grammar control! ð':ok>=4?'Good. Review the hints.':'Review grammar reference.')}
+
+function aFw(){oM('âï¸','Free Writing: "The Best/Worst Day of My Life" (150â200 words)','S4 Task Cycle 3 Â· Writing libre Â· OBLIGATORIA',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Integrar todos los recursos de la unidad en una narraciÃ³n personal libre.</div>
+<div style="display:flex;gap:10px;margin-bottom:14px">
+<div id="ta" onclick="this.style.borderColor='var(--blue)';this.style.background='var(--blt)';document.getElementById('tb').style.borderColor='var(--bdr)';document.getElementById('tb').style.background=''" style="flex:1;padding:12px;border:2px solid var(--bdr);border-radius:6px;cursor:pointer;text-align:center;font-weight:600;font-size:13px">â¨ "It was the best day of my life"</div>
+<div id="tb" onclick="this.style.borderColor='var(--blue)';this.style.background='var(--blt)';document.getElementById('ta').style.borderColor='var(--bdr)';document.getElementById('ta').style.background=''" style="flex:1;padding:12px;border:2px solid var(--bdr);border-radius:6px;cursor:pointer;text-align:center;font-weight:600;font-size:13px">ð± "It was the worst day of my life"</div></div>
+<div style="background:var(--ylt);border:1px solid #ffe082;border-radius:6px;padding:11px 14px;font-size:12.5px;margin-bottom:12px">ð¯ <strong>Include all 6:</strong>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:7px">${['Past simple','Past continuous','Used to','3+ connectors','Emotion adjective','Phrasal verb'].map(t=>`<span style="background:var(--blt);color:var(--bdk);padding:3px 9px;border-radius:99px;font-size:11.5px;font-weight:700">${t}</span>`).join('')}</div></div>
+<textarea class="wa" id="fw-t" oninput="wc(this,'fw-w',150,200)" placeholder="Start writing... 'It was the best/worst day of my life. It happened on...'" style="min-height:200px"></textarea>
+<div class="wcr"><span>Target: 150â200 words</span><span class="wn" id="fw-w">0 words</span></div>`,
+`<button class="bp" onclick="fwSb()">ð¤ Submit</button><button class="bs" onclick="cM()" style="margin-left:9px">Cancelar</button>`)}
+function fwSb(){const n=wn(document.getElementById('fw-t').value);if(n<100){alert('Please write at least 100 words.');return}alert(`â Submitted for assessment! (${n} words)`);cM()}
+
+// âââ S5 âââââââââââââââââââââââââââââââââââââââââââ
+function aCu(){
+const UK=`Last weekend, I found myself doing something terribly embarrassing. I was queueing at the post office â you know how it is, that grey Tuesday morning feeling â when I suddenly realised I'd been standing in the wrong line for about twenty minutes. I'd been cheerfully waiting behind a chap who turned out to be looking at his phone, not actually in the queue at all. We had a bit of a laugh about it. Nothing dramatic. These things happen, don't they? I got home, had a cup of tea, and got on with things.`
+const ES=`Â¡No van a creer lo que me pasÃ³ el fin de semana! Estaba comprando en el supermercado cuando de repente me di cuenta de que llevaba todo el rato con el carrito equivocado. Â¡El mÃ­o seguÃ­a en la entrada! Fue un momento de pÃ¡nico total â sentÃ­ que se me caÃ­a el alma al suelo. CorrÃ­ como una loca por todo el supermercado, con la gente mirÃ¡ndome y yo sin poder parar de reÃ­rme de mÃ­ misma. Â¡QuÃ© momento mÃ¡s surrealista! Les juro que nunca me voy a olvidar de esa cara de vergÃ¼enza ajena que me pusieron en caja.`
+oM('ð','Cultural Moment: UK vs Hispanic Storytelling','S5 Project Task Â· Intercultural Awareness',`
+<div class="xi"><strong>ð¯ Objetivo:</strong> Comparar estilos narrativos en inglÃ©s y espaÃ±ol para desarrollar conciencia intercultural.<br>Lee los dos blogs. Identifica 2 diferencias clave.</div>
+<div class="bg"><div class="bk"><div class="bkh buk">ð¬ð§ British blog â "A Minor Tuesday Disaster"</div><div class="bkb">${UK}</div></div>
+<div class="bk"><div class="bkh bes">ðªð¸ Hispanic blog â "Â¡Lo que me pasÃ³!"</div><div class="bkb">${ES}</div></div></div>
+<div style="background:#f0f4f8;border:1px solid var(--bdr);border-radius:6px;padding:13px;margin-bottom:14px;font-size:12.5px">
+<strong style="color:var(--bdk)">ð Analyse:</strong>
+<ol style="margin:7px 0 0 18px;line-height:2"><li>How does each writer describe emotions? Which one uses understatement?</li><li>Which blog uses more exclamations? What effect does this create?</li></ol></div>
+<p style="font-size:13.5px;font-weight:700;margin-bottom:8px">ð Difference 1:</p>
+<textarea class="wa" style="min-height:80px" placeholder="Describe the first narrative style difference..."></textarea>
+<p style="font-size:13.5px;font-weight:700;margin:12px 0 8px">ð Difference 2:</p>
+<textarea class="wa" style="min-height:80px" placeholder="Describe the second difference..."></textarea>`,
+`<button class="bp" onclick="alert('â Cultural analysis saved!');cM()">ð¾ Save</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+
+function aPt(){const cl=['Event 1: past simple + past continuous (when/while)','Event 2: used to (habits/states that changed)','Event 3: emotional vocabulary (â¥3 emotion adjectives)','Sequence connectors throughout (first, then, eventuallyâ¦)','Labov evaluation section at the end','Intercultural comparison (60 words: British/US vs my style)','Total: 3 minutes (â350â400 spoken words)','Recording quality: clear voice, appropriate pace']
+oM('ðï¸','PROJECT TASK: "My Life Story So Far"','S5 EvaluaciÃ³n sumativa Â· TBLT culminante',`
+<div class="pc"><h3>ðï¸ "My Life Story So Far" â Mini-podcast (3 min)</h3><p>Tarea sumativa integradora. RÃºbrica analÃ­tica 5 criterios.</p><ul class="prl2"><li>3 key life events + past tenses</li><li>Sequence adverbs, emotions, phrasal verbs</li><li>Labov structure + intercultural component (10%)</li></ul></div>
+<p style="font-size:13.5px;font-weight:700;color:var(--bdk);margin-bottom:12px">ð Planning template:</p>
+<div style="margin-bottom:12px;border:1px solid var(--bdr);border-radius:6px;overflow:hidden"><div style="background:var(--bdk);color:#fff;padding:9px 13px;font-family:var(--fu);font-weight:700;font-size:12.5px">OPENING â Introduce yourself (30 sec)</div><div style="padding:11px 13px"><textarea class="wa" style="min-height:55px" placeholder="Hi, my name isâ¦ today I'm going to tell you about three important moments..."></textarea></div></div>
+<div style="margin-bottom:12px;border:1px solid var(--bdr);border-radius:6px;overflow:hidden"><div style="background:var(--red);color:#fff;padding:9px 13px;font-family:var(--fu);font-weight:700;font-size:12.5px">EVENTS 1, 2 & 3 â Main narrative (2 min)</div><div style="padding:11px 13px"><textarea class="wa" style="min-height:90px" placeholder="Event 1 (past simple + continuous)... Event 2 (used to)... Event 3 (emotions)..."></textarea></div></div>
+<div style="margin-bottom:14px;border:1px solid var(--bdr);border-radius:6px;overflow:hidden"><div style="background:var(--grn);color:#fff;padding:9px 13px;font-family:var(--fu);font-weight:700;font-size:12.5px">EVALUATION + INTERCULTURAL (30 sec)</div><div style="padding:11px 13px"><textarea class="wa" style="min-height:70px" placeholder="Looking back... / Intercultural: In my narrative I tend to [X], whereas British storytellers often [Y]..."></textarea></div></div>
+<p style="font-size:13.5px;font-weight:700;color:var(--bdk);margin-bottom:8px">â Pre-recording checklist:</p>
+${cl.map((c,i)=>`<div class="ci" id="pc${i}" onclick="ciTg(this)"><input type="checkbox" id="pcb${i}"><label for="pcb${i}">${c}</label></div>`).join('')}
+<div style="margin-top:16px;text-align:center"><div class="tc"><span class="tn2" id="pt-tn">180</span><span class="tl2">seconds</span></div><button class="rb" id="pt-rb" onclick="stR('pt-tn','pt-rb',180,'ð´ Recording your podcast...','â Podcast submitted!')">ðï¸ Record Project Task (3 min)</button></div>`,
+'<button class="bs" onclick="cM()">Cerrar</button>')}
+
+const CDI=['I can understand the main information in short narratives in clear, standard speech.','I can understand narratives (holidays, anecdotes) spoken at a slow, clear pace.','I can understand descriptions of places, events and feelings in narrative texts.','I can narrate experiences with feelings and describe real or imagined events.','I can write about experiences, describing feelings and reactions in cohesive texts.','I can participate spontaneously and express emotions (surprise, happiness, sadness).','I can write personal letters describing experiences in reasonable detail.','I can follow a sequence of events using logical and temporal connectors.','I can show awareness of the Labov narrative structure in texts I read and write.','I can initiate, maintain and close simple face-to-face conversations.']
+let cdSl={}
+function aCd(){cdSl={}
+oM('â','Can-Do Tracker â AutoevaluaciÃ³n Final U1','S5 Project Task Â· Feedback Â· 10 descriptores MCER B1',`
+<div class="xi"><strong>ð¯ Instrucciones:</strong> Selecciona tu nivel en cada descriptor:<br>
+<strong>1</strong> = No puedo &nbsp;Â·&nbsp; <strong>2</strong> = Puedo con ayuda &nbsp;Â·&nbsp; <strong>3</strong> = Puedo con dificultad &nbsp;Â·&nbsp; <strong>4</strong> = Puedo con soltura</div>
+${CDI.map((d,i)=>`<div class="cdr"><div class="cdt">${i+1}. ${d}</div><div class="cds">${[1,2,3,4].map(n=>`<button class="cdb" id="cd${i}_${n}" onclick="cdSl2(${i},${n})">${n}</button>`).join('')}</div></div>`).join('')}
+<div id="cd-sc"></div>`,
+`<button class="bp" onclick="cdSb()">ð¾ Guardar autoevaluaciÃ³n</button><button class="bs" onclick="cM()" style="margin-left:9px">Cerrar</button>`)}
+function cdSl2(i,n){for(let k=1;k<=4;k++){const b=document.getElementById(`cd${i}_${k}`);if(b)b.classList.remove('sl')}document.getElementById(`cd${i}_${n}`).classList.add('sl');cdSl[i]=n}
+function cdSb(){const ans=Object.keys(cdSl).length;if(ans<10){alert(`Complete all 10 descriptors. (${ans}/10 done)`);return}const avg=(Object.values(cdSl).reduce((a,b)=>a+b,0)/10).toFixed(1);document.getElementById('cd-sc').innerHTML=`<div class="sb2 ${avg>=3?'':avg>=2?'mid':'low'}"><div class="sn">${avg}/4</div><div class="sm">Average self-assessment Â· ${avg>=3.5?'Excellent â ready for U2! ð':avg>=2.5?'Good. Review areas scored 1â2.':'Consolidate B1 skills before moving on.'}</div></div>`;setTimeout(()=>alert('â Can-Do Tracker saved. Your teacher will use this for U2 planning.'),500)}
+</script>
+</body></html>

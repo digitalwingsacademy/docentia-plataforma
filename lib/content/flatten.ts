@@ -4,7 +4,7 @@ export interface FlatSection {
   sectionId: string;
   unidadDir: string;
   archivo: string;
-  tipo: "video" | "texto" | "quiz";
+  tipo: "video" | "texto" | "quiz" | "actividad";
   titulo: string;
   duracionMinutos: number;
   unidadTitulo: string;

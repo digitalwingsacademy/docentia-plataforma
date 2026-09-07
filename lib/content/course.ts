@@ -1,7 +1,16 @@
 import { load as parseYaml } from "js-yaml";
 import { unstable_cache } from "next/cache";
 import { listContentDir, readContentFile } from "./source";
-import { cursoYmlSchema, quizYmlSchema, unidadYmlSchema, type CursoYml, type QuizYml, type UnidadYml } from "./schema";
+import {
+  cursoYmlSchema,
+  quizYmlSchema,
+  rellenarHuecosYmlSchema,
+  unidadYmlSchema,
+  type CursoYml,
+  type QuizYml,
+  type RellenarHuecosYml,
+  type UnidadYml,
+} from "./schema";
 
 export function contentTag(slug: string): string {
   return `content:${slug}`;
@@ -62,6 +71,19 @@ export function getQuiz(slug: string, unidadDir: string, ref: string) {
   return unstable_cache(() => loadQuiz(slug, unidadDir, ref), ["quiz", slug, unidadDir, ref], {
     tags: [contentTag(slug)],
   })();
+}
+
+async function loadActividad(slug: string, unidadDir: string, archivo: string, ref: string): Promise<RellenarHuecosYml> {
+  const raw = await readContentFile(`cursos/${slug}/unidades/${unidadDir}/${archivo}`, ref);
+  return rellenarHuecosYmlSchema.parse(parseYaml(raw));
+}
+
+export function getActividad(slug: string, unidadDir: string, archivo: string, ref: string) {
+  return unstable_cache(
+    () => loadActividad(slug, unidadDir, archivo, ref),
+    ["actividad", slug, unidadDir, archivo, ref],
+    { tags: [contentTag(slug)] }
+  )();
 }
 
 /** Suma de secciones y minutos declarados en todo el curso - lo que
