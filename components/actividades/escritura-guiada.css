@@ -1,0 +1,27 @@
+@import "./foro.css";
+
+/* Especifico de escritura-guiada: una seccion (titulo + guia + textarea) por
+   fase. Reutiliza .fo-textarea/.fo-submitted de foro.css. */
+
+.eg-secciones {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.eg-seccion-titulo {
+  font-family: var(--rh-font-display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--rh-accent);
+  margin-bottom: 0.3rem;
+}
+
+.eg-seccion-guia {
+  font-size: 0.85rem;
+  color: var(--rh-ink-muted);
+  margin-bottom: 0.5rem;
+}

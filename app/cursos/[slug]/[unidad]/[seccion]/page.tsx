@@ -4,7 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { createClient } from "@/lib/supabase/server";
 import { getOrCreateEnrollment } from "@/lib/actions/enrollment";
-import { getActividad, getCourseStructure, getQuiz, getSectionMdx } from "@/lib/content/course";
+import { getActividad, getChecklist, getCourseStructure, getQuiz, getSectionMdx } from "@/lib/content/course";
 import { RellenarHuecos } from "@/components/actividades/rellenar-huecos";
 import { Foro } from "@/components/actividades/foro";
 import { GrabacionAudio } from "@/components/actividades/grabacion-audio";
@@ -13,6 +13,9 @@ import { Clasificar } from "@/components/actividades/clasificar";
 import { Ordenar } from "@/components/actividades/ordenar";
 import { OpcionMultiple } from "@/components/actividades/opcion-multiple";
 import { MarcarPalabras } from "@/components/actividades/marcar-palabras";
+import { EscrituraLibre } from "@/components/actividades/escritura-libre";
+import { EscrituraGuiada } from "@/components/actividades/escritura-guiada";
+import { RevisionEntrePares } from "@/components/actividades/revision-entre-pares";
 import { flattenSections } from "@/lib/content/flatten";
 import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
@@ -234,5 +237,25 @@ async function ActividadSection({
       return (
         <MarcarPalabras actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
       );
+    case "escritura-libre":
+      return (
+        <EscrituraLibre actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
+    case "escritura-guiada":
+      return (
+        <EscrituraGuiada actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
+    case "revision-entre-pares": {
+      const checklist = await getChecklist(slug, unidadDir, actividad.checklist, contentRef);
+      return (
+        <RevisionEntrePares
+          actividad={actividad}
+          criterios={checklist.criterios}
+          enrollmentId={enrollmentId}
+          sectionId={sectionId}
+          durationMinutes={durationMinutes}
+        />
+      );
+    }
   }
 }

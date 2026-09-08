@@ -1,0 +1,50 @@
+@import "./foro.css";
+
+/* Especifico de escritura-libre: selector de prompt, contador clasificado,
+   checklist informativo. Reutiliza .fo-field/.fo-textarea/.fo-submitted de
+   foro.css - misma mecanica de "textarea + contador + entrega enviada". */
+
+.el-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+.el-prompt {
+  flex: 1;
+  min-width: 180px;
+  min-height: 46px;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font: 600 0.85rem/1.4 var(--rh-font-body);
+  color: var(--rh-ink);
+  background: var(--rh-surface);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.el-prompt:hover {
+  border-color: var(--rh-accent);
+}
+.el-prompt.el-prompt-selected {
+  border-color: var(--rh-accent);
+  background: color-mix(in srgb, var(--rh-accent) 10%, var(--rh-surface));
+}
+
+.fo-counter.el-bajo {
+  color: var(--rh-ink-muted);
+}
+.fo-counter.el-dentro {
+  color: var(--rh-good);
+}
+.fo-counter.el-sobre {
+  color: var(--rh-error);
+}
+
+.el-lista {
+  margin: 0 0 1.2rem;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--rh-ink-muted);
+  line-height: 1.7;
+}

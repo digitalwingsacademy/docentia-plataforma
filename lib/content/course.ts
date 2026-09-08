@@ -3,10 +3,12 @@ import { unstable_cache } from "next/cache";
 import { listContentDir, readContentFile } from "./source";
 import {
   actividadYmlSchema,
+  checklistYmlSchema,
   cursoYmlSchema,
   quizYmlSchema,
   unidadYmlSchema,
   type ActividadYml,
+  type ChecklistYml,
   type CursoYml,
   type QuizYml,
   type UnidadYml,
@@ -82,6 +84,21 @@ export function getActividad(slug: string, unidadDir: string, archivo: string, r
   return unstable_cache(
     () => loadActividad(slug, unidadDir, archivo, ref),
     ["actividad", slug, unidadDir, archivo, ref],
+    { tags: [contentTag(slug)] }
+  )();
+}
+
+async function loadChecklist(slug: string, unidadDir: string, archivo: string, ref: string): Promise<ChecklistYml> {
+  const raw = await readContentFile(`cursos/${slug}/unidades/${unidadDir}/${archivo}`, ref);
+  return checklistYmlSchema.parse(parseYaml(raw));
+}
+
+/** Bloque reutilizable referenciado desde revision-entre-pares (y, mas
+ * adelante, checklistPrevia de grabacion-audio) - docs/formato-actividades.md #4.1. */
+export function getChecklist(slug: string, unidadDir: string, archivo: string, ref: string) {
+  return unstable_cache(
+    () => loadChecklist(slug, unidadDir, archivo, ref),
+    ["checklist", slug, unidadDir, archivo, ref],
     { tags: [contentTag(slug)] }
   )();
 }

@@ -1,0 +1,59 @@
+@import "./foro.css";
+
+/* Especifico de revision-entre-pares: checklist de criterios + comentario.
+   Reutiliza .fo-textarea/.fo-submitted de foro.css. */
+
+.rp-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.rp-criterio {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  min-height: 44px;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  font: 400 0.88rem/1.4 var(--rh-font-body);
+  color: var(--rh-ink);
+  background: var(--rh-surface);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.rp-criterio:hover {
+  border-color: var(--rh-accent);
+}
+.rp-criterio.rp-marcado {
+  border-color: var(--rh-good);
+  background: color-mix(in srgb, var(--rh-good) 10%, var(--rh-surface));
+}
+.rp-check {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1.5px solid var(--rh-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+.rp-criterio.rp-marcado .rp-check {
+  background: var(--rh-good);
+  border-color: var(--rh-good);
+  color: white;
+}
+.rp-check svg {
+  width: 12px;
+  height: 12px;
+}
+
+.rp-contador {
+  font: 600 0.78rem/1 var(--rh-font-mono);
+  color: var(--rh-ink-muted);
+  margin: 0 0 1rem;
+}
