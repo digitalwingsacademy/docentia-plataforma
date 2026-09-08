@@ -1,0 +1,57 @@
+@import "./signal.css";
+
+/* Especifico de foro: textareas de publicacion/respuesta + contador. */
+
+.fo-field {
+  margin-bottom: 1.2rem;
+}
+.fo-label {
+  display: block;
+  font: 700 0.72rem/1 var(--rh-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--rh-ink-muted);
+  margin-bottom: 0.6rem;
+}
+.fo-textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 0.9rem 1rem;
+  font: 400 0.95rem/1.6 var(--rh-font-body);
+  color: var(--rh-ink);
+  background: var(--rh-surface);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 10px;
+  resize: vertical;
+}
+.fo-textarea:focus {
+  outline: 2px solid var(--rh-accent);
+  outline-offset: 1px;
+}
+.fo-textarea.fo-reply {
+  min-height: 80px;
+}
+
+.fo-counter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  font: 600 0.78rem/1 var(--rh-font-mono);
+  color: var(--rh-ink-muted);
+}
+.fo-counter.fo-ok {
+  color: var(--rh-good);
+}
+
+.fo-submitted {
+  padding: 1.2rem 1.4rem;
+  background: var(--rh-surface);
+  border: 1px solid var(--rh-border);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.fo-submitted + .fo-submitted {
+  margin-top: 0.8rem;
+}

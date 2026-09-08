@@ -2,13 +2,13 @@ import { load as parseYaml } from "js-yaml";
 import { unstable_cache } from "next/cache";
 import { listContentDir, readContentFile } from "./source";
 import {
+  actividadYmlSchema,
   cursoYmlSchema,
   quizYmlSchema,
-  rellenarHuecosYmlSchema,
   unidadYmlSchema,
+  type ActividadYml,
   type CursoYml,
   type QuizYml,
-  type RellenarHuecosYml,
   type UnidadYml,
 } from "./schema";
 
@@ -73,9 +73,9 @@ export function getQuiz(slug: string, unidadDir: string, ref: string) {
   })();
 }
 
-async function loadActividad(slug: string, unidadDir: string, archivo: string, ref: string): Promise<RellenarHuecosYml> {
+async function loadActividad(slug: string, unidadDir: string, archivo: string, ref: string): Promise<ActividadYml> {
   const raw = await readContentFile(`cursos/${slug}/unidades/${unidadDir}/${archivo}`, ref);
-  return rellenarHuecosYmlSchema.parse(parseYaml(raw));
+  return actividadYmlSchema.parse(parseYaml(raw));
 }
 
 export function getActividad(slug: string, unidadDir: string, archivo: string, ref: string) {

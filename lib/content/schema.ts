@@ -12,6 +12,9 @@ export const seccionTipoSchema = z.enum(["video", "texto", "quiz", "actividad"])
 export const unidadYmlSchema = z.object({
   titulo: z.string().min(1),
   orden: z.number().int().positive(),
+  // Terminologia TBLT (Pre-Task, Task Cycle N, Project Task) - descriptiva,
+  // no estructural (docs/analisis-prototipo-idiomas.md #4).
+  fase: z.string().optional(),
   secciones: z
     .array(
       z.object({
@@ -21,6 +24,7 @@ export const unidadYmlSchema = z.object({
         titulo: z.string().min(1),
         duracionMinutos: z.number().int().positive(),
         orden: z.number().int().positive(),
+        obligatoria: z.boolean().default(true),
       })
     )
     .min(1),
@@ -72,6 +76,37 @@ export const rellenarHuecosYmlSchema = z.object({
 });
 export type RellenarHuecosYml = z.infer<typeof rellenarHuecosYmlSchema>;
 export type Hueco = z.infer<typeof huecoSchema>;
+
+// Tipos de valoracion humana (docs/formato-actividades.md #3): ninguno usa
+// modo ni reintentos, no hay respuesta correcta que proteger. Guardan una
+// entrega en activity_submissions, sin calificar todavia (sin UI de
+// correccion por el coordinador en esta tanda).
+export const grabacionAudioYmlSchema = z.object({
+  tipo: z.literal("grabacion-audio"),
+  instrucciones: z.string().min(1),
+  duracionGrabacionSegundos: z.number().int().positive(),
+  preparacionSegundos: z.number().int().min(0).default(0),
+  rubricaId: z.string().nullable().default(null),
+});
+export type GrabacionAudioYml = z.infer<typeof grabacionAudioYmlSchema>;
+
+export const foroYmlSchema = z.object({
+  tipo: z.literal("foro"),
+  instrucciones: z.string().min(1),
+  palabrasMinimasPublicacion: z.number().int().positive(),
+  requiereRespuesta: z.boolean().default(true),
+});
+export type ForoYml = z.infer<typeof foroYmlSchema>;
+
+// Union discriminada: anadir un subtipo nuevo es anadir un miembro aqui, sin
+// tocar el resto del pipeline de carga (lib/content/course.ts) ni el switch
+// de renderizado (app/cursos/.../page.tsx).
+export const actividadYmlSchema = z.discriminatedUnion("tipo", [
+  rellenarHuecosYmlSchema,
+  grabacionAudioYmlSchema,
+  foroYmlSchema,
+]);
+export type ActividadYml = z.infer<typeof actividadYmlSchema>;
 
 export const cursoYmlSchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/, "el slug solo admite minusculas, numeros y guiones"),

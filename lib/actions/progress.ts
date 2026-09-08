@@ -60,6 +60,37 @@ export async function markSectionAsRead(params: { enrollmentId: string; sectionI
   return recordSectionProgress({ ...params, percent: 100 });
 }
 
+/** Entrega de una actividad de valoracion humana (grabacion-audio, foro...) -
+ * guarda el payload libre en activity_submissions y marca la seccion como
+ * completada (percent 100 = "entregado", no "calificado": no hay UI de
+ * correccion por el coordinador todavia, ver docs/formato-actividades.md #3). */
+export async function submitActivity(params: {
+  enrollmentId: string;
+  sectionId: string;
+  durationMinutes: number;
+  payload: Record<string, unknown>;
+}) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.from("activity_submissions").upsert(
+    {
+      enrollment_id: params.enrollmentId,
+      section_id: params.sectionId,
+      payload: params.payload as Database["public"]["Tables"]["activity_submissions"]["Insert"]["payload"],
+      submitted_at: new Date().toISOString(),
+    },
+    { onConflict: "enrollment_id,section_id" }
+  );
+  if (error) throw error;
+
+  await recordSectionProgress({
+    enrollmentId: params.enrollmentId,
+    sectionId: params.sectionId,
+    percent: 100,
+    durationMinutes: params.durationMinutes,
+  });
+}
+
 export interface SubmitQuizResult {
   score: number;
   passed: boolean;

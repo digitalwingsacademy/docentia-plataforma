@@ -39,6 +39,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_submissions: {
+        Row: {
+          enrollment_id: string
+          id: string
+          payload: Json
+          section_id: string
+          submitted_at: string
+        }
+        Insert: {
+          enrollment_id: string
+          id?: string
+          payload: Json
+          section_id: string
+          submitted_at?: string
+        }
+        Update: {
+          enrollment_id?: string
+          id?: string
+          payload?: Json
+          section_id?: string
+          submitted_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activity_submissions_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "enrollment_progress"
+            referencedColumns: ["enrollment_id"]
+          },
+          {
+            foreignKeyName: "activity_submissions_enrollment_id_fkey"
+            columns: ["enrollment_id"]
+            isOneToOne: false
+            referencedRelation: "enrollments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       certificates: {
         Row: {
           enrollment_id: string

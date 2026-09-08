@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getOrCreateEnrollment } from "@/lib/actions/enrollment";
 import { getActividad, getCourseStructure, getQuiz, getSectionMdx } from "@/lib/content/course";
 import { RellenarHuecos } from "@/components/actividades/rellenar-huecos";
+import { Foro } from "@/components/actividades/foro";
+import { GrabacionAudio } from "@/components/actividades/grabacion-audio";
 import { flattenSections } from "@/lib/content/flatten";
 import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
@@ -202,12 +204,16 @@ async function ActividadSection({
   durationMinutes: number;
 }) {
   const actividad = await getActividad(slug, unidadDir, archivo, contentRef);
-  return (
-    <RellenarHuecos
-      actividad={actividad}
-      enrollmentId={enrollmentId}
-      sectionId={sectionId}
-      durationMinutes={durationMinutes}
-    />
-  );
+  switch (actividad.tipo) {
+    case "rellenar-huecos":
+      return (
+        <RellenarHuecos actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
+    case "foro":
+      return <Foro actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
+    case "grabacion-audio":
+      return (
+        <GrabacionAudio actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
+  }
 }
