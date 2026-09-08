@@ -16,6 +16,7 @@ import { MarcarPalabras } from "@/components/actividades/marcar-palabras";
 import { EscrituraLibre } from "@/components/actividades/escritura-libre";
 import { EscrituraGuiada } from "@/components/actividades/escritura-guiada";
 import { RevisionEntrePares } from "@/components/actividades/revision-entre-pares";
+import { CorreccionErrores } from "@/components/actividades/correccion-errores";
 import { flattenSections } from "@/lib/content/flatten";
 import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
@@ -257,5 +258,9 @@ async function ActividadSection({
         />
       );
     }
+    case "correccion-errores":
+      return (
+        <CorreccionErrores actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
   }
 }

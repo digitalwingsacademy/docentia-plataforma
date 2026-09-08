@@ -1,0 +1,76 @@
+@import "./signal.css";
+
+/* Especifico de correccion-errores: frase con tramo resaltado + input debajo. */
+
+.ce-frases {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ce-frase {
+  padding: 1rem 1.2rem;
+  background: var(--rh-surface);
+  border: 1px solid var(--rh-border);
+  border-radius: 10px;
+}
+
+.ce-texto {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  font-style: italic;
+  color: var(--rh-ink);
+  margin-bottom: 0.7rem;
+}
+
+.ce-error {
+  font-style: normal;
+  color: var(--rh-error);
+  text-decoration: underline wavy var(--rh-error);
+  text-decoration-skip-ink: none;
+}
+
+.ce-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.ce-label {
+  font: 600 0.78rem/1 var(--rh-font-mono);
+  color: var(--rh-ink-muted);
+  white-space: nowrap;
+}
+
+.ce-input {
+  flex: 1;
+  min-width: 160px;
+  min-height: 44px;
+  padding: 0 0.8rem;
+  font: 500 0.9rem var(--rh-font-body);
+  color: var(--rh-ink);
+  background: var(--rh-bg);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 6px;
+}
+.ce-input:focus {
+  outline: 2px solid var(--rh-accent);
+  outline-offset: 1px;
+}
+.ce-input.ce-ok {
+  border-color: var(--rh-good);
+  color: var(--rh-good);
+  background: color-mix(in srgb, var(--rh-good) 10%, var(--rh-bg));
+}
+.ce-input.ce-bad {
+  border-color: var(--rh-error);
+  color: var(--rh-error);
+  background: color-mix(in srgb, var(--rh-error) 10%, var(--rh-bg));
+}
+
+.ce-input-row svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}

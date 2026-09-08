@@ -232,6 +232,25 @@ export const revisionEntreParesYmlSchema = z.object({
 });
 export type RevisionEntreParesYml = z.infer<typeof revisionEntreParesYmlSchema>;
 
+// correccion-errores (docs/formato-actividades.md #2.7): `texto` marca el
+// tramo erroneo con <error>...</error> - el renderer lo parsea a segmentos,
+// nunca dangerouslySetInnerHTML.
+export const fraseErrorSchema = z.object({
+  id: z.union([z.string(), z.number()]),
+  texto: z.string().min(1),
+  respuesta: z.string().min(1),
+  pista: z.string().optional(),
+});
+export const correccionErroresYmlSchema = z.object({
+  tipo: z.literal("correccion-errores"),
+  instrucciones: z.string().min(1),
+  modo: z.enum(["practica", "evaluacion"]).default("practica"),
+  reintentos: reintentosSchema.default({ maximos: "ilimitado", mostrarSolucionAl: "siempre" }),
+  frases: z.array(fraseErrorSchema).min(1),
+});
+export type CorreccionErroresYml = z.infer<typeof correccionErroresYmlSchema>;
+export type FraseError = z.infer<typeof fraseErrorSchema>;
+
 // Union discriminada: anadir un subtipo nuevo es anadir un miembro aqui, sin
 // tocar el resto del pipeline de carga (lib/content/course.ts) ni el switch
 // de renderizado (app/cursos/.../page.tsx).
@@ -247,6 +266,7 @@ export const actividadYmlSchema = z.discriminatedUnion("tipo", [
   escrituraLibreYmlSchema,
   escrituraGuiadaYmlSchema,
   revisionEntreParesYmlSchema,
+  correccionErroresYmlSchema,
 ]);
 export type ActividadYml = z.infer<typeof actividadYmlSchema>;
 
