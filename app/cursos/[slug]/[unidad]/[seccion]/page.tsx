@@ -4,7 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { createClient } from "@/lib/supabase/server";
 import { getOrCreateEnrollment } from "@/lib/actions/enrollment";
-import { getActividad, getChecklist, getCourseStructure, getQuiz, getSectionMdx } from "@/lib/content/course";
+import { getActividad, getChecklist, getCourseStructure, getQuiz, getSectionMdx, getTablaRubrica } from "@/lib/content/course";
 import { RellenarHuecos } from "@/components/actividades/rellenar-huecos";
 import { Foro } from "@/components/actividades/foro";
 import { GrabacionAudio } from "@/components/actividades/grabacion-audio";
@@ -17,6 +17,7 @@ import { EscrituraLibre } from "@/components/actividades/escritura-libre";
 import { EscrituraGuiada } from "@/components/actividades/escritura-guiada";
 import { RevisionEntrePares } from "@/components/actividades/revision-entre-pares";
 import { CorreccionErrores } from "@/components/actividades/correccion-errores";
+import { AutoevaluacionDescriptores } from "@/components/actividades/autoevaluacion-descriptores";
 import { flattenSections } from "@/lib/content/flatten";
 import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
@@ -220,10 +221,22 @@ async function ActividadSection({
       );
     case "foro":
       return <Foro actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
-    case "grabacion-audio":
+    case "grabacion-audio": {
+      const [checklistPrevia, rubrica] = await Promise.all([
+        actividad.checklistPrevia ? getChecklist(slug, unidadDir, actividad.checklistPrevia, contentRef) : null,
+        actividad.rubricaId ? getTablaRubrica(slug, unidadDir, actividad.rubricaId, contentRef) : null,
+      ]);
       return (
-        <GrabacionAudio actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+        <GrabacionAudio
+          actividad={actividad}
+          enrollmentId={enrollmentId}
+          sectionId={sectionId}
+          durationMinutes={durationMinutes}
+          checklistPrevia={checklistPrevia?.criterios}
+          rubrica={rubrica ?? undefined}
+        />
       );
+    }
     case "emparejar":
       return <Emparejar actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
     case "clasificar":
@@ -261,6 +274,15 @@ async function ActividadSection({
     case "correccion-errores":
       return (
         <CorreccionErrores actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
+    case "autoevaluacion-descriptores":
+      return (
+        <AutoevaluacionDescriptores
+          actividad={actividad}
+          enrollmentId={enrollmentId}
+          sectionId={sectionId}
+          durationMinutes={durationMinutes}
+        />
       );
   }
 }

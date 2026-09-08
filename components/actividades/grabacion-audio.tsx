@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { Noto_Sans, Unbounded } from "next/font/google";
 import { submitActivity } from "@/lib/actions/progress";
 import { createClient } from "@/lib/supabase/client";
-import type { GrabacionAudioYml } from "@/lib/content/schema";
+import type { GrabacionAudioYml, TablaRubricaYml } from "@/lib/content/schema";
+import { CheckIcon } from "./shared";
+import { TablaRubrica } from "./tabla-rubrica";
 import "./grabacion-audio.css";
 
 const display = Unbounded({ subsets: ["latin"], weight: ["700", "800"], variable: "--rh-font-display" });
@@ -17,6 +19,8 @@ interface Props {
   enrollmentId: string;
   sectionId: string;
   durationMinutes: number;
+  checklistPrevia?: string[];
+  rubrica?: TablaRubricaYml;
 }
 
 type Fase = "preparacion" | "lista" | "grabando" | "subiendo" | "enviado" | "error";
@@ -38,12 +42,13 @@ function StopIcon() {
   );
 }
 
-export function GrabacionAudio({ actividad, enrollmentId, sectionId, durationMinutes }: Props) {
+export function GrabacionAudio({ actividad, enrollmentId, sectionId, durationMinutes, checklistPrevia, rubrica }: Props) {
   const [fase, setFase] = useState<Fase>(actividad.preparacionSegundos > 0 ? "preparacion" : "lista");
   const [segundos, setSegundos] = useState(actividad.preparacionSegundos > 0 ? actividad.preparacionSegundos : actividad.duracionGrabacionSegundos);
   const [notas, setNotas] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [playbackUrl, setPlaybackUrl] = useState<string | null>(null);
+  const [autochequeados, setAutochequeados] = useState<Set<number>>(new Set());
 
   const streamRef = useRef<MediaStream | null>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
@@ -156,6 +161,60 @@ export function GrabacionAudio({ actividad, enrollmentId, sectionId, durationMin
       <h3 className="rh-title">{actividad.instrucciones}</h3>
 
       {error && <p className="ga-error">{error}</p>}
+
+      {fase !== "enviado" && fase !== "subiendo" && (
+        <>
+          {rubrica && (
+            <>
+              <p className="rh-section-label">Cómo se evaluará</p>
+              <TablaRubrica tabla={rubrica} />
+            </>
+          )}
+
+          {actividad.plantillaPlanificacion && (
+            <>
+              <p className="rh-section-label">Planificación (no se guarda)</p>
+              <div className="ga-plantilla">
+                {actividad.plantillaPlanificacion.map((paso, i) => (
+                  <div key={i} className="ga-fase">
+                    <p className="ga-fase-titulo">{paso.titulo}</p>
+                    <textarea className="ga-notes" placeholder={paso.guia} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {checklistPrevia && (
+            <>
+              <p className="rh-section-label">Autochequeo antes de grabar</p>
+              <div className="ga-checklist">
+                {checklistPrevia.map((criterio, i) => {
+                  const marcado = autochequeados.has(i);
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      className={`ga-checklist-item${marcado ? " ga-checked" : ""}`}
+                      onClick={() =>
+                        setAutochequeados((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(i)) next.delete(i);
+                          else next.add(i);
+                          return next;
+                        })
+                      }
+                    >
+                      <span className="ga-checklist-box">{marcado && <CheckIcon />}</span>
+                      {criterio}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </>
+      )}
 
       {fase === "preparacion" && (
         <>

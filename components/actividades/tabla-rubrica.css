@@ -1,0 +1,45 @@
+/* Presentacional, sin tokens propios de "Signal": se usa dentro de otro
+   componente de actividad (grabacion-audio), que ya trae rh-console/signal.css. */
+
+.tr-wrap {
+  overflow-x: auto;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--rh-border);
+  border-radius: 10px;
+}
+
+.tr-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.tr-tabla th,
+.tr-tabla td {
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--rh-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.tr-tabla thead th {
+  background: var(--rh-surface-2);
+  font: 700 0.7rem/1 var(--rh-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--rh-ink-muted);
+  white-space: nowrap;
+}
+
+.tr-tabla tbody th {
+  background: var(--rh-surface);
+  font-weight: 700;
+  color: var(--rh-ink);
+  white-space: nowrap;
+}
+
+.tr-tabla tbody td {
+  background: var(--rh-bg);
+  color: var(--rh-ink-muted);
+}

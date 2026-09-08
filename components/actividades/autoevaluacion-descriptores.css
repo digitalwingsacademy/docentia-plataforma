@@ -1,0 +1,72 @@
+@import "./signal.css";
+
+/* Especifico de autoevaluacion-descriptores: fila descriptor + botones 1..N. */
+
+.ad-filas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.3rem;
+}
+
+.ad-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--rh-surface);
+  border: 1px solid var(--rh-border);
+  border-radius: 8px;
+}
+
+.ad-texto {
+  flex: 1;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--rh-ink);
+}
+
+.ad-escala {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.ad-nivel {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rh-border);
+  background: var(--rh-bg);
+  color: var(--rh-ink-muted);
+  font: 700 0.82rem/1 var(--rh-font-mono);
+  cursor: pointer;
+}
+.ad-nivel:hover {
+  border-color: var(--rh-accent);
+}
+.ad-nivel.ad-seleccionado {
+  border-color: var(--rh-accent);
+  background: var(--rh-accent);
+  color: var(--rh-accent-ink);
+}
+
+.ad-resultado {
+  text-align: center;
+  padding: 1.4rem;
+  background: var(--rh-surface);
+  border: 1px solid var(--rh-border);
+  border-radius: 10px;
+}
+.ad-resultado-media {
+  font-family: var(--rh-font-display);
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: var(--rh-accent);
+}
+.ad-resultado-msg {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--rh-ink-muted);
+}

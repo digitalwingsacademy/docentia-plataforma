@@ -6,11 +6,13 @@ import {
   checklistYmlSchema,
   cursoYmlSchema,
   quizYmlSchema,
+  tablaRubricaYmlSchema,
   unidadYmlSchema,
   type ActividadYml,
   type ChecklistYml,
   type CursoYml,
   type QuizYml,
+  type TablaRubricaYml,
   type UnidadYml,
 } from "./schema";
 
@@ -99,6 +101,21 @@ export function getChecklist(slug: string, unidadDir: string, archivo: string, r
   return unstable_cache(
     () => loadChecklist(slug, unidadDir, archivo, ref),
     ["checklist", slug, unidadDir, archivo, ref],
+    { tags: [contentTag(slug)] }
+  )();
+}
+
+async function loadTablaRubrica(slug: string, unidadDir: string, archivo: string, ref: string): Promise<TablaRubricaYml> {
+  const raw = await readContentFile(`cursos/${slug}/unidades/${unidadDir}/${archivo}`, ref);
+  return tablaRubricaYmlSchema.parse(parseYaml(raw));
+}
+
+/** Bloque de referencia mostrado antes de una entrega (docs/formato-actividades.md #4.3) -
+ * nunca se corrige automaticamente contra ella, es solo transparencia de criterios. */
+export function getTablaRubrica(slug: string, unidadDir: string, archivo: string, ref: string) {
+  return unstable_cache(
+    () => loadTablaRubrica(slug, unidadDir, archivo, ref),
+    ["tabla-rubrica", slug, unidadDir, archivo, ref],
     { tags: [contentTag(slug)] }
   )();
 }

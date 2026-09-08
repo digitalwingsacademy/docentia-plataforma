@@ -82,14 +82,24 @@ export type Hueco = z.infer<typeof huecoSchema>;
 // modo ni reintentos, no hay respuesta correcta que proteger. Guardan una
 // entrega en activity_submissions, sin calificar todavia (sin UI de
 // correccion por el coordinador en esta tanda).
+export const fasePlanificacionSchema = z.object({
+  titulo: z.string().min(1),
+  guia: z.string().min(1),
+});
 export const grabacionAudioYmlSchema = z.object({
   tipo: z.literal("grabacion-audio"),
   instrucciones: z.string().min(1),
   duracionGrabacionSegundos: z.number().int().positive(),
   preparacionSegundos: z.number().int().min(0).default(0),
+  // Nombres de fichero (mismo mecanismo que `checklist` de revision-entre-pares),
+  // no ids abstractos - se resuelven con getChecklist/getTablaRubrica cuando
+  // no son null.
+  plantillaPlanificacion: z.array(fasePlanificacionSchema).optional(),
+  checklistPrevia: z.string().optional(),
   rubricaId: z.string().nullable().default(null),
 });
 export type GrabacionAudioYml = z.infer<typeof grabacionAudioYmlSchema>;
+export type FasePlanificacion = z.infer<typeof fasePlanificacionSchema>;
 
 export const foroYmlSchema = z.object({
   tipo: z.literal("foro"),
@@ -190,6 +200,19 @@ export const checklistYmlSchema = z.object({
 });
 export type ChecklistYml = z.infer<typeof checklistYmlSchema>;
 
+// Bloque reutilizable (docs/formato-actividades.md #4.3): tabla de referencia
+// mostrada antes de una entrega (p.ej. dentro de grabacion-audio via
+// rubricaId), nunca corregida automaticamente contra ella.
+export const criterioRubricaSchema = z.object({
+  nombre: z.string().min(1),
+  descripciones: z.array(z.string().min(1)).min(2),
+});
+export const tablaRubricaYmlSchema = z.object({
+  niveles: z.array(z.string().min(1)).min(2),
+  criterios: z.array(criterioRubricaSchema).min(1),
+});
+export type TablaRubricaYml = z.infer<typeof tablaRubricaYmlSchema>;
+
 // Tipos de valoracion humana adicionales (docs/formato-actividades.md #3.2,
 // #3.3, #3.5) - ninguno usa modo ni reintentos, reutilizan
 // activity_submissions (creada en S1, sin migracion nueva).
@@ -251,6 +274,23 @@ export const correccionErroresYmlSchema = z.object({
 export type CorreccionErroresYml = z.infer<typeof correccionErroresYmlSchema>;
 export type FraseError = z.infer<typeof fraseErrorSchema>;
 
+// autoevaluacion-descriptores (docs/formato-actividades.md #3.6): el propio
+// alumno se puntua, no hay respuesta correcta - se guarda en
+// activity_submissions igual que los tipos de valoracion humana, pero
+// conceptualmente es una encuesta, no una entrega para que otro corrija.
+export const descriptorSchema = z.object({
+  id: z.union([z.string(), z.number()]),
+  texto: z.string().min(1),
+});
+export const autoevaluacionDescriptoresYmlSchema = z.object({
+  tipo: z.literal("autoevaluacion-descriptores"),
+  instrucciones: z.string().min(1),
+  escala: z.object({ min: z.number().int(), max: z.number().int() }),
+  descriptores: z.array(descriptorSchema).min(1),
+});
+export type AutoevaluacionDescriptoresYml = z.infer<typeof autoevaluacionDescriptoresYmlSchema>;
+export type Descriptor = z.infer<typeof descriptorSchema>;
+
 // Union discriminada: anadir un subtipo nuevo es anadir un miembro aqui, sin
 // tocar el resto del pipeline de carga (lib/content/course.ts) ni el switch
 // de renderizado (app/cursos/.../page.tsx).
@@ -267,6 +307,7 @@ export const actividadYmlSchema = z.discriminatedUnion("tipo", [
   escrituraGuiadaYmlSchema,
   revisionEntreParesYmlSchema,
   correccionErroresYmlSchema,
+  autoevaluacionDescriptoresYmlSchema,
 ]);
 export type ActividadYml = z.infer<typeof actividadYmlSchema>;
 
