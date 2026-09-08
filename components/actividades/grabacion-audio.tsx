@@ -58,8 +58,10 @@ export function GrabacionAudio({ actividad, enrollmentId, sectionId, durationMin
     };
   }, []);
 
-  function iniciarCuentaAtras(desde: number, alTerminar: () => void) {
-    setSegundos(desde);
+  // No resetea `segundos`: el llamador es responsable de dejarlo en el valor
+  // de partida antes de invocar esto (evita un setState sincrono dentro del
+  // cuerpo del efecto de montaje, que dispara cascading-renders en React).
+  function iniciarIntervalo(alTerminar: () => void) {
     intervalRef.current = setInterval(() => {
       setSegundos((s) => {
         if (s <= 1) {
@@ -78,8 +80,7 @@ export function GrabacionAudio({ actividad, enrollmentId, sectionId, durationMin
   }
 
   useEffect(() => {
-    if (fase === "preparacion") iniciarCuentaAtras(actividad.preparacionSegundos, () => setFase("lista"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (fase === "preparacion") iniciarIntervalo(() => setFase("lista"));
   }, [fase]);
 
   async function empezarGrabacion() {
@@ -103,7 +104,8 @@ export function GrabacionAudio({ actividad, enrollmentId, sectionId, durationMin
       recorderRef.current = recorder;
       recorder.start();
       setFase("grabando");
-      iniciarCuentaAtras(actividad.duracionGrabacionSegundos, () => {
+      setSegundos(actividad.duracionGrabacionSegundos);
+      iniciarIntervalo(() => {
         segundosGrabadosRef.current = actividad.duracionGrabacionSegundos;
         recorder.stop();
       });
