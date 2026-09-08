@@ -42,30 +42,22 @@ export default async function SectionPage({ params }: { params: Promise<PagePara
   const result = await getOrCreateEnrollment(slug);
   if (result.status === "no_organization") return <NoOrganizationMessage />;
   if (result.status === "course_not_found") notFound();
-  const enrollment = result.enrollment;
+  const { enrollment, course } = result;
 
-  const { data: course } = await supabase
-    .from("courses")
-    .select("title, content_ref, version")
-    .eq("slug", slug)
-    .eq("version", enrollment.course_version)
-    .maybeSingle();
-  if (!course) notFound();
+  // Independientes entre si (una necesita content_ref, la otra solo
+  // enrollment.id/sectionId) - en paralelo en vez de en cadena, ahorra una
+  // ronda de red completa en cada navegacion dentro de una seccion.
+  const [structure, { data: progress }] = await Promise.all([
+    getCourseStructure(slug, course.content_ref),
+    supabase.from("section_progress").select("status").eq("enrollment_id", enrollment.id).eq("section_id", sectionId).maybeSingle(),
+  ]);
 
-  const structure = await getCourseStructure(slug, course.content_ref);
   const sections = flattenSections(structure);
   const index = sections.findIndex((s) => s.unidadDir === unidadDir && s.sectionId === sectionId);
   const section = sections[index];
   if (!section) notFound();
 
   const next = sections[index + 1];
-
-  const { data: progress } = await supabase
-    .from("section_progress")
-    .select("status")
-    .eq("enrollment_id", enrollment.id)
-    .eq("section_id", sectionId)
-    .maybeSingle();
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-10">

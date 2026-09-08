@@ -13,23 +13,16 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
   const result = await getOrCreateEnrollment(slug);
   if (result.status === "no_organization") return <NoOrganizationMessage />;
   if (result.status === "course_not_found") notFound();
-  const enrollment = result.enrollment;
+  const { enrollment, course } = result;
 
-  const { data: course } = await supabase
-    .from("courses")
-    .select("title, summary, content_ref, version")
-    .eq("slug", slug)
-    .eq("version", enrollment.course_version)
-    .maybeSingle();
-  if (!course) notFound();
-
-  const structure = await getCourseStructure(slug, course.content_ref);
+  // Las tres son independientes entre si - en paralelo en vez de en cadena
+  // ahorra dos rondas de red completas en la pagina que abre cada curso.
+  const [structure, { data: progressRows }, { data: certificate }] = await Promise.all([
+    getCourseStructure(slug, course.content_ref),
+    supabase.from("section_progress").select("section_id, status").eq("enrollment_id", enrollment.id),
+    supabase.from("certificates").select("verification_code").eq("enrollment_id", enrollment.id).maybeSingle(),
+  ]);
   const sections = flattenSections(structure);
-
-  const { data: progressRows } = await supabase
-    .from("section_progress")
-    .select("section_id, status")
-    .eq("enrollment_id", enrollment.id);
 
   const statusBySection = new Map(progressRows?.map((p) => [p.section_id, p.status]));
   const firstIncomplete = sections.find((s) => statusBySection.get(s.sectionId) !== "COMPLETED") ?? sections[0];
@@ -46,12 +39,6 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
       unidades.push({ unidadDir: section.unidadDir, unidadTitulo: section.unidadTitulo, sections: [section] });
     }
   }
-
-  const { data: certificate } = await supabase
-    .from("certificates")
-    .select("verification_code")
-    .eq("enrollment_id", enrollment.id)
-    .maybeSingle();
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-10">
