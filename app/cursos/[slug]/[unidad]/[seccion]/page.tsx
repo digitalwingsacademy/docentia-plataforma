@@ -11,6 +11,8 @@ import { GrabacionAudio } from "@/components/actividades/grabacion-audio";
 import { Emparejar } from "@/components/actividades/emparejar";
 import { Clasificar } from "@/components/actividades/clasificar";
 import { Ordenar } from "@/components/actividades/ordenar";
+import { OpcionMultiple } from "@/components/actividades/opcion-multiple";
+import { MarcarPalabras } from "@/components/actividades/marcar-palabras";
 import { flattenSections } from "@/lib/content/flatten";
 import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
@@ -224,5 +226,13 @@ async function ActividadSection({
       return <Clasificar actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
     case "ordenar":
       return <Ordenar actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
+    case "opcion-multiple":
+      return (
+        <OpcionMultiple actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
+    case "marcar-palabras":
+      return (
+        <MarcarPalabras actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
+      );
   }
 }

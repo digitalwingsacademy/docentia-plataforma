@@ -46,6 +46,7 @@ export const quizYmlSchema = z.object({
   preguntas: z.array(quizPreguntaSchema).min(1),
 });
 export type QuizYml = z.infer<typeof quizYmlSchema>;
+export type QuizPregunta = z.infer<typeof quizPreguntaSchema>;
 
 // Actividades interactivas (docs/formato-actividades.md). Por ahora solo se
 // implementa el subtipo rellenar-huecos; el resto del inventario de
@@ -152,6 +153,34 @@ export const ordenarYmlSchema = z.object({
 export type OrdenarYml = z.infer<typeof ordenarYmlSchema>;
 export type Evento = z.infer<typeof eventoSchema>;
 
+// opcion-multiple (docs/formato-actividades.md #2.2): reutiliza
+// quizPreguntaSchema, es la misma forma de dato que quiz.yml. Solo se
+// implementa el estimulo `texto` por ahora - `audio` necesita el mismo
+// pipeline de Storage que grabacion-audio y queda para cuando exista.
+export const estimuloTextoSchema = z.object({
+  tipo: z.literal("texto"),
+  contenido: z.string().min(1),
+});
+export const opcionMultipleYmlSchema = z.object({
+  tipo: z.literal("opcion-multiple"),
+  instrucciones: z.string().min(1),
+  modo: z.enum(["practica", "evaluacion"]).default("practica"),
+  reintentos: reintentosSchema.default({ maximos: "ilimitado", mostrarSolucionAl: "siempre" }),
+  estimulo: estimuloTextoSchema,
+  preguntas: z.array(quizPreguntaSchema).min(1),
+});
+export type OpcionMultipleYml = z.infer<typeof opcionMultipleYmlSchema>;
+
+export const marcarPalabrasYmlSchema = z.object({
+  tipo: z.literal("marcar-palabras"),
+  instrucciones: z.string().min(1),
+  modo: z.enum(["practica", "evaluacion"]).default("practica"),
+  reintentos: reintentosSchema.default({ maximos: "ilimitado", mostrarSolucionAl: "siempre" }),
+  texto: z.string().min(1),
+  palabrasCorrectas: z.array(z.string().min(1)).min(1),
+});
+export type MarcarPalabrasYml = z.infer<typeof marcarPalabrasYmlSchema>;
+
 // Union discriminada: anadir un subtipo nuevo es anadir un miembro aqui, sin
 // tocar el resto del pipeline de carga (lib/content/course.ts) ni el switch
 // de renderizado (app/cursos/.../page.tsx).
@@ -162,6 +191,8 @@ export const actividadYmlSchema = z.discriminatedUnion("tipo", [
   emparejarYmlSchema,
   clasificarYmlSchema,
   ordenarYmlSchema,
+  opcionMultipleYmlSchema,
+  marcarPalabrasYmlSchema,
 ]);
 export type ActividadYml = z.infer<typeof actividadYmlSchema>;
 

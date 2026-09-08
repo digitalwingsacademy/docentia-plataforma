@@ -1,0 +1,74 @@
+@import "./signal.css";
+
+/* Especifico de opcion-multiple: pasaje de estimulo + preguntas radio. */
+
+.om-pasaje {
+  padding: 1.3rem 1.4rem;
+  margin-bottom: 1.4rem;
+  background: var(--rh-surface);
+  border: 1px solid var(--rh-border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--rh-ink);
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.om-preguntas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.om-pregunta-enunciado {
+  font: 600 0.92rem/1.5 var(--rh-font-body);
+  margin-bottom: 0.6rem;
+}
+
+.om-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.om-opcion {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.5rem 0.8rem;
+  font: 400 0.88rem/1.4 var(--rh-font-body);
+  color: var(--rh-ink);
+  background: var(--rh-surface);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.om-opcion:hover:not(.om-disabled) {
+  border-color: var(--rh-accent);
+}
+.om-opcion.om-selected {
+  border-color: var(--rh-accent);
+  background: color-mix(in srgb, var(--rh-accent) 10%, var(--rh-surface));
+}
+.om-opcion.om-ok {
+  border-color: var(--rh-good);
+  background: color-mix(in srgb, var(--rh-good) 12%, var(--rh-surface));
+  color: var(--rh-good);
+}
+.om-opcion.om-bad {
+  border-color: var(--rh-error);
+  background: color-mix(in srgb, var(--rh-error) 12%, var(--rh-surface));
+  color: var(--rh-error);
+}
+.om-opcion input {
+  accent-color: var(--rh-accent);
+  width: 16px;
+  height: 16px;
+}
+.om-opcion svg {
+  width: 15px;
+  height: 15px;
+  margin-left: auto;
+}

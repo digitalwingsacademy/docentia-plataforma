@@ -1,0 +1,44 @@
+@import "./signal.css";
+
+/* Especifico de marcar-palabras: texto con spans clicables. */
+
+.mp-texto {
+  padding: 1.4rem;
+  background: var(--rh-surface);
+  border: 1px solid var(--rh-border);
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 2.1;
+  color: var(--rh-ink);
+}
+
+.mp-span {
+  padding: 0.05rem 0.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.mp-span:hover {
+  background: color-mix(in srgb, var(--rh-accent) 14%, transparent);
+}
+.mp-span.mp-marcado {
+  background: color-mix(in srgb, var(--rh-accent) 18%, transparent);
+  border-bottom: 2px solid var(--rh-accent);
+}
+.mp-span.mp-ok {
+  background: color-mix(in srgb, var(--rh-good) 16%, transparent);
+  border-bottom: 2px solid var(--rh-good);
+  color: var(--rh-good);
+  cursor: default;
+}
+.mp-span.mp-omitido {
+  border-bottom: 2px dashed var(--rh-error);
+  color: var(--rh-error);
+  cursor: default;
+}
+
+.mp-contador {
+  font: 600 0.78rem/1 var(--rh-font-mono);
+  color: var(--rh-ink-muted);
+  margin: 0.8rem 0 0;
+}
