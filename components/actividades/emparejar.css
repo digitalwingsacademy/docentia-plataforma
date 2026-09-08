@@ -1,0 +1,70 @@
+@import "./signal.css";
+
+/* Especifico de emparejar: dos columnas (terminos/definiciones). */
+
+.em-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 560px) {
+  .em-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.em-col-label {
+  font: 700 0.72rem/1 var(--rh-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--rh-ink-muted);
+  margin-bottom: 0.6rem;
+}
+
+.em-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.em-item {
+  min-height: 44px;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  font: 500 0.88rem/1.4 var(--rh-font-body);
+  color: var(--rh-ink);
+  background: var(--rh-surface);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.em-item:hover:not(:disabled) {
+  border-color: var(--rh-accent);
+}
+.em-item.em-selected {
+  border-color: var(--rh-accent);
+  background: color-mix(in srgb, var(--rh-accent) 10%, var(--rh-surface));
+}
+.em-item.em-used {
+  color: var(--rh-ink-muted);
+  cursor: default;
+}
+.em-item:disabled {
+  cursor: default;
+}
+.em-item.em-ok {
+  border-color: var(--rh-good);
+  background: color-mix(in srgb, var(--rh-good) 12%, var(--rh-surface));
+  color: var(--rh-good);
+}
+.em-item.em-bad {
+  border-color: var(--rh-error);
+  background: color-mix(in srgb, var(--rh-error) 12%, var(--rh-surface));
+  color: var(--rh-error);
+}
+.em-item svg {
+  width: 14px;
+  height: 14px;
+  margin-left: 0.4rem;
+  vertical-align: -2px;
+}

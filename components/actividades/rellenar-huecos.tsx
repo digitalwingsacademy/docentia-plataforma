@@ -5,6 +5,7 @@ import { IBM_Plex_Mono, Noto_Sans, Unbounded } from "next/font/google";
 import { markSectionAsRead } from "@/lib/actions/progress";
 import { gradeRellenarHuecos } from "@/lib/domain/rellenar-huecos";
 import type { RellenarHuecosYml } from "@/lib/content/schema";
+import { barajarDeterminista, CheckIcon, CrossIcon } from "./shared";
 import "./rellenar-huecos.css";
 
 const display = Unbounded({ subsets: ["latin"], weight: ["700", "800"], variable: "--rh-font-display" });
@@ -32,38 +33,6 @@ function parseTexto(texto: string): Segmento[] {
 
 function normalizar(valor: string): string {
   return valor.trim().toLowerCase().replace(/\s+/g, " ");
-}
-
-// Barajado deterministico (mismo resultado en servidor y cliente, evita un
-// mismatch de hidratacion que Math.random() causaria en el primer render).
-function barajarDeterminista<T>(items: T[], seed: string): T[] {
-  let h = 0;
-  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
-  const arr = [...items];
-  for (let i = arr.length - 1; i > 0; i--) {
-    h = (h * 1103515245 + 12345) >>> 0;
-    const j = h % (i + 1);
-    const tmp = arr[i]!;
-    arr[i] = arr[j]!;
-    arr[j] = tmp;
-  }
-  return arr;
-}
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  );
-}
-
-function CrossIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-      <path d="M18 6 6 18M6 6l12 12" />
-    </svg>
-  );
 }
 
 export function RellenarHuecos({ actividad, enrollmentId, sectionId, durationMinutes }: Props) {

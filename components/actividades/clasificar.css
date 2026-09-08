@@ -1,0 +1,94 @@
+@import "./signal.css";
+
+/* Especifico de clasificar: banco de items + columnas de categoria. */
+
+.cl-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.3rem;
+}
+.cl-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.95rem;
+  font: 600 0.85rem/1 var(--rh-font-mono);
+  color: var(--rh-ink);
+  background: var(--rh-surface);
+  border: none;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1.5px var(--rh-border);
+  cursor: pointer;
+}
+.cl-chip:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 1.5px var(--rh-accent);
+}
+.cl-chip.cl-selected {
+  box-shadow: inset 0 0 0 2px var(--rh-accent);
+  background: color-mix(in srgb, var(--rh-accent) 10%, var(--rh-surface));
+}
+.cl-chip:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.cl-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.9rem;
+}
+
+.cl-column {
+  border: 1.5px dashed var(--rh-border);
+  border-radius: 10px;
+  padding: 0.7rem;
+  min-height: 120px;
+  cursor: pointer;
+}
+.cl-column-head {
+  font-family: var(--rh-font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--rh-accent);
+  margin-bottom: 0.6rem;
+}
+.cl-column-ex {
+  display: block;
+  font: 500 0.72rem/1 var(--rh-font-body);
+  color: var(--rh-ink-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+.cl-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  min-height: 36px;
+  padding: 0.3rem 0.6rem;
+  margin-top: 0.4rem;
+  font: 500 0.82rem/1.3 var(--rh-font-body);
+  background: var(--rh-surface);
+  border-radius: 6px;
+  border-left: 3px solid var(--rh-ink-muted);
+}
+.cl-tag button {
+  background: none;
+  border: none;
+  color: var(--rh-ink-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0.2rem;
+}
+.cl-tag.cl-ok {
+  border-left-color: var(--rh-good);
+  color: var(--rh-good);
+}
+.cl-tag.cl-bad {
+  border-left-color: var(--rh-error);
+  color: var(--rh-error);
+}

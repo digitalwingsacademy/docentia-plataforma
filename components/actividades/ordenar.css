@@ -1,0 +1,54 @@
+@import "./signal.css";
+
+/* Especifico de ordenar: fila de evento + select de posicion. */
+
+.or-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.or-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--rh-surface);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 8px;
+}
+.or-row.or-ok {
+  border-color: var(--rh-good);
+  background: color-mix(in srgb, var(--rh-good) 10%, var(--rh-surface));
+}
+.or-row.or-bad {
+  border-color: var(--rh-error);
+  background: color-mix(in srgb, var(--rh-error) 10%, var(--rh-surface));
+}
+
+.or-texto {
+  flex: 1;
+  font: 400 0.9rem/1.5 var(--rh-font-body);
+  color: var(--rh-ink);
+}
+
+.or-select {
+  min-height: 44px;
+  min-width: 64px;
+  padding: 0 0.5rem;
+  font: 600 0.88rem/1 var(--rh-font-mono);
+  color: var(--rh-ink);
+  background: var(--rh-bg);
+  border: 1.5px solid var(--rh-border);
+  border-radius: 6px;
+}
+.or-select:focus {
+  outline: 2px solid var(--rh-accent);
+  outline-offset: 1px;
+}
+
+.or-row svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}

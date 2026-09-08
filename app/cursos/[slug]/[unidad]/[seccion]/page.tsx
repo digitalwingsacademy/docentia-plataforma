@@ -8,6 +8,9 @@ import { getActividad, getCourseStructure, getQuiz, getSectionMdx } from "@/lib/
 import { RellenarHuecos } from "@/components/actividades/rellenar-huecos";
 import { Foro } from "@/components/actividades/foro";
 import { GrabacionAudio } from "@/components/actividades/grabacion-audio";
+import { Emparejar } from "@/components/actividades/emparejar";
+import { Clasificar } from "@/components/actividades/clasificar";
+import { Ordenar } from "@/components/actividades/ordenar";
 import { flattenSections } from "@/lib/content/flatten";
 import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
@@ -215,5 +218,11 @@ async function ActividadSection({
       return (
         <GrabacionAudio actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />
       );
+    case "emparejar":
+      return <Emparejar actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
+    case "clasificar":
+      return <Clasificar actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
+    case "ordenar":
+      return <Ordenar actividad={actividad} enrollmentId={enrollmentId} sectionId={sectionId} durationMinutes={durationMinutes} />;
   }
 }
