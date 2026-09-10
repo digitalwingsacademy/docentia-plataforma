@@ -6,37 +6,21 @@ import { todasLasVariables } from "./fuentes";
 import { temas, type Tema } from "./temas";
 import { setTema as persistirTema } from "@/lib/actions/theme";
 import type { TemaId } from "@/lib/theme";
-import {
-  curso,
-  sesion,
-  tituloLeccion,
-  introduccion,
-  secciones,
-  avisoImportante,
-  avisoInfo,
-  seccionesSesion,
-  siguienteTitulo,
-  siguienteDuracion,
-  fonicaTeaser,
-} from "./contenido-leccion";
+import { curso } from "./contenido-leccion";
+import { Leccion } from "./leccion";
+import { Sistema } from "./sistema";
 import "./esqueleto.css";
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  );
-}
 
 interface Props {
   temaInicial: TemaId;
 }
 
+type Vista = "leccion" | "sistema";
+
 export function DesignLabComparador({ temaInicial }: Props) {
   const [temaId, setTemaId] = useState<TemaId>(temaInicial);
   const [modo, setModo] = useState<"light" | "dark">("light");
-  const [leida, setLeida] = useState(false);
+  const [vista, setVista] = useState<Vista>("leccion");
 
   function elegirTema(id: TemaId) {
     setTemaId(id);
@@ -80,55 +64,16 @@ export function DesignLabComparador({ temaInicial }: Props) {
         </button>
       </div>
 
-      <main className="dl-stage">
-        <p className="dl-eyebrow">{sesion}</p>
-        <h1 className="dl-title">{tituloLeccion}</h1>
-        <div className="dl-rule" key={`${temaId}-${modo}`} />
+      <div className="dl-tabs" role="tablist" aria-label="Vista del design lab">
+        <button role="tab" aria-selected={vista === "leccion"} onClick={() => setVista("leccion")}>
+          Lección
+        </button>
+        <button role="tab" aria-selected={vista === "sistema"} onClick={() => setVista("sistema")}>
+          Sistema
+        </button>
+      </div>
 
-        <div className="dl-progress">
-          {seccionesSesion.map((s) => (
-            <div key={s.titulo} className={`dl-progress-item${s.actual ? " dl-current" : ""}`}>
-              {s.titulo}
-            </div>
-          ))}
-        </div>
-
-        <p className="dl-lede">{introduccion}</p>
-
-        {secciones.map((s) => (
-          <div className="dl-section" key={s.titulo}>
-            <h2>{s.titulo}</h2>
-            <p>{s.texto}</p>
-            <p className="dl-example">{s.ejemplo}</p>
-            {s.nota && <p className="dl-note">{s.nota}</p>}
-          </div>
-        ))}
-
-        <div className="dl-aviso">
-          <span className="dl-aviso-label">Importante</span>
-          {avisoImportante}
-        </div>
-        <div className="dl-aviso">
-          <span className="dl-aviso-label">Nota</span>
-          {avisoInfo}
-        </div>
-
-        <div className="dl-actions">
-          <button className="dl-btn" onClick={() => setLeida(true)}>
-            <CheckIcon />
-            {leida ? "Marcada como leída" : "Marcar como leída"}
-          </button>
-        </div>
-
-        <div className="dl-next">
-          <p className="dl-next-label">A continuación</p>
-          <a className="dl-next-link" href="#">
-            {siguienteTitulo}
-          </a>
-          <p className="dl-next-meta">{siguienteDuracion}</p>
-          <p className="dl-teaser">{fonicaTeaser}</p>
-        </div>
-      </main>
+      {vista === "leccion" ? <Leccion key={`${temaId}-${modo}`} /> : <Sistema activo={activo} paleta={paleta} modo={modo} />}
 
       <footer className="dl-footer">
         <strong>
