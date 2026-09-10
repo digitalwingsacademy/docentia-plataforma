@@ -23,7 +23,7 @@ import { Aviso } from "@/components/mdx/aviso";
 import { Actividad } from "@/components/mdx/actividad";
 import { Descargable } from "@/components/mdx/descargable";
 import { Comparativa } from "@/components/mdx/comparativa";
-import { Presentacion } from "@/components/mdx/presentacion";
+import { Presentacion } from "@/components/mdx/presentacion-loader";
 import { VideoSection } from "@/components/mdx/video";
 import { ReadingProgress } from "@/components/reading-progress";
 import { QuizPlayer } from "@/components/quiz-player";
