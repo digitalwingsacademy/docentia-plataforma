@@ -4,7 +4,10 @@ import { env } from "@/lib/env";
 
 // /api/webhooks se autentica con su propia firma HMAC (ver route.ts), no
 // con sesion de usuario - por eso esta en la lista de rutas publicas.
-const PUBLIC_PATHS = ["/login", "/auth/callback", "/certificados", "/api/webhooks"];
+// /design-lab es una herramienta interna de revision de diseno (maquetas
+// estaticas, sin datos de ningun colegio), no una pantalla del producto -
+// no tiene sentido exigir login para verla.
+const PUBLIC_PATHS = ["/login", "/auth/callback", "/certificados", "/api/webhooks", "/design-lab"];
 
 // Refresca la sesion en cada peticion (los tokens de Supabase expiran) y
 // protege rutas privadas. No hace operaciones de sistema de ficheros: solo
