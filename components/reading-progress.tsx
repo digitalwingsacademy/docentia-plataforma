@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { markSectionAsRead } from "@/lib/actions/progress";
+import { CheckIcon } from "@/components/leccion/iconos";
 
 interface Props {
   enrollmentId: string;
@@ -33,18 +34,22 @@ export function ReadingProgress({ enrollmentId, sectionId, durationMinutes, alre
   }, [completed, enrollmentId, sectionId, durationMinutes]);
 
   return (
-    <div className="mt-8 flex flex-col items-center gap-3 border-t pt-6">
+    <div className="lc-actions">
       <div ref={sentinelRef} aria-hidden="true" />
       {completed ? (
-        <p className="text-sm text-green-700">✓ Lección marcada como leída.</p>
+        <p className="lc-completado">
+          <CheckIcon /> Lección marcada como leída.
+        </p>
       ) : (
         <button
+          type="button"
+          className="lc-btn"
           onClick={() => {
             setCompleted(true);
             void markSectionAsRead({ enrollmentId, sectionId, durationMinutes });
           }}
-          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
         >
+          <CheckIcon />
           Marcar como leída
         </button>
       )}

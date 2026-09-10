@@ -3,7 +3,7 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { todasLasVariables } from "./fuentes";
-import { temas, type Tema } from "./temas";
+import { temas, type Tema } from "@/lib/tema/temas";
 import { setTema as persistirTema } from "@/lib/actions/theme";
 import type { TemaId } from "@/lib/theme";
 import { curso } from "./contenido-leccion";

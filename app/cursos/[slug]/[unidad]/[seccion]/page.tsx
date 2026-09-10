@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { createClient } from "@/lib/supabase/server";
+import { TEMA_COOKIE, MODO_COOKIE, esTemaId, esModoId } from "@/lib/theme";
+import { LeccionShell, type PasoSesion } from "@/components/leccion/leccion-shell";
 import { getOrCreateEnrollment } from "@/lib/actions/enrollment";
 import { getActividad, getChecklist, getCourseStructure, getQuiz, getSectionMdx, getTablaRubrica } from "@/lib/content/course";
 import { RellenarHuecos } from "@/components/actividades/rellenar-huecos";
@@ -45,11 +48,13 @@ export default async function SectionPage({ params }: { params: Promise<PagePara
   const { enrollment, course } = result;
 
   // Independientes entre si (una necesita content_ref, la otra solo
-  // enrollment.id/sectionId) - en paralelo en vez de en cadena, ahorra una
-  // ronda de red completa en cada navegacion dentro de una seccion.
-  const [structure, { data: progress }] = await Promise.all([
+  // enrollment.id) - en paralelo en vez de en cadena, ahorra una ronda de
+  // red completa en cada navegacion dentro de una seccion. Se piden todas
+  // las filas de progreso del enrollment (no solo la seccion actual) para
+  // poder marcar como completados los pasos ya leidos de la unidad.
+  const [structure, { data: progressRows }] = await Promise.all([
     getCourseStructure(slug, course.content_ref),
-    supabase.from("section_progress").select("status").eq("enrollment_id", enrollment.id).eq("section_id", sectionId).maybeSingle(),
+    supabase.from("section_progress").select("section_id, status").eq("enrollment_id", enrollment.id),
   ]);
 
   const sections = flattenSections(structure);
@@ -58,38 +63,29 @@ export default async function SectionPage({ params }: { params: Promise<PagePara
   if (!section) notFound();
 
   const next = sections[index + 1];
+  const statusBySection = new Map(progressRows?.map((p) => [p.section_id, p.status]));
 
-  return (
-    <main className="mx-auto max-w-2xl px-4 py-10">
-      <Link href={`/cursos/${slug}`} className="text-sm text-muted-foreground hover:underline">
-        ← {course.title}
-      </Link>
-      <p className="mt-2 text-xs uppercase tracking-wide text-muted-foreground">{section.unidadTitulo}</p>
-      <h1 className="text-2xl font-semibold">{section.titulo}</h1>
+  if (section.tipo === "actividad" || section.tipo === "quiz") {
+    return (
+      <main className="mx-auto max-w-2xl px-4 py-10">
+        <Link href={`/cursos/${slug}`} className="text-sm text-muted-foreground hover:underline">
+          ← {course.title}
+        </Link>
+        <p className="mt-2 text-xs uppercase tracking-wide text-muted-foreground">{section.unidadTitulo}</p>
+        <h1 className="text-2xl font-semibold">{section.titulo}</h1>
 
-      <article className="prose prose-neutral mt-6 max-w-none dark:prose-invert">
-        {section.tipo === "quiz" ? (
-          <QuizPlayerSection
-            slug={slug}
-            unidadDir={unidadDir}
-            sectionId={sectionId}
-            contentRef={course.content_ref}
-            enrollmentId={enrollment.id}
-            durationMinutes={section.duracionMinutos}
-          />
-        ) : section.tipo === "actividad" ? (
-          <ActividadSection
-            slug={slug}
-            unidadDir={unidadDir}
-            archivo={section.archivo}
-            contentRef={course.content_ref}
-            enrollmentId={enrollment.id}
-            sectionId={sectionId}
-            durationMinutes={section.duracionMinutos}
-          />
-        ) : (
-          <>
-            <LessonContent
+        <article className="prose prose-neutral mt-6 max-w-none dark:prose-invert">
+          {section.tipo === "quiz" ? (
+            <QuizPlayerSection
+              slug={slug}
+              unidadDir={unidadDir}
+              sectionId={sectionId}
+              contentRef={course.content_ref}
+              enrollmentId={enrollment.id}
+              durationMinutes={section.duracionMinutos}
+            />
+          ) : (
+            <ActividadSection
               slug={slug}
               unidadDir={unidadDir}
               archivo={section.archivo}
@@ -98,27 +94,65 @@ export default async function SectionPage({ params }: { params: Promise<PagePara
               sectionId={sectionId}
               durationMinutes={section.duracionMinutos}
             />
-            {section.tipo === "texto" && (
-              <ReadingProgress
-                enrollmentId={enrollment.id}
-                sectionId={sectionId}
-                durationMinutes={section.duracionMinutos}
-                alreadyCompleted={progress?.status === "COMPLETED"}
-              />
-            )}
-          </>
-        )}
-      </article>
+          )}
+        </article>
 
-      {next && (
-        <Link
-          href={`/cursos/${slug}/${next.unidadDir}/${next.sectionId}`}
-          className="mt-8 inline-block text-sm text-primary hover:underline"
-        >
-          Siguiente: {next.titulo} →
-        </Link>
-      )}
-    </main>
+        {next && (
+          <Link
+            href={`/cursos/${slug}/${next.unidadDir}/${next.sectionId}`}
+            className="mt-8 inline-block text-sm text-primary hover:underline"
+          >
+            Siguiente: {next.titulo} →
+          </Link>
+        )}
+      </main>
+    );
+  }
+
+  const cookieStore = await cookies();
+  const temaGuardado = cookieStore.get(TEMA_COOKIE)?.value;
+  const modoGuardado = cookieStore.get(MODO_COOKIE)?.value;
+  const temaId = esTemaId(temaGuardado) ? temaGuardado : "cuaderno";
+  const modo = esModoId(modoGuardado) ? modoGuardado : "light";
+
+  const pasos: PasoSesion[] = sections
+    .filter((s) => s.unidadDir === unidadDir)
+    .map((s) => ({
+      titulo: s.titulo,
+      estado: s.sectionId === sectionId ? "actual" : statusBySection.get(s.sectionId) === "COMPLETED" ? "completado" : "pendiente",
+    }));
+
+  return (
+    <LeccionShell
+      cursoHref={`/cursos/${slug}`}
+      cursoTitulo={course.title}
+      unidadTitulo={section.unidadTitulo}
+      seccionTitulo={section.titulo}
+      pasos={pasos}
+      siguiente={next ? { href: `/cursos/${slug}/${next.unidadDir}/${next.sectionId}`, titulo: next.titulo, duracionMinutos: next.duracionMinutos } : null}
+      temaId={temaId}
+      modo={modo}
+      debajoDelContenido={
+        section.tipo === "texto" ? (
+          <ReadingProgress
+            enrollmentId={enrollment.id}
+            sectionId={sectionId}
+            durationMinutes={section.duracionMinutos}
+            alreadyCompleted={statusBySection.get(sectionId) === "COMPLETED"}
+          />
+        ) : null
+      }
+    >
+      <LessonContent
+        slug={slug}
+        unidadDir={unidadDir}
+        archivo={section.archivo}
+        contentRef={course.content_ref}
+        enrollmentId={enrollment.id}
+        sectionId={sectionId}
+        durationMinutes={section.duracionMinutos}
+      />
+    </LeccionShell>
   );
 }
 

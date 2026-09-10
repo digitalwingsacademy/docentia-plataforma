@@ -1,7 +1,11 @@
 // Los tres paquetes de tema: SOLO color y tipografia. La estructura,
-// espaciado, iconografia y animacion viven en esqueleto.css y son iguales
-// para los tres - igual que un tema de IDE no mueve los paneles, solo
-// cambia la paleta (y a veces la fuente).
+// espaciado, iconografia y animacion viven en el CSS de cada superficie
+// (esqueleto.css en /design-lab, leccion.css en el producto real) y son
+// iguales para los tres - igual que un tema de IDE no mueve los paneles,
+// solo cambia la paleta (y a veces la fuente).
+//
+// Fuente unica compartida por /design-lab y el producto real (paso 4) para
+// que nunca haya dos copias de la paleta desincronizadas.
 
 export interface PaletaModo {
   bg: string;
@@ -69,11 +73,18 @@ export const temas: Tema[] = [
       surface: "#f5f1e4",
       surface2: "#e2dabf",
       ink: "#3a2e28",
-      inkMuted: "#7a6b5a",
-      accent: "#9c7a2e",
+      // Retocado desde #7a6b5a (paso 4): daba 4.12:1 sobre el fondo claro,
+      // por debajo de AA - mismo tono, ~4.5pp menos de luminosidad, 4.94:1.
+      inkMuted: "#6d5f50",
+      // Retocado desde #9c7a2e (paso 4): el original daba 3.75:1 con
+      // accentInk sobre el boton, por debajo de AA (4.5:1) - mismo tono,
+      // ~7pp menos de luminosidad, 4.89:1.
+      accent: "#836926",
       accentInk: "#fbf7ec",
       border: "#d8cfae",
-      good: "#4f7a4a",
+      // Retocado desde #4f7a4a (paso 4): daba 3.99:1 sobre el fondo claro,
+      // por debajo de AA - mismo tono, ~4pp menos de luminosidad, 4.83:1.
+      good: "#466c41",
       error: "#a6402e",
     },
     dark: {
@@ -102,10 +113,14 @@ export const temas: Tema[] = [
       surface2: "#eef1ec",
       ink: "#16211c",
       inkMuted: "#5b675f",
-      accent: "#1f8a5f",
+      // Retocado desde #1f8a5f (paso 4): el original daba ~4.1:1 tanto en
+      // accentInk sobre el boton como en good sobre el fondo, por debajo de
+      // AA (4.5:1) - mismo tono, ~3pp menos de luminosidad, ~4.85:1 en
+      // ambos usos.
+      accent: "#1c7d56",
       accentInk: "#f2fbf6",
       border: "#dfe6e0",
-      good: "#1f8a5f",
+      good: "#1c7d56",
       error: "#c23b2e",
     },
     dark: {

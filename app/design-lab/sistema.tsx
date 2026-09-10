@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CheckIcon, CrossIcon } from "./iconos";
 import { pasaAA, ratioContraste } from "./contraste";
-import type { PaletaModo, Tema } from "./temas";
+import type { PaletaModo, Tema } from "@/lib/tema/temas";
 import { fonicaTeaser, seccionesSesion } from "./contenido-leccion";
 
 interface Props {

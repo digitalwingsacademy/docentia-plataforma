@@ -1,0 +1,324 @@
+/* Version de produccion del esqueleto validado en app/design-lab/esqueleto.css
+   (misma estructura, mismo contrato de variables --tema-*) para la pantalla
+   real de leccion (tipo: texto). Nada de color/tipografia concretos vive
+   aqui: todo se lee del tema activo, resuelto en servidor a partir de la
+   cookie en app/cursos/[slug]/[unidad]/[seccion]/page.tsx. */
+
+.lc {
+  background: var(--tema-bg);
+  color: var(--tema-ink);
+  min-height: 100vh;
+  font-family: var(--tema-font-body);
+}
+
+.lc * {
+  box-sizing: border-box;
+}
+
+.lc-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-bottom: 1px solid var(--tema-border);
+  flex-wrap: wrap;
+}
+.lc-bar a {
+  color: var(--tema-ink-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+.lc-bar a:hover {
+  color: var(--tema-ink);
+}
+.lc-spacer {
+  flex: 1;
+}
+
+.lc-switcher {
+  display: inline-flex;
+  border: 1px solid var(--tema-border);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.lc-switcher button {
+  border: none;
+  background: transparent;
+  color: var(--tema-ink-muted);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.76rem;
+  font-family: var(--tema-font-mono);
+  cursor: pointer;
+  min-height: 36px;
+  white-space: nowrap;
+}
+.lc-switcher button[aria-pressed="true"] {
+  background: var(--tema-accent);
+  color: var(--tema-accent-ink);
+}
+
+.lc-toggle {
+  border: 1px solid var(--tema-border);
+  background: var(--tema-surface);
+  color: var(--tema-ink);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.78rem;
+  font-family: var(--tema-font-mono);
+  cursor: pointer;
+  min-height: 36px;
+}
+
+.lc-bar a:focus-visible,
+.lc-switcher button:focus-visible,
+.lc-toggle:focus-visible,
+.lc-btn:focus-visible,
+.lc-next-link:focus-visible {
+  outline: 2px solid var(--tema-accent);
+  outline-offset: 2px;
+}
+
+.lc-stage {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3rem 1.6rem 5rem;
+}
+
+.lc-eyebrow {
+  font-family: var(--tema-font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tema-ink-muted);
+  margin-bottom: 0.8rem;
+}
+
+.lc-title {
+  font-family: var(--tema-font-display);
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6rem;
+  text-wrap: balance;
+}
+
+.lc-rule {
+  height: 1px;
+  background: var(--tema-accent);
+  width: 100%;
+  transform-origin: left;
+  animation: lc-draw 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  margin-bottom: 2rem;
+}
+@keyframes lc-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lc-rule {
+    animation: none;
+  }
+}
+
+.lc-progress {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 2.6rem;
+  flex-wrap: wrap;
+}
+.lc-progress-item {
+  flex: 1;
+  min-width: 90px;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--tema-border);
+  font-family: var(--tema-font-mono);
+  font-size: 0.68rem;
+  color: var(--tema-ink-muted);
+  line-height: 1.4;
+}
+.lc-progress-item.lc-current {
+  border-color: var(--tema-accent);
+  color: var(--tema-ink);
+}
+.lc-progress-item.lc-done {
+  color: var(--tema-ink-muted);
+}
+.lc-progress-item.lc-done .lc-icon {
+  color: var(--tema-good);
+  margin-right: 0.2rem;
+}
+
+/* Cuerpo del MDX: sustituye al plugin "prose" de Tailwind, que no leia
+   ninguno de los tokens del tema. */
+.lc-prose {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+.lc-prose > * + * {
+  margin-top: 1.1rem;
+}
+.lc-prose h2 {
+  font-family: var(--tema-font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-top: 2.2rem;
+}
+.lc-prose h3 {
+  font-family: var(--tema-font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-top: 1.8rem;
+}
+.lc-prose blockquote {
+  border-left: 2px solid var(--tema-accent);
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  margin: 0;
+  font-style: italic;
+}
+.lc-prose blockquote p {
+  margin: 0;
+}
+.lc-prose code {
+  font-family: var(--tema-font-mono);
+  font-size: 0.9em;
+  background: var(--tema-surface2);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+.lc-prose ul,
+.lc-prose ol {
+  padding-left: 1.3rem;
+}
+.lc-prose li + li {
+  margin-top: 0.5rem;
+}
+.lc-prose a {
+  color: var(--tema-ink);
+  text-decoration-color: var(--tema-accent);
+  text-underline-offset: 0.2em;
+}
+.lc-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.lc-prose th,
+.lc-prose td {
+  border-bottom: 1px solid var(--tema-border);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+}
+.lc-prose th {
+  font-family: var(--tema-font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tema-ink-muted);
+}
+
+.lc-aviso {
+  border-top: 1px solid var(--tema-border);
+  border-bottom: 1px solid var(--tema-border);
+  padding: 1.1rem 0;
+  margin: 1.6rem 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+.lc-aviso-label {
+  display: block;
+  font-family: var(--tema-font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--tema-accent);
+  margin-bottom: 0.5rem;
+}
+
+.lc-actions {
+  margin-top: 2.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  justify-content: center;
+}
+.lc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--tema-accent);
+  color: var(--tema-accent-ink);
+  border: none;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.92rem;
+  font-family: var(--tema-font-body);
+  font-weight: 600;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.lc-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+.lc-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.lc-icon {
+  width: 1em;
+  height: 1em;
+  font-size: 1.1rem;
+  stroke-width: 2.5;
+  flex-shrink: 0;
+  vertical-align: -0.15em;
+}
+
+.lc-completado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--tema-good);
+  font-size: 0.95rem;
+}
+
+.lc-next {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--tema-border);
+}
+.lc-next-label {
+  font-family: var(--tema-font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--tema-ink-muted);
+  margin-bottom: 0.6rem;
+}
+.lc-next-link {
+  display: inline-block;
+  font-family: var(--tema-font-display);
+  font-size: 1.3rem;
+  color: var(--tema-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+.lc-next-link:hover {
+  border-color: var(--tema-accent);
+}
+.lc-next-meta {
+  font-family: var(--tema-font-mono);
+  font-size: 0.78rem;
+  color: var(--tema-ink-muted);
+}
